@@ -1,10 +1,10 @@
 local lsp = require('lsp-zero').preset({})
 
 lsp.on_attach(function(_, bufnr)
-    lsp.default_keymaps({buffer = bufnr})
+    lsp.default_keymaps({ buffer = bufnr })
 end)
 
-local lspconfig = require'lspconfig'
+local lspconfig = require 'lspconfig'
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
@@ -13,7 +13,7 @@ lsp.setup()
 local cmp = require('cmp')
 cmp.setup({
     mapping = {
-        ['<CR>'] = cmp.mapping.confirm({select = false}),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
     },
     window = {
         completion = cmp.config.window.bordered(),
@@ -32,10 +32,10 @@ require('mason-lspconfig').setup({
     },
 })
 
-lspconfig.gopls.setup{
+lspconfig.gopls.setup {
     settings = {
-        gopls =  {
-            env = {GOFLAGS="-tags=integration,gofuzz,developer,runtime"}
+        gopls = {
+            env = { GOFLAGS = "-tags=integration,gofuzz,developer,runtime" }
         }
     },
     on_attach = function(_, bufnr)

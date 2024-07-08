@@ -1,6 +1,6 @@
 require('kanagawa').setup({
     commentStyle = { italic = true },
-    keywordStyle = { italic = true},
+    keywordStyle = { italic = true },
     statementStyle = { bold = true },
     transparent = false,
     terminalColors = true,

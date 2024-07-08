@@ -60,7 +60,7 @@ require("lazy").setup({
         "ray-x/lsp_signature.nvim",
         event = "VeryLazy",
         opts = {},
-        config = function(_, opts) require'lsp_signature'.setup(opts) end
+        config = function(_, opts) require 'lsp_signature'.setup(opts) end
     },
 
     {
@@ -77,7 +77,8 @@ require("lazy").setup({
 
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
     },
 
     {
