@@ -1,32 +1,43 @@
 config:
   backup: true
+  banner: false
   create: true
   dotpath: dotfiles
+  link_on_import: absolute
+  link_dotfile_default: absolute
 dotfiles:
   d_polybar:
     src: config/polybar
     dst: ~/.config/polybar
+    link: absolute
   d_fish:
     src: config/fish
     dst: ~/.config/fish
+    link: absolute
   d_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+    link: absolute
   f_gitconfig:
     src: gitconfig
     dst: ~/.gitconfig
+    link: absolute
   d_alacritty:
     src: config/alacritty
     dst: ~/.config/alacritty
+    link: absolute
   d_i3:
     src: config/i3
     dst: ~/.config/i3
+    link: absolute
   d_omf:
     src: config/omf
     dst: ~/.config/omf
+    link: absolute
   d_tmux:
     src: config/tmux
     dst: ~/.config/tmux
+    link: absolute
 profiles:
   tbarch:
     dotfiles:

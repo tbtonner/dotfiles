@@ -87,3 +87,4 @@ set -g __fish_git_prompt_color_branch_end           brblack
 set -g __fish_git_prompt_color_branch               $theme_secondary
 
 bind \el 'clear; commandline -f repaint'
+bind \u00AC 'clear; commandline -f repaint'
