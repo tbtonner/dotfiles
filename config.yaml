@@ -12,9 +12,13 @@ dotfiles:
   d_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
 profiles:
   tbarch:
     dotfiles:
     - d_polybar
     - d_fish
     - d_nvim
+    - f_gitconfig

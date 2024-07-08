@@ -1,0 +1,50 @@
+[user]
+	email = tom.tonner@couchbase.com
+	name = Tom Tonner
+	username = tbtonner
+	signingkey = B31A941DA969748F
+[commit]
+	gpgsign = true
+[core]
+	editor = nvim
+[pull]
+	ff = only
+[core]
+	pager = delta --dark
+[alias]
+	gud = push --no-verify
+	gerrit = push gerrit HEAD:refs/for/master
+	originHead = push origin HEAD:refs/for/master
+	trustbro = push -f --no-verify
+	calm = status -s
+	ql = log --oneline --stat
+	st = status
+	ck = checkout
+	same = commit --amend --no-edit
+	amend = !git commit --amend && git status
+	stashpopforce = stash show -p | git apply && git stash drop
+	clones = clone --recurse-submodules
+	count-lines = "! git log --author=\"$1\" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf \"added lines: %s, removed lines: %s, total lines: %s\\n\", add, subs, loc }' #"
+[interactive]
+    diffFilter = delta --color-only
+[add.interactive]
+    useBuiltin = false # required for git 2.37.0
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+[color]
+	ui = auto
+[gpg]
+	program = /usr/local/bin/gpg
+[push]
+	autoSetupRemote = true
+
