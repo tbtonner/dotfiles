@@ -2,7 +2,11 @@
 	email = tom.tonner@couchbase.com
 	name = Tom Tonner
 	username = tbtonner
-	signingkey = B31A941DA969748F
+    {%@@ if profile == "tbarch" @@%}
+	signingkey = 02C8A2F8BA2C8279 
+    {%@@ elif profile == "LD94V3GWK7" @@%}
+	signingkey = B31A941DA969748F 
+    {%@@ endif @@%}
 [commit]
 	gpgsign = true
 [core]
@@ -44,7 +48,11 @@
 [color]
 	ui = auto
 [gpg]
+    {%@@ if profile == "tbarch" @@%}
+	program = /usr/bin/gpg
+    {%@@ elif profile == "LD94V3GWK7" @@%}
 	program = /usr/local/bin/gpg
+    {%@@ endif @@%}
 [push]
 	autoSetupRemote = true
 

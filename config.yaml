@@ -22,3 +22,9 @@ profiles:
     - d_fish
     - d_nvim
     - f_gitconfig
+  LD94V3GWK7:
+    dotfiles:
+    - d_polybar
+    - d_fish
+    - d_nvim
+    - f_gitconfig
