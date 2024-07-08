@@ -38,6 +38,11 @@ alias tc='task modify'
 
 alias dotdrop='~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml'
 
+{%@@ if profile == "tbarch" @@%}
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+{%@@ endif @@%}
+
 # cbclocal aliases
 alias cbclu='cbclocal up --with-services=ui,scheduler'
 alias cbcbilling='awslocal s3 mb s3://billing; cbimport json -c localhost -u 'Administrator' -p 'password' -b cpapi -d file:///Users/tomtonner/work/rates.json -f lines -g %id%; cbimport json -c localhost -u 'Administrator' -p 'password' -b cpapi -d file:///Users/tomtonner/work/factors.json -f lines -g %id%'
