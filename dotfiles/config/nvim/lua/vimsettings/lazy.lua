@@ -20,8 +20,6 @@ require("lazy").setup({
 
     "jiangmiao/auto-pairs",
 
-    "vim-test/vim-test",
-
     "knsh14/vim-github-link",
 
     "christoomey/vim-tmux-navigator",
@@ -41,6 +39,13 @@ require("lazy").setup({
     "nvim-tree/nvim-tree.lua",
 
     "nvim-treesitter/nvim-treesitter",
+
+    {
+        "vim-test/vim-test",
+        dependencies = {
+            "preservim/vimux",
+        },
+    },
 
     {
         "VonHeikemen/lsp-zero.nvim",

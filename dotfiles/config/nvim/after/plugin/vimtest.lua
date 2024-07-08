@@ -4,4 +4,6 @@ vim.keymap.set("n", "<leader>ts", ':TestSuite<cr>', { silent = true })
 vim.keymap.set("n", "<leader>tl", ':TestLast<cr>', { silent = true })
 vim.keymap.set("n", "<leader>tv", ':TestVisit<cr>', { silent = true })
 
+vim.cmd("let test#strategy = 'vimux'")
+
 vim.g['test#go#gotest#options'] = '--count 1'
