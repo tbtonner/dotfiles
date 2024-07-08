@@ -3,4 +3,18 @@ config:
   create: true
   dotpath: dotfiles
 dotfiles:
+  d_polybar:
+    src: config/polybar
+    dst: ~/.config/polybar
+  d_fish:
+    src: config/fish
+    dst: ~/.config/fish
+  d_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
 profiles:
+  tbarch:
+    dotfiles:
+    - d_polybar
+    - d_fish
+    - d_nvim
