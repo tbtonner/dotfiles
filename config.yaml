@@ -15,6 +15,18 @@ dotfiles:
   f_gitconfig:
     src: gitconfig
     dst: ~/.gitconfig
+  d_alacritty:
+    src: config/alacritty
+    dst: ~/.config/alacritty
+  d_i3:
+    src: config/i3
+    dst: ~/.config/i3
+  d_omf:
+    src: config/omf
+    dst: ~/.config/omf
+  d_tmux:
+    src: config/tmux
+    dst: ~/.config/tmux
 profiles:
   tbarch:
     dotfiles:
@@ -22,9 +34,16 @@ profiles:
     - d_fish
     - d_nvim
     - f_gitconfig
+    - d_alacritty
+    - d_i3
+    - d_omf
+    - d_tmux
   LD94V3GWK7:
     dotfiles:
     - d_polybar
     - d_fish
     - d_nvim
     - f_gitconfig
+    - d_alacritty
+    - d_omf
+    - d_tmux

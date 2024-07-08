@@ -1,0 +1,31 @@
+[shell]
+{%@@ if profile == "tbarch" @@%}
+program = "/usr/bin/fish"
+{%@@ elif profile == "LD94V3GWK7" @@%}
+program = "/opt/homebrew/bin/fish"
+{%@@ endif @@%}
+
+[window]
+dimensions = { columns = 250, lines = 60 }
+
+{%@@ if profile == "LD94V3GWK7" @@%}
+startup_mode = "Fullscreen"
+{%@@ endif @@%}
+
+[colors.primary]
+background = "#1f1f28"
+
+[colors]
+cursor = { text = "CellBackground", cursor = "#c7c7c7" }
+
+[font]
+normal = { family = "Consolas NF", style = "Book" }
+bold = { family = "Consolas NF", style = "Bold" }
+italic = { family = "Consolas NF", style = "Italic" }
+bold_italic = { family = "Consolas NF", style = "Bold Italic" }
+
+{%@@ if profile == "tbarch" @@%}
+size = 10
+{%@@ elif profile == "LD94V3GWK7" @@%}
+size = 14
+{%@@ endif @@%}
