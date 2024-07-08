@@ -7,7 +7,6 @@ program = "/opt/homebrew/bin/fish"
 
 [window]
 dimensions = { columns = 250, lines = 60 }
-
 {%@@ if profile == "LD94V3GWK7" @@%}
 startup_mode = "Fullscreen"
 {%@@ endif @@%}
@@ -23,7 +22,6 @@ normal = { family = "Consolas NF", style = "Book" }
 bold = { family = "Consolas NF", style = "Bold" }
 italic = { family = "Consolas NF", style = "Italic" }
 bold_italic = { family = "Consolas NF", style = "Bold Italic" }
-
 {%@@ if profile == "tbarch" @@%}
 size = 10
 {%@@ elif profile == "LD94V3GWK7" @@%}

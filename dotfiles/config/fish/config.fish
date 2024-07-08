@@ -37,7 +37,6 @@ alias td='task done'
 alias tc='task modify'
 
 alias dotdrop='~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml'
-
 {%@@ if profile == "tbarch" @@%}
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
