@@ -36,6 +36,8 @@ alias ta='task add'
 alias td='task done'
 alias tc='task modify'
 
+alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration'
+
 {%@@ if profile == "tbarch" @@%}
 alias dotdrop='~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml'
 alias pbcopy='xsel --clipboard --input'
