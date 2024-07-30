@@ -38,6 +38,9 @@ dotfiles:
     src: config/tmux/tmux.conf
     dst: ~/.config/tmux/tmux.conf
     link: absolute
+  d_bin:
+    src: bin
+    dst: ~/bin
 profiles:
   tbarch:
     dotfiles:
@@ -57,3 +60,4 @@ profiles:
     - d_alacritty
     - d_omf
     - f_tmux.conf
+    - d_bin

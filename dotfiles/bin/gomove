@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# get arg names
+while [ $# -gt 0 ]; do
+    if [[ $1 == "--"* ]]; then
+        v="${1/--/}"
+        declare "$v"="$2"
+        shift
+    fi
+    shift
+done
+
+# move the actual directories
+git mv $from $to;
+
+# find all cases of the package imports and change to new directory
+find . -not -path "*/\.git/*" -name "*.go" -exec gsed -i "s|github.com/couchbasecloud/couchbase-cloud/$from|github.com/couchbasecloud/couchbase-cloud/$to|g" "{}" \;
+
+# sort bazel for moved files
+make gazelle;
