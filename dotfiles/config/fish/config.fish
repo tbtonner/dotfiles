@@ -4,6 +4,7 @@ set fish_cursor_default block
 fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
+fish_add_path /Users/tomtonner/bin
 
 # Functions
 function awsAssumeGuardians 
@@ -36,7 +37,7 @@ alias ta='task add'
 alias td='task done'
 alias tc='task modify'
 
-alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration'
+alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 
 {%@@ if profile == "tbarch" @@%}
 alias dotdrop='~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml'
