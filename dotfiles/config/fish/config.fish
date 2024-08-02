@@ -46,10 +46,10 @@ alias pbpaste='xsel --clipboard --output'
 
 {%@@ endif @@%}
 # cbclocal aliases
-alias cbclu='cbclocal up --with-services=ui,scheduler'
-alias cbcbilling='awslocal s3 mb s3://billing; cbimport json -c localhost -u 'Administrator' -p 'password' -b cpapi -d file:///Users/tomtonner/work/rates.json -f lines -g %id%; cbimport json -c localhost -u 'Administrator' -p 'password' -b cpapi -d file:///Users/tomtonner/work/factors.json -f lines -g %id%'
+alias cbclu='cbclocal up --with-services=ui,scheduler --billing'
 alias cbcld='cbclocal down'
 alias cbclr='cbclocal restart'
+alias cbclb='cbclocal bootstrap'
 
 # cp db access
 alias assumeStage='go run scripts/cbc-aws-assumerole/main.go -profile cbc-main-account dbaas-stage-0001'
