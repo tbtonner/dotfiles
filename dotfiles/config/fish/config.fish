@@ -5,6 +5,7 @@ fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
 fish_add_path /Users/tomtonner/bin
+fish_add_path /home/tom/go/bin
 
 # Functions
 function awsAssumeGuardians 
@@ -44,7 +45,9 @@ alias dotdrop='~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml'
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
+alias cbclocal='sudo cbclocal'
 {%@@ endif @@%}
+
 # cbclocal aliases
 alias cbclu='cbclocal up --with-services=ui,scheduler --billing'
 alias cbcld='cbclocal down'
