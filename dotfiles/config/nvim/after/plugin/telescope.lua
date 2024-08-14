@@ -3,6 +3,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-f>', builtin.live_grep, {})
 vim.keymap.set("n", "<leader>tr", ":Telescope resume<cr>")
+vim.keymap.set('n', '<leader>tq', builtin.quickfix, {})
 
 vim.keymap.set("n", "gb", function() builtin.buffers({ initial_mode = "normal", show_line = false }) end, {})
 vim.keymap.set("n", "gd", function() builtin.lsp_definitions({ initial_mode = "normal", show_line = false }) end, {})
