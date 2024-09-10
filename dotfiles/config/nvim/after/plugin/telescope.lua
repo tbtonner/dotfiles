@@ -22,7 +22,7 @@ require('telescope').setup {
         },
         mappings = {
             i = {
-                ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
+                ["<C-space>"] = require("telescope.actions").to_fuzzy_refine,
             },
         },
     }
