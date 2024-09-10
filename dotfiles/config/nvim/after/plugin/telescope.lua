@@ -19,7 +19,12 @@ require('telescope').setup {
     defaults = {
         file_ignore_patterns = {
             "mocks"
-        }
+        },
+        mappings = {
+            i = {
+                ["<C-r>"] = require("telescope.actions").to_fuzzy_refine,
+            },
+        },
     }
 }
 

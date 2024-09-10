@@ -40,6 +40,8 @@ require("lazy").setup({
 
     "nvim-treesitter/nvim-treesitter",
 
+    "tpope/vim-unimpaired",
+
     {
         "vim-test/vim-test",
         dependencies = {
