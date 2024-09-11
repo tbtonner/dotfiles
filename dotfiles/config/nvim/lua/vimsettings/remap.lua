@@ -1,11 +1,8 @@
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<F6>", ':set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<cr>')
 
-vim.keymap.set("n", "gn", ":bnext<cr>")
-vim.keymap.set("n", "gp", ":bprevious<cr>")
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "H", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 
