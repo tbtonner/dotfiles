@@ -12,94 +12,32 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "lewis6991/gitsigns.nvim",
-
-    "tpope/vim-commentary",
-
-    "tpope/vim-repeat",
-
-    "jiangmiao/auto-pairs",
-
-    "knsh14/vim-github-link",
-
-    "christoomey/vim-tmux-navigator",
-
-    "arkav/lualine-lsp-progress",
-
-    "AndrewRadev/splitjoin.vim",
-
-    "ryanoasis/vim-devicons",
-
-    "ray-x/go.nvim",
-
-    "tpope/vim-surround",
-
-    "tpope/vim-fugitive",
-
-    "nvim-tree/nvim-tree.lua",
-
-    "nvim-treesitter/nvim-treesitter",
-
-    "tpope/vim-unimpaired",
-
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        build = "cd app && yarn install",
-        init = function()
-            vim.g.mkdp_filetypes = { "markdown" }
-        end,
-        ft = { "markdown" },
-    },
-
-    {
-        "vim-test/vim-test",
-        dependencies = {
-            "preservim/vimux",
-        },
-    },
-
-    {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/nvim-cmp",
-            "L3MON4D3/LuaSnip",
-            "neovim/nvim-lspconfig",
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-        },
-
-    },
-
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        opts = {},
-        config = function(_, opts) require 'lsp_signature'.setup(opts) end
-    },
-
-    {
-        "rebelot/kanagawa.nvim",
-        lazy = false,
-    },
-
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-    },
-
-    {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build =
-        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-    },
-
-    {
-        "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" }
-    },
+    {"rebelot/kanagawa.nvim", lazy = false},
+    {"lewis6991/gitsigns.nvim"},
+    {"tpope/vim-commentary"},
+    {"tpope/vim-repeat"},
+    {"jiangmiao/auto-pairs"},
+    {"knsh14/vim-github-link"},
+    {"christoomey/vim-tmux-navigator"},
+    {"AndrewRadev/splitjoin.vim"},
+    {"ryanoasis/vim-devicons"},
+    {"ray-x/go.nvim"},
+    {"tpope/vim-surround"},
+    {"tpope/vim-fugitive"},
+    {"nvim-tree/nvim-tree.lua"},
+    {"nvim-treesitter/nvim-treesitter"},
+    {"tpope/vim-unimpaired"},
+    {"arkav/lualine-lsp-progress"},
+    {"nvim-telescope/telescope-fzf-native.nvim"},
+    {'VonHeikemen/lsp-zero.nvim'},
+    {'neovim/nvim-lspconfig'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'hrsh7th/nvim-cmp'},
+    {"L3MON4D3/LuaSnip"},
+    {"ray-x/lsp_signature.nvim"},
+    {"williamboman/mason.nvim"},
+    {"williamboman/mason-lspconfig.nvim"},
+    {"vim-test/vim-test", dependencies = {"preservim/vimux"}},
+    {"nvim-telescope/telescope.nvim", dependencies = {"nvim-lua/plenary.nvim" }},
+    {"nvim-lualine/lualine.nvim", dependencies = {"nvim-tree/nvim-web-devicons"}},
 })
