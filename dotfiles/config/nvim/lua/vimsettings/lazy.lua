@@ -38,6 +38,6 @@ require("lazy").setup({
     {"williamboman/mason.nvim"},
     {"williamboman/mason-lspconfig.nvim"},
     {"vim-test/vim-test", dependencies = {"preservim/vimux"}},
-    {"nvim-telescope/telescope.nvim", dependencies = {"nvim-lua/plenary.nvim" }},
+    {"nvim-telescope/telescope.nvim", dependencies = {"nvim-lua/plenary.nvim"}},
     {"nvim-lualine/lualine.nvim", dependencies = {"nvim-tree/nvim-web-devicons"}},
 })
