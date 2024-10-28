@@ -37,6 +37,7 @@ require("lazy").setup({
     {"ray-x/lsp_signature.nvim"},
     {"williamboman/mason.nvim"},
     {"williamboman/mason-lspconfig.nvim"},
+    {"nvim-treesitter/nvim-treesitter-textobjects"},
     {"vim-test/vim-test", dependencies = {"preservim/vimux"}},
     {"nvim-telescope/telescope.nvim", dependencies = {"nvim-lua/plenary.nvim"}},
     {"nvim-lualine/lualine.nvim", dependencies = {"nvim-tree/nvim-web-devicons"}},
