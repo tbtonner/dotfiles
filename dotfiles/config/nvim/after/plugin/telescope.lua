@@ -12,7 +12,7 @@ vim.keymap.set("n", "gr", function() builtin.lsp_references({ initial_mode = "no
 vim.keymap.set("n", "ge", function() builtin.diagnostics({ initial_mode = "normal", show_line = false }) end, {})
 
 vim.keymap.set("n", "gf", function() builtin.treesitter({ initial_mode = "normal" }) end, {})
-vim.keymap.set("n", "gj", function() builtin.jumplist({ initial_mode = "normal", show_line = false }) end, {})
+vim.keymap.set("n", "gJ", function() builtin.jumplist({ initial_mode = "normal", show_line = false }) end, {})
 vim.keymap.set("n", "gm", function() builtin.marks({ initial_mode = "normal" }) end, {})
 vim.keymap.set("n", "gq", function() builtin.quickfix({ initial_mode = "normal" }) end, {})
 
@@ -26,6 +26,17 @@ require('telescope').setup {
             n = { ["<C-space>"] = actions.to_fuzzy_refine },
         },
     },
+    extensions = {
+        file_browser = {
+            select_buffer = true,
+            initial_mode = "normal",
+        },
+    },
 }
 
 require('telescope').load_extension('fzf')
+
+require("telescope").load_extension("file_browser")
+
+vim.keymap.set("n", "<F1>", ":Telescope file_browser path=%:p:h <CR>")
+vim.keymap.set("i", "<F1>", ":Telescope file_browser path=%:p:h <CR>")

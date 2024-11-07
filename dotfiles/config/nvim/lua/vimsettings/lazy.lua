@@ -24,7 +24,7 @@ require("lazy").setup({
     {"ray-x/go.nvim"},
     {"tpope/vim-surround"},
     {"tpope/vim-fugitive"},
-    {"nvim-tree/nvim-tree.lua"},
+    {"nvim-telescope/telescope-file-browser.nvim"},
     {"nvim-treesitter/nvim-treesitter"},
     {"tpope/vim-unimpaired"},
     {"arkav/lualine-lsp-progress"},

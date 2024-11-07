@@ -7,12 +7,10 @@ vim.opt.textwidth      = 120
 
 vim.opt.termguicolors  = true
 
+vim.opt.wrap           = false
 vim.opt.autoindent     = true
 vim.opt.smartindent    = true
-
 vim.opt.breakindent    = true
-vim.opt.breakindentopt = "shift:2,min:40,sbr"
-vim.opt.showbreak      = ">>"
 
 vim.opt.cursorline     = true
 

@@ -50,7 +50,7 @@ require('lspconfig').lua_ls.setup {
 require('lspconfig').gopls.setup({
     settings = {
         gopls = {
-            env = {GOFLAGS = "-tags=integration,gofuzz,developer,runtime"}
+            env = {GOFLAGS = "-tags=integration"}
         }
     },
     on_attach = function(_, bufnr)
