@@ -40,14 +40,6 @@ alias tc='task modify'
 
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 
-{%@@ if profile == "tbarch" @@%}
-alias dotdrop='~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml'
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
-
-alias cbclocal='sudo cbclocal'
-{%@@ endif @@%}
-
 # cbclocal aliases
 alias cbclu='cbclocal up --with-services=ui,scheduler --billing'
 alias cbcld='cbclocal down'
