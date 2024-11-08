@@ -26,17 +26,6 @@ require('telescope').setup {
             n = { ["<C-space>"] = actions.to_fuzzy_refine },
         },
     },
-    extensions = {
-        file_browser = {
-            select_buffer = true,
-            initial_mode = "normal",
-        },
-    },
 }
 
 require('telescope').load_extension('fzf')
-
-require("telescope").load_extension("file_browser")
-
-vim.keymap.set("n", "<F1>", ":Telescope file_browser path=%:p:h <CR>")
-vim.keymap.set("i", "<F1>", ":Telescope file_browser path=%:p:h <CR>")

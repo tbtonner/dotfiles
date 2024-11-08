@@ -24,7 +24,6 @@ require("lazy").setup({
     {"ray-x/go.nvim"},
     {"tpope/vim-surround"},
     {"tpope/vim-fugitive"},
-    {"nvim-telescope/telescope-file-browser.nvim"},
     {"nvim-treesitter/nvim-treesitter"},
     {"tpope/vim-unimpaired"},
     {"arkav/lualine-lsp-progress"},
@@ -39,6 +38,7 @@ require("lazy").setup({
     {"williamboman/mason-lspconfig.nvim"},
     {"nvim-treesitter/nvim-treesitter-textobjects"},
     {"vim-test/vim-test", dependencies = {"preservim/vimux"}},
+    {"nvim-neo-tree/neo-tree.nvim", dependencies = {"nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"}},
     {"nvim-telescope/telescope.nvim", dependencies = {"nvim-lua/plenary.nvim"}},
     {"nvim-lualine/lualine.nvim", dependencies = {"nvim-tree/nvim-web-devicons"}},
 })
