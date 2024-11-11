@@ -41,10 +41,10 @@ alias tc='task modify'
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 
 # cbclocal aliases
-alias cbclu='cbclocal up --with-services=ui,scheduler --billing'
-alias cbcld='cbclocal down'
-alias cbclr='cbclocal restart'
-alias cbclb='cbclocal bootstrap'
+alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler'
+alias cbclu='go run ./cmd/cbclocal up'
+alias cbcld='go run ./cmd/cbclocal down'
+alias cbclr='go run ./cmd/cbclocal restart'
 
 # cp db access
 alias assumeStage='go run scripts/cbc-aws-assumerole/main.go -profile cbc-main-account dbaas-stage-0001'
