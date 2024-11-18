@@ -1,19 +1,24 @@
 set fish_cursor_default block
 
-# Paths
+# paths
 fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
 fish_add_path /Users/tomtonner/bin
 fish_add_path /home/tom/go/bin
 
-# Functions
+# functions
 function awsAssumeGuardians 
 	cbc-aws-assumerole -account dbaas-test-0005 -profile cbc-main -duration 43200
     export AWS_PROFILE=dbaas-test-0005-temp
 end
 
-# Aliases
+function awsAssumeGuardiansStage
+	cbc-aws-assumerole -account dbaas-stage-0001 -profile cbc-main
+    export AWS_PROFILE=dbaas-stage-0001-temp
+end
+
+# git aliases
 alias g='git'
 alias gst='git status'
 alias gs='git stash'
@@ -31,24 +36,17 @@ alias gg='git gud'
 alias ga='git add'
 alias gaa='git add .'
 
-# task
-alias t='task'
-alias tl='task list'
-alias ta='task add'
-alias td='task done'
-alias tc='task modify'
-
-alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
-
 # cbclocal aliases
 alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler'
+alias cbclocal='go run ./cmd/cbclocal'
 alias cbclu='go run ./cmd/cbclocal up'
 alias cbcld='go run ./cmd/cbclocal down'
 alias cbclr='go run ./cmd/cbclocal restart'
+alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 
-# cp db access
-alias assumeStage='go run scripts/cbc-aws-assumerole/main.go -profile cbc-main-account dbaas-stage-0001'
-alias cpdev='AWS_PROFILE=dbaas-stage-0001-temp aws eks update-kubeconfig --alias dev-cp --name dev-201909301908-cp-eks --region us-east-1; AWS_PROFILE=dbaas-stage-0001-temp kubectl get secret --namespace default cp-couchbase-auth -o go-template=`{{range $k,$v := .data}}{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{"\n"}}{{end}}`; AWS_PROFILE=dbaas-stage-0001-temp kubectl get pod --selector=app=couchbase; AWS_PROFILE=dbaas-stage-0001-temp kubectl port-forward cp-couchbase-0104 8091:8091'
+# binds
+bind \el 'clear; commandline -f repaint'
+bind \u00AC 'clear; commandline -f repaint'
 
 # prompt
 set -g theme_display_time yes
@@ -83,6 +81,3 @@ set -g __fish_git_prompt_char_branch_end            ']'
 set -g __fish_git_prompt_color_branch_begin         brblack
 set -g __fish_git_prompt_color_branch_end           brblack
 set -g __fish_git_prompt_color_branch               $theme_secondary
-
-bind \el 'clear; commandline -f repaint'
-bind \u00AC 'clear; commandline -f repaint'
