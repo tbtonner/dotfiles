@@ -42,7 +42,10 @@ alias cbclocal='go run ./cmd/cbclocal'
 alias cbclu='go run ./cmd/cbclocal up'
 alias cbcld='go run ./cmd/cbclocal down'
 alias cbclr='go run ./cmd/cbclocal restart'
+
+# testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
+alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
 
 # binds
 bind \el 'clear; commandline -f repaint'
