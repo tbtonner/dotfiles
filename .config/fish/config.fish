@@ -35,6 +35,8 @@ alias gco='git checkout'
 alias gg='git gud'
 alias ga='git add'
 alias gaa='git add .'
+alias gac='gaa; gc -m'
+alias gacn='gaa; gc --no-verify -m'
 
 # cbclocal aliases
 alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler'
