@@ -5,7 +5,6 @@ fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
 fish_add_path /Users/tomtonner/bin
-fish_add_path /home/tom/go/bin
 
 # functions
 function awsAssumeGuardians 
@@ -42,7 +41,7 @@ alias gacn='gaa; gc --no-verify -m'
 alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler'
 alias cbclocal='go run ./cmd/cbclocal'
 alias cbclu='go run ./cmd/cbclocal up'
-alias cbcld='go run ./cmd/cbclocal down'
+alias cbcld='go run ./cmd/cbclocal down; docker volume rm cbclocal_db'
 alias cbclr='go run ./cmd/cbclocal restart'
 
 # testing aliases
