@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {"rebelot/kanagawa.nvim", lazy = false},
+    {"github/copilot.vim"},
     {"lewis6991/gitsigns.nvim"},
     {"tpope/vim-commentary"},
     {"tpope/vim-repeat"},

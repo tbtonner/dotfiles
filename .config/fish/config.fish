@@ -42,6 +42,7 @@ alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler'
 alias cbclocal='go run ./cmd/cbclocal'
 alias cbclu='go run ./cmd/cbclocal up'
 alias cbcld='go run ./cmd/cbclocal down; docker volume rm cbclocal_db'
+alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
 alias cbclr='go run ./cmd/cbclocal restart'
 
 # testing aliases
