@@ -1,1 +1,1 @@
-vim.g['AutoPairsMultilineClose'] = 0
+require('nvim-autopairs').setup({})
