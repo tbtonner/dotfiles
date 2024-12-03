@@ -3,6 +3,7 @@ require("nvim-treesitter.configs").setup({
         select = {
             enable = true,
             lookahead = true,
+            include_surrounding_whitespace = true,
 
             keymaps = {
                 ["af"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
