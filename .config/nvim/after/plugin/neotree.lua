@@ -11,7 +11,14 @@ require("neo-tree").setup({
         filtered_items = {
             hide_dotfiles = false,
         },
-    }
+    },
+    window = {
+        mappings = {
+            ["/"] = "noop",
+            ["f"] = "noop",
+            ["<C-f>"] = "noop",
+        },
+    },
 })
 
 vim.keymap.set("n", "<F1>", ":Neotree filesystem reveal toggle<cr>")
