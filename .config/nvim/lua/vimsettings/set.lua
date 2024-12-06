@@ -1,7 +1,7 @@
 vim.opt.nu             = true
 vim.opt.relativenumber = true
 
-vim.opt.mousescroll = "ver:1,hor:0"
+vim.opt.mousescroll    = "ver:1,hor:0"
 
 vim.opt.ruler          = true
 vim.opt.colorcolumn    = "120"
