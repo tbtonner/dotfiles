@@ -22,7 +22,6 @@ require("lazy").setup({
     {"christoomey/vim-tmux-navigator"},
     {"AndrewRadev/splitjoin.vim"},
     {"ryanoasis/vim-devicons"},
-    {"ray-x/go.nvim"},
     {"tpope/vim-surround"},
     {"tpope/vim-fugitive"},
     {"tpope/vim-unimpaired"},

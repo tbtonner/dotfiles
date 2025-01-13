@@ -22,7 +22,10 @@ require('telescope').setup {
             "mocks",
         },
         mappings = {
-            i = { ["<C-space>"] = actions.to_fuzzy_refine },
+            i = {
+                ["<C-space>"] = actions.to_fuzzy_refine,
+                ["<C-q>"] = actions.send_to_qflist,
+            },
             n = { ["<C-space>"] = actions.to_fuzzy_refine },
         },
     },
