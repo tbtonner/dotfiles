@@ -2,6 +2,6 @@
 
 git apply ~/bin/jobrun.patch
 
-echo "{\"jobtype\": \"$1\", \"payload\": \"$2\"}" | http POST http://localhost:8080/internal/support/f/runjob -A bearer -a the-secret-token-for-internal-support
+echo "{\"jobtype\": \"$1\", \"payload\": $2}" | http POST http://localhost:8080/internal/support/f/runjob -A bearer -a the-secret-token-for-internal-support
 
 git checkout -- cmd/cp-api/v2/internalbilling/internalbilling.go
