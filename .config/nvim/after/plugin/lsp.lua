@@ -58,14 +58,21 @@ require('lspconfig').gopls.setup({
             hint_prefix = "🐢 ",
         }, bufnr)
 
-      -- Auto goimports on save for go
+        -- Auto goimports on save for go
         vim.api.nvim_create_autocmd("BufWritePre", {
             callback = function()
+                local orignal = vim.notify
+                vim.notify = function(msg, level, opts)
+                    if msg == 'No code actions available' then
+                        return
+                    end
+                    orignal(msg, level, opts)
+                end
+
                 vim.lsp.buf.code_action({
                     context = { only = { "source.organizeImports" } },
                     apply = true,
                 })
-                vim.wait(100)
             end,
         })
     end,
