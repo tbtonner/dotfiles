@@ -51,11 +51,23 @@ require('lspconfig').gopls.setup({
         }
     },
     on_attach = function(_, bufnr)
+      -- Floating turtle hints
         require "lsp_signature".on_attach({
             bind = true,
             floating_window = false,
             hint_prefix = "🐢 ",
         }, bufnr)
+
+      -- Auto goimports on save for go
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            callback = function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "source.organizeImports" } },
+                    apply = true,
+                })
+                vim.wait(100)
+            end,
+        })
     end,
 })
 
