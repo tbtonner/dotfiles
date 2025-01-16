@@ -26,7 +26,10 @@ require('telescope').setup {
                 ["<C-space>"] = actions.to_fuzzy_refine,
                 ["<C-q>"] = actions.send_to_qflist,
             },
-            n = { ["<C-space>"] = actions.to_fuzzy_refine },
+            n = {
+                ["<C-space>"] = actions.to_fuzzy_refine,
+                ["<C-q>"] = actions.send_to_qflist,
+            },
         },
     },
 }
