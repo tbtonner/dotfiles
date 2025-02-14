@@ -37,6 +37,7 @@ require("lazy").setup({
     {"williamboman/mason-lspconfig.nvim"},
     {"nvim-treesitter/nvim-treesitter-textobjects"},
     {"nvim-treesitter/nvim-treesitter"},
+    {"ray-x/go.nvim"},
     {"vim-test/vim-test", dependencies = {"preservim/vimux"}},
     {"nvim-neo-tree/neo-tree.nvim", dependencies = {"nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"}},
     {"nvim-telescope/telescope.nvim", dependencies = {"nvim-lua/plenary.nvim"}},

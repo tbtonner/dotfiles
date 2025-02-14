@@ -1,0 +1,5 @@
+#!/bin/bash
+
+aws eks update-kubeconfig --alias sbx-$1 --name sbx-$1-cp-eks --region us-east-1
+
+kubectl port-forward cp-couchbase-0000 $2:8091
