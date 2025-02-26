@@ -15,6 +15,7 @@ require("lazy").setup({
     {"rebelot/kanagawa.nvim", lazy = false},
     {"github/copilot.vim"},
     {"lewis6991/gitsigns.nvim"},
+    {"fredrikaverpil/pr.nvim"},
     {"tpope/vim-commentary"},
     {"tpope/vim-repeat"},
     {"windwp/nvim-autopairs"},
