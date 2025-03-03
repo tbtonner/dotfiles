@@ -24,7 +24,6 @@ require("lazy").setup({
     {"AndrewRadev/splitjoin.vim"},
     {"ryanoasis/vim-devicons"},
     {"tpope/vim-surround"},
-    {"tpope/vim-fugitive"},
     {"tpope/vim-unimpaired"},
     {"arkav/lualine-lsp-progress"},
     {"nvim-telescope/telescope-fzf-native.nvim"},
