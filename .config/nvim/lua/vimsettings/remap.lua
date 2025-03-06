@@ -31,3 +31,5 @@ vim.keymap.set("n", "<leader>fp", ':let @+=expand("%:.")<cr>')
 vim.keymap.set("n", "<leader>if", 'oif err != nil {}<left><cr><esc>Oreturn err<esc>')
 
 vim.keymap.set("n", "<leader>qd", ':cdo execute "norm @q" | update<cr><cr>')
+
+vim.keymap.set("n", "<C-y>", "<C-w><C-w>")
