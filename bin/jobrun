@@ -11,6 +11,4 @@ if [ "$2" == "" ]; then
     payload="{\"jobtype\": \"$1\"}"
 fi
 
-git apply ~/bin/jobrun.patch
 echo $payload | http POST http://localhost:8080/internal/support/f/runjob -A bearer -a the-secret-token-for-internal-support
-git checkout -- cmd/cp-api/v2/internalbilling/internalbilling.go
