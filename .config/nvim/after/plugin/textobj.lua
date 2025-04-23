@@ -42,3 +42,9 @@ require("nvim-treesitter.configs").setup({
         },
     },
 })
+
+require("various-textobjs").setup {
+    keymaps = {
+        useDefaults = true
+    }
+}

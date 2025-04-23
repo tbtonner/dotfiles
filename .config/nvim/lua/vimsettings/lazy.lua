@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {"rebelot/kanagawa.nvim", lazy = false},
     {"github/copilot.vim"},
+    {"chrisgrieser/nvim-various-textobjs"},
     {"lewis6991/gitsigns.nvim"},
     {"fredrikaverpil/pr.nvim"},
     {"tpope/vim-commentary"},
