@@ -45,3 +45,5 @@ vim.opt.updatetime     = 50
 vim.g.history          = 1000
 
 vim.g.mapleader        = " "
+
+vim.opt.shell          = "/bin/bash"
