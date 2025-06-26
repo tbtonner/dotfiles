@@ -10,7 +10,7 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 local cmp = require('cmp')
 cmp.setup({
     sources = {
-        {name = 'nvim_lsp'},
+        { name = 'nvim_lsp' },
     },
     snippet = {
         expand = function(args)
@@ -39,7 +39,7 @@ require('mason-lspconfig').setup({
 require('lspconfig').lua_ls.setup {
     settings = {
         Lua = {
-            diagnostics = {globals = {'vim', 'require'}},
+            diagnostics = { globals = { 'vim', 'require' } },
         },
     },
 }
@@ -47,11 +47,11 @@ require('lspconfig').lua_ls.setup {
 require('lspconfig').gopls.setup({
     settings = {
         gopls = {
-            env = {GOFLAGS = "-tags=integration"}
+            env = { GOFLAGS = "-tags=integration" }
         }
     },
     on_attach = function(_, bufnr)
-      -- Floating turtle hints
+        -- Floating turtle hints
         require "lsp_signature".on_attach({
             bind = true,
             floating_window = false,
@@ -65,3 +65,11 @@ vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>zz', 
 vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev()<CR>zz', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function()
+        vim.lsp.buf.format()
+        vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true }
+        vim.lsp.buf.code_action { context = { only = { 'source.fixAll' } }, apply = true }
+    end,
+})
