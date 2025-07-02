@@ -11,14 +11,28 @@ local cmp = require('cmp')
 cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
-    },
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end,
+        { name = "copilot" },
+        { name = 'buffer' },
     },
     mapping = cmp.mapping.preset.insert({
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
     }),
     window = {
         completion = cmp.config.window.bordered(),
@@ -67,9 +81,10 @@ vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<
 vim.api.nvim_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.go", "*.lua", "*.ts" },
     callback = function()
         vim.lsp.buf.format()
         vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true }
         vim.lsp.buf.code_action { context = { only = { 'source.fixAll' } }, apply = true }
-    end,
+    end
 })
