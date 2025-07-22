@@ -16,6 +16,19 @@ vim.keymap.set("n", "gJ", function() builtin.jumplist({ initial_mode = "normal",
 vim.keymap.set("n", "gm", function() builtin.marks({ initial_mode = "normal" }) end, {})
 vim.keymap.set("n", "gq", function() builtin.quickfix({ initial_mode = "normal" }) end, {})
 
+local focus_preview = function(prompt_bufnr)
+    local action_state = require("telescope.actions.state")
+    local picker = action_state.get_current_picker(prompt_bufnr)
+    local prompt_win = picker.prompt_win
+    local previewer = picker.previewer
+    local winid = previewer.state.winid
+    local bufnr = previewer.state.bufnr
+    vim.keymap.set("n", "<Tab>", function()
+        vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", prompt_win))
+    end, { buffer = bufnr })
+    vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", winid))
+end
+
 require('telescope').setup {
     defaults = {
         file_ignore_patterns = {
@@ -29,6 +42,7 @@ require('telescope').setup {
             n = {
                 ["<C-space>"] = actions.to_fuzzy_refine,
                 ["<C-q>"] = actions.send_to_qflist,
+                ["<Tab>"] = focus_preview,
             },
         },
     },
