@@ -1,0 +1,23 @@
+#!/bin/bash
+
+CLUSTER_ID=$1
+
+if [ -z "$CLUSTER_ID" ]; then
+  echo "Usage: $0 <cluster-id>"
+  exit 1
+fi
+
+echo "Searching for EC2 instances for cluster $CLUSTER_ID..."
+
+INSTANCE_INFO=$(aws ec2 describe-instances \
+  --filters "Name=tag:couchbase-cloud-cluster-id,Values=$CLUSTER_ID" "Name=instance-state-name,Values=running" \
+  --output json)
+
+INSTANCE_ID=$(echo "$INSTANCE_INFO" | jq -r '.Reservations[].Instances[] | select(.Tags[]?.Key == "couchbase-cloud-function" and .Tags[]?.Value == "backup") | .InstanceId')
+
+if [ "$(echo "$INSTANCE_INFO" | jq -r '.Reservations | length')" -eq "0" ]; then
+  echo "No running backup instance found for cluster $CLUSTER_ID."
+  exit 1
+fi
+
+aws ec2-instance-connect ssh --instance-id "$INSTANCE_ID"
