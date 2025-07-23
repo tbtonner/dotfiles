@@ -11,7 +11,6 @@ local cmp = require('cmp')
 cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
-        { name = "copilot" },
         { name = 'buffer' },
     },
     mapping = cmp.mapping.preset.insert({

@@ -12,9 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { "rebelot/kanagawa.nvim",                      lazy = false },
     { "zbirenbaum/copilot.lua" },
-    { "zbirenbaum/copilot-cmp" },
     { "chrisgrieser/nvim-various-textobjs" },
     { "lewis6991/gitsigns.nvim" },
     { "fredrikaverpil/pr.nvim" },
@@ -34,10 +32,11 @@ require("lazy").setup({
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
     { "ray-x/lsp_signature.nvim" },
-    { "williamboman/mason.nvim",                    version = "1.11.0" },
-    { "williamboman/mason-lspconfig.nvim",          version = "1.32.0" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
     { "nvim-treesitter/nvim-treesitter" },
+    { "rebelot/kanagawa.nvim",                      lazy = false },
+    { "williamboman/mason.nvim",                    version = "1.11.0" },
+    { "williamboman/mason-lspconfig.nvim",          version = "1.32.0" },
     { "vim-test/vim-test",                          dependencies = { "preservim/vimux" } },
     { "nvim-neo-tree/neo-tree.nvim",                dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" } },
     { "nvim-telescope/telescope.nvim",              dependencies = { "nvim-lua/plenary.nvim" } },
