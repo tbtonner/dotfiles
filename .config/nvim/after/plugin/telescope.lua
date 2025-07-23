@@ -43,6 +43,8 @@ require('telescope').setup {
                 ["<C-space>"] = actions.to_fuzzy_refine,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<Tab>"] = focus_preview,
+                ['<C-c>'] = actions.delete_buffer,
+                ['dd'] = actions.delete_buffer,
             },
         },
     },
