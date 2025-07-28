@@ -14,18 +14,18 @@ cmp.setup({
         { name = 'buffer' },
     },
     mapping = cmp.mapping.preset.insert({
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<cr>'] = cmp.mapping.confirm({ select = true }),
+        ['<down>'] = cmp.mapping.scroll_docs(-4),
+        ['<up>'] = cmp.mapping.scroll_docs(4),
+        ['<C-space>'] = cmp.mapping.complete(),
+        ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             else
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        ['<C-k>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             else
