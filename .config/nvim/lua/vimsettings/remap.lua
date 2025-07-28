@@ -10,7 +10,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<C-d>", ":q!<cr>")
-vim.keymap.set("n", "<C-s>", ":bufdo w<cr>")
+vim.keymap.set("n", "<C-s>", ":silent wa | silent w<cr>")
 vim.keymap.set("n", "<C-c>", ':bp | bd #<cr>')
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
