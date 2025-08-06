@@ -12,7 +12,14 @@ cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
-        { name = 'copilot' },
+        { name = 'nvim_lsp_signature_help' }
+    },
+    view = {
+        entries = {
+            name = "custom",
+            selection_order = "near_cursor",
+            follow_cursor = true,
+        },
     },
     mapping = cmp.mapping.preset.insert({
         ['<cr>'] = cmp.mapping.confirm({ select = true }),
@@ -64,14 +71,6 @@ require('lspconfig').gopls.setup({
             env = { GOFLAGS = "-tags=integration" }
         }
     },
-    on_attach = function(_, bufnr)
-        -- Floating turtle hints
-        require "lsp_signature".on_attach({
-            bind = true,
-            floating_window = false,
-            hint_prefix = "🐢 ",
-        }, bufnr)
-    end,
 })
 
 vim.diagnostic.config({ virtual_text = true })
