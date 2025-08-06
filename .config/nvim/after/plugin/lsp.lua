@@ -12,6 +12,7 @@ cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
+        { name = 'copilot' },
     },
     mapping = cmp.mapping.preset.insert({
         ['<cr>'] = cmp.mapping.confirm({ select = true }),

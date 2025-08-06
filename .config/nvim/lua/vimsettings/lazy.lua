@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     { "zbirenbaum/copilot.lua" },
+    { "zbirenbaum/copilot-cmp" },
     { "chrisgrieser/nvim-various-textobjs" },
     { "lewis6991/gitsigns.nvim" },
     { "fredrikaverpil/pr.nvim" },
