@@ -5,6 +5,7 @@ fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
 fish_add_path /Users/tomtonner/bin
+fish_add_path /Users/tomtonner/.local/share/nvim/mason/bin/
 
 # functions
 function awsAssumeGuardians 
@@ -51,6 +52,9 @@ alias cbclr='go run ./cmd/cbclocal restart'
 # testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
+
+# jwt
+alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:Password123! | jq -r ".jwt"'
 
 # binds
 bind \el 'clear; commandline -f repaint'

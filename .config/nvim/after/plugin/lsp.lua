@@ -1,31 +1,12 @@
 vim.opt.signcolumn = 'yes'
 
-local lspconfig_defaults = require('lspconfig').util.default_config
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-    'force',
-    lspconfig_defaults.capabilities,
-    require('cmp_nvim_lsp').default_capabilities()
-)
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    handlers = {
-        function(server_name)
-            require('lspconfig')[server_name].setup({})
-        end,
-    },
+    automatic_enable = true,
 })
 
-
-require('lspconfig').lua_ls.setup {
-    settings = {
-        Lua = {
-            diagnostics = { globals = { 'vim', 'require' } },
-        },
-    },
-}
-
-require('lspconfig').gopls.setup({
+vim.lsp.config("*", {
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
     settings = {
         gopls = {
             env = { GOFLAGS = "-tags=integration" }

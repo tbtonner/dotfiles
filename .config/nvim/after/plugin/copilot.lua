@@ -1,5 +1,14 @@
 require("copilot").setup({
-    suggestion = { enabled = false },
-    panel = { enabled = false },
+    suggestion = {
+        auto_trigger = true,
+        keymap = {
+            accept = "<Tab>",
+            prev = "<C-h>",
+            next = "<C-l>",
+            dismiss = "<C-g>",
+        },
+    },
+    panel = {
+        enabled = false,
+    },
 })
-require("copilot_cmp").setup()
