@@ -17,3 +17,9 @@ bold = { family = "Consolas NF", style = "Bold" }
 italic = { family = "Consolas NF", style = "Italic" }
 bold_italic = { family = "Consolas NF", style = "Bold Italic" }
 size = 15
+
+
+[keyboard]
+bindings = [
+  { key = "Enter", mods = "Control", chars = "\uE000" }
+]
