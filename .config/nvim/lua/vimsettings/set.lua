@@ -7,9 +7,13 @@ vim.opt.ruler          = true
 vim.opt.colorcolumn    = "120"
 vim.opt.textwidth      = 120
 
+vim.opt.wrap           = true
+vim.opt.linebreak      = true
+vim.opt.wrapmargin     = 0
+vim.opt.showbreak      = "  "
+
 vim.opt.termguicolors  = true
 
-vim.opt.wrap           = false
 vim.opt.autoindent     = true
 vim.opt.smartindent    = true
 vim.opt.breakindent    = true
@@ -48,7 +52,4 @@ vim.g.mapleader        = " "
 
 vim.opt.shell          = "/bin/bash"
 
-vim.opt.wrap           = true
-vim.opt.linebreak      = true
-vim.opt.textwidth      = 0
-vim.opt.wrapmargin     = 0
+vim.keymap.set("n", "\u{E002}", "<cmd>echo 'Ctrl+Tab pressed'<CR>", { noremap = true })
