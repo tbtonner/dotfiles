@@ -6,8 +6,8 @@ cmp.setup({
         { name = 'buffer' },
     },
     mapping = cmp.mapping.preset.insert({
-        -- <C-CR> but this hack is needed to work with alacritty.
-        ['\u{E000}'] = cmp.mapping.confirm({ select = false }),
+        -- <C-CR>/<C-u> to confirm selection
+        ['\21'] = cmp.mapping.confirm({ select = true }),
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
     }),

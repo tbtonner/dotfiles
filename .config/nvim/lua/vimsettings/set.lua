@@ -51,5 +51,3 @@ vim.g.history          = 1000
 vim.g.mapleader        = " "
 
 vim.opt.shell          = "/bin/bash"
-
-vim.keymap.set("n", "\u{E002}", "<cmd>echo 'Ctrl+Tab pressed'<CR>", { noremap = true })

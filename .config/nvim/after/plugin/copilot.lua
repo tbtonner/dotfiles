@@ -2,8 +2,8 @@ require("copilot").setup({
     suggestion = {
         auto_trigger = true,
         keymap = {
-            -- <C-Tab> will also work with my alacritty binding the two here
-            accept = "<C-t>",
+            -- <C-Tab>/<C-t> to accept
+            accept = "\20",
             prev = "<C-h>",
             next = "<C-l>",
             dismiss = "<C-g>",

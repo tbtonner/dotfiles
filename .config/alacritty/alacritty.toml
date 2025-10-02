@@ -20,7 +20,8 @@ size = 15
 
 [keyboard]
 bindings = [
-  { key = "Enter", mods = "Control", chars = "\uE000" },
   # setting as <C-t> to be able to use in nvim
   { key = "Tab", mods = "Control", chars = "\u0014" },
+  # setting as <C-u> to be able to use in nvim
+  { key = "Enter", mods = "Control", chars = "\u0015" },
 ]
