@@ -18,8 +18,9 @@ italic = { family = "Consolas NF", style = "Italic" }
 bold_italic = { family = "Consolas NF", style = "Bold Italic" }
 size = 15
 
-
 [keyboard]
 bindings = [
-  { key = "Enter", mods = "Control", chars = "\uE000" }
+  { key = "Enter", mods = "Control", chars = "\uE000" },
+  # setting as <C-t> to be able to use in nvim
+  { key = "Tab", mods = "Control", chars = "\u0014" },
 ]
