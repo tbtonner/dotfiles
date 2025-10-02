@@ -47,3 +47,8 @@ vim.g.history          = 1000
 vim.g.mapleader        = " "
 
 vim.opt.shell          = "/bin/bash"
+
+vim.opt.wrap           = true
+vim.opt.linebreak      = true
+vim.opt.textwidth      = 0
+vim.opt.wrapmargin     = 0
