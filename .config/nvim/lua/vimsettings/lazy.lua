@@ -15,6 +15,7 @@ require("lazy").setup({
     { "zbirenbaum/copilot.lua" },
     { "zbirenbaum/copilot-cmp" },
     { "chrisgrieser/nvim-various-textobjs" },
+    { "lewis6991/gitsigns.nvim" },
     { "FabijanZulj/blame.nvim" },
     { "fredrikaverpil/pr.nvim" },
     { "tpope/vim-commentary" },
