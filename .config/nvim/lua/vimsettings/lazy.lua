@@ -17,6 +17,7 @@ require("lazy").setup({
     { "chrisgrieser/nvim-various-textobjs" },
     { "lewis6991/gitsigns.nvim" },
     { "FabijanZulj/blame.nvim" },
+    { "ray-x/lsp_signature.nvim" },
     { "fredrikaverpil/pr.nvim" },
     { "tpope/vim-commentary" },
     { "tpope/vim-repeat" },

@@ -12,6 +12,9 @@ vim.lsp.config("*", {
             env = { GOFLAGS = "-tags=integration" }
         }
     },
+    on_attach = function(_, bufnr)
+        require "lsp_signature".on_attach({ hint_enable = false }, bufnr)
+    end,
 })
 
 vim.diagnostic.config({ virtual_text = true })
