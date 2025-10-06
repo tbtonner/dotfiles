@@ -9,7 +9,8 @@ vim.keymap.set("n", "gb", function() builtin.buffers({ initial_mode = "normal", 
 vim.keymap.set("n", "gd", function() builtin.lsp_definitions({ initial_mode = "normal", show_line = false }) end, {})
 vim.keymap.set("n", "gi", function() builtin.lsp_implementations({ initial_mode = "normal", show_line = false }) end, {})
 vim.keymap.set("n", "gr", function() builtin.lsp_references({ initial_mode = "normal", show_line = false }) end, {})
-vim.keymap.set("n", "ge", function() builtin.diagnostics({ initial_mode = "normal", show_line = false }) end, {})
+vim.keymap.set("n", "ge",
+    function() builtin.diagnostics({ initial_mode = "normal", show_line = false, severity_limit = "Error" }) end, {})
 
 vim.keymap.set("n", "gf", function() builtin.treesitter({ initial_mode = "normal" }) end, {})
 vim.keymap.set("n", "gJ", function() builtin.jumplist({ initial_mode = "normal", show_line = false }) end, {})
