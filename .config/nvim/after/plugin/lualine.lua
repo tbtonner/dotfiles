@@ -1,12 +1,20 @@
 local noice = require("noice")
 
+local function searchcount()
+    local sc = vim.fn.searchcount({ recompute = 1 })
+    if sc.total == 0 then
+        return ""
+    end
+    return string.format("[%d/%d]", sc.current, sc.total)
+end
+
 require('lualine').setup {
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'diff', 'diagnostics', { noice.api.statusline.mode.get, cond = noice.api.statusline.mode.has, color = { fg = "#ff9e64" }, } },
         lualine_c = { 'lsp_progress', { 'filename', path = 1 } },
 
-        lualine_x = { { 'searchcount', maxcount = 9999 }, 'selectioncount', 'filetype' },
+        lualine_x = { { searchcount }, 'selectioncount', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
     },
