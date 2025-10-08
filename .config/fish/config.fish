@@ -42,12 +42,12 @@ alias gacn='gaa; gc --no-verify -m'
 alias gcp='git cherry-pick'
 
 # cbclocal aliases
-alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
-alias cbclocal='go run ./cmd/cbclocal'
-alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static,open-api'
-alias cbcld='go run ./cmd/cbclocal down'
-alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
-alias cbclr='go run ./cmd/cbclocal restart'
+alias cbc='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
+alias cbclocal='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal'
+alias cbclu='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal up --with-services=ui-static,open-api'
+alias cbcld='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal down'
+alias cbcldf='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal down --force; docker volume rm cbclocal_db'
+alias cbclr='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal restart'
 
 # testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
@@ -67,12 +67,12 @@ set -g theme_display_hostname no
 set -g theme_display_rw no
 set -g theme_display_virtualenv yes
 
-set theme_primary                                   88a662 
-set theme_secondary                                 e46876 
-set theme_primary_variant                           8e79af 
-set theme_time                                      6780b1 
-set theme_prompt                                    ffffff 
-set theme_hilight                                   e4c284 
+set theme_primary                                   88a662
+set theme_secondary                                 e46876
+set theme_primary_variant                           8e79af
+set theme_time                                      6780b1
+set theme_prompt                                    ffffff
+set theme_hilight                                   e4c284
 
 set -g theme_color_user                             $theme_hilight
 set -g theme_color_host                             $theme_primary_variant

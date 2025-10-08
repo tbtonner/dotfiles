@@ -53,11 +53,3 @@ vim.g.history         = 1000
 vim.g.mapleader       = " "
 
 vim.opt.shell         = "/bin/bash"
-
--- Automatically set 'textwidth' formatting option for all buffers
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*",
-    callback = function()
-        vim.opt.formatoptions:append("t")
-    end,
-})
