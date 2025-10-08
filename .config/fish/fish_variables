@@ -7,6 +7,7 @@ SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fish
 SETUVAR _fisher_patrickf1_2F_fzf_2E_fish_files:\x7e/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_changed_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_diff_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_processes\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e\x7e/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e\x7e/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejomik/fish\x2dgruvbox\x1epatrickf1/fzf\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
+SETUVAR devhost:dev\x2enonprod\x2dproject\x2davengers\x2ecom
 SETUVAR fish_color_autosuggestion:969896
 SETUVAR fish_color_cancel:\x2d\x2dreverse
 SETUVAR fish_color_command:b294bb
@@ -53,3 +54,4 @@ SETUVAR internaltokenstage:cb\x2d08f255ee\x2d9120\x2d4e37\x2dbc8d\x2dc58eb43150f
 SETUVAR localoid:adb4fb4c\x2d1d98\x2d4287\x2dac33\x2d230742d2cc76
 SETUVAR localpid:c09035e8\x2d3971\x2d4b79\x2da6ec\x2dbccd9056041f
 SETUVAR sbxtoken:cb\x2d645AD509\x2d7639\x2d4EE8\x2dB58E\x2d2DE04EFCE1CB
+SETUVAR stagehost:stage\x2enonprod\x2dproject\x2davengers\x2ecom

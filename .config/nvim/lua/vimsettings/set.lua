@@ -21,6 +21,8 @@ vim.opt.breakindent   = true
 
 vim.opt.cursorline    = true
 
+vim.opt.showmode      = false
+
 vim.opt.ignorecase    = true
 
 vim.opt.tabstop       = 4
@@ -30,7 +32,6 @@ vim.opt.expandtab     = true
 
 vim.opt.encoding      = "UTF-8"
 vim.opt.spelllang     = "en"
-vim.opt.regexpengine  = 1
 
 vim.opt.clipboard     = 'unnamedplus'
 

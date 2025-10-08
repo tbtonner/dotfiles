@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     { "zbirenbaum/copilot.lua" },
-    { "zbirenbaum/copilot-cmp" },
+    { 'stevearc/dressing.nvim' },
     { "chrisgrieser/nvim-various-textobjs" },
     { "lewis6991/gitsigns.nvim" },
     { "FabijanZulj/blame.nvim" },
@@ -31,8 +31,11 @@ require("lazy").setup({
     { "arkav/lualine-lsp-progress" },
     { "nvim-telescope/telescope-fzf-native.nvim" },
     { 'VonHeikemen/lsp-zero.nvim' },
-    { 'hrsh7th/cmp-nvim-lsp' },
+    { "zbirenbaum/copilot-cmp" },
+    { "folke/noice.nvim" },
     { 'hrsh7th/nvim-cmp' },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-nvim-lsp' },
     { "hrsh7th/cmp-nvim-lsp-signature-help" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
     { "nvim-treesitter/nvim-treesitter" },
