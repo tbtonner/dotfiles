@@ -12,10 +12,10 @@ background = "#1f1f28"
 cursor = { text = "CellBackground", cursor = "#c7c7c7" }
 
 [font]
-normal = { family = "Consolas NF", style = "Book" }
-bold = { family = "Consolas NF", style = "Bold" }
-italic = { family = "Consolas NF", style = "Italic" }
-bold_italic = { family = "Consolas NF", style = "Bold Italic" }
+normal = { family = "Consolas Nerd Font Mono", style = "Regular" }
+bold = { family = "Consolas Nerd Font Mono", style = "Bold" }
+italic = { family = "Consolas Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "Consolas Nerd Font Mono", style = "Bold Italic" }
 # size = 15
 size = 18
 
