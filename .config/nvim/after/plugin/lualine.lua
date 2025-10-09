@@ -13,7 +13,7 @@ require('lualine').setup {
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'diff', 'diagnostics', { noice.api.statusline.mode.get, cond = noice.api.statusline.mode.has, color = { fg = "#ff9e64" }, } },
-        lualine_c = { 'lsp_progress', { 'filename', path = 1 } },
+        lualine_c = { { 'filename', path = 1 } },
 
         lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }, searchcount, 'selectioncount', 'filetype' },
         lualine_y = { 'progress' },
