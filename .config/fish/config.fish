@@ -24,6 +24,7 @@ end
 alias g='git'
 alias gst='git status'
 alias gs='git stash'
+alias grh='git reset --hard'
 alias gsp='git stash pop'
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -40,6 +41,7 @@ alias gaa='git add .'
 alias gac='gaa; gc -m'
 alias gacn='gaa; gc --no-verify -m'
 alias gcp='git cherry-pick'
+alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
 
 # cbclocal aliases
 alias cbc='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'

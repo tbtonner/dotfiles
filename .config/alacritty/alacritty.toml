@@ -16,7 +16,8 @@ normal = { family = "Consolas NF", style = "Book" }
 bold = { family = "Consolas NF", style = "Bold" }
 italic = { family = "Consolas NF", style = "Italic" }
 bold_italic = { family = "Consolas NF", style = "Bold Italic" }
-size = 15
+# size = 15
+size = 18
 
 [keyboard]
 bindings = [

@@ -3,3 +3,10 @@ require('blame').setup {
 }
 
 vim.keymap.set("n", "<leader>gb", ':BlameToggle window<cr>')
+
+require('gitblame').setup {
+    message_template = " <author> • <date> ",
+    date_format = "%Y-%m-%d",
+}
+
+vim.g.gitblame_display_virtual_text = 0
