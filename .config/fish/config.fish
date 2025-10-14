@@ -44,12 +44,12 @@ alias gcp='git cherry-pick'
 alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
 
 # cbclocal aliases
-alias cbc='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
-alias cbclocal='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal'
-alias cbclu='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal up --with-services=ui-static,open-api'
-alias cbcld='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal down'
-alias cbcldf='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal down --force; docker volume rm cbclocal_db'
-alias cbclr='go run /Users/tomtonner/work/couchbase-cloud/cmd/cbclocal restart'
+alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
+alias cbclocal='go run ./cmd/cbclocal'
+alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static,open-api'
+alias cbcld='go run ./cmd/cbclocal down'
+alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
+alias cbclr='go run ./cmd/cbclocal restart'
 
 # testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
@@ -57,6 +57,9 @@ alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
 
 # jwt
 alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:Password123! | jq -r ".jwt"'
+
+# font
+alias togglefont='awk \'/size *= *[0-9]+/ {if ($3 == 17) $3=15; else if ($3 == 15) $3=17} 1\' ~/.config/alacritty/alacritty.toml > /tmp/alacritty.tmp; and mv /tmp/alacritty.tmp ~/.config/alacritty/alacritty.toml'
 
 # binds
 bind \el 'clear; commandline -f repaint'
