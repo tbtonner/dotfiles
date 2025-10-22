@@ -51,6 +51,9 @@ alias cbcld='go run ./cmd/cbclocal down'
 alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
 alias cbclr='go run ./cmd/cbclocal restart'
 
+# vpn
+alias vpn='sudo ~/work/couchbase-cloud/scripts/cbc-setup-vpn.sh'
+
 # testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'

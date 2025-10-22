@@ -9,11 +9,12 @@ vim.keymap.set("n", "<C-s>", ":silent wa | silent w<cr>")
 vim.keymap.set("n", "<C-c>", ':bp | bd #<cr>')
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set("n", "<leader>r", '"_ciw<esc>p')
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
+vim.keymap.set("n", "<leader>r", [["_diw"0P]])
+
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("v", "<leader>s", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>s", [["qyy:%s/<C-r>q/<C-r>q/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
