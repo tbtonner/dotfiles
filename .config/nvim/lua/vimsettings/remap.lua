@@ -11,8 +11,6 @@ vim.keymap.set("n", "<C-c>", ':bp | bd #<cr>')
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
-vim.keymap.set("n", "<leader>r", [["_diw"0P]])
-
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("v", "<leader>s", [["qyy:%s/<C-r>q/<C-r>q/gI<Left><Left><Left>]])
 
@@ -29,3 +27,9 @@ vim.keymap.set("n", "<leader>if", 'oif err != nil {}<left><cr><esc>Oreturn err<e
 vim.keymap.set("n", "<leader>qd", ':cdo execute "norm @q" | update<cr><cr>')
 
 vim.keymap.set("n", "<C-y>", "<C-w><C-w>")
+
+vim.keymap.set("n", "<leader>r", function()
+    local yanked = vim.fn.getreg("0"):gsub("\n", "")
+    if yanked == "" then return end
+    vim.cmd('normal! "_ciw' .. yanked)
+end)
