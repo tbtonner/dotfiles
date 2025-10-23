@@ -1,5 +1,9 @@
 set fish_cursor_default block
 
+# Set UTF-8 locale for tmux and terminal
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
+
 # paths
 fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
