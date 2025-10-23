@@ -9,13 +9,20 @@ local function searchcount()
     return string.format("[%d/%d]", sc.current, sc.total)
 end
 
+local function quickfix_position()
+    local qflist = vim.fn.getqflist()
+    if #qflist == 0 then return "" end
+    local idx = vim.fn.getqflist({ idx = 0 }).idx
+    return string.format("[%d/%d]", idx, #qflist)
+end
+
 require('lualine').setup {
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'diff', 'diagnostics', { noice.api.statusline.mode.get, cond = noice.api.statusline.mode.has, color = { fg = "#ff9e64" }, } },
         lualine_c = { { 'filename', path = 1 } },
 
-        lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }, searchcount, 'selectioncount', 'filetype' },
+        lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }, quickfix_position, searchcount, 'selectioncount', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
     },
