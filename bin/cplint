@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   ./lint_changed_packages.sh [base_branch] [ignored_dir1 ignored_dir2 ...]
+#
+# Example:
+#   ./lint_changed_packages.sh main vendor mocks testdata
+
+BASE_BRANCH="${1:-main}"
+shift || true
+IGNORED_DIRS="$@"
+
+# Load ignores from .lintignore if present
+if [[ -f ".lintignore" ]]; then
+  while IFS= read -r line; do
+    # Skip blank lines and comments
+    if [[ -n "$line" && ! "$line" =~ ^[[:space:]]*# ]]; then
+      IGNORED_DIRS="$IGNORED_DIRS $line"
+    fi
+  done < .lintignore
+fi
+
+# Deduplicate ignored dirs
+if [[ -n "$IGNORED_DIRS" ]]; then
+  IGNORED_DIRS=$(echo "$IGNORED_DIRS" | tr ' ' '\n' | sort -u | tr '\n' ' ')
+fi
+
+# Get changed .go files (excluding deleted)
+changed_go_files=$(git diff --name-only --diff-filter=ACM "$BASE_BRANCH" | grep '\.go$' || true)
+
+if [[ -z "$changed_go_files" ]]; then
+  echo "✅ No Go files changed since $BASE_BRANCH."
+  exit 0
+fi
+
+# Extract unique directories (Go packages)
+changed_dirs=$(echo "$changed_go_files" | xargs -n1 dirname | sort -u)
+
+# Filter ignored dirs
+if [[ -n "$IGNORED_DIRS" ]]; then
+  for ignore in $IGNORED_DIRS; do
+    changed_dirs=$(echo "$changed_dirs" | grep -vE "^${ignore}(/|$)" || true)
+  done
+fi
+
+if [[ -z "$changed_dirs" ]]; then
+  echo "✅ No Go packages to lint after applying ignore filters."
+  exit 0
+fi
+
+echo "📦 Changed Go packages:"
+echo "$changed_dirs"
+echo
+
+# Run golangci-lint on each changed package
+for dir in $changed_dirs; do
+  echo "🔍 Running golangci-lint in $dir ..."
+  golangci-lint run --config cv/golangci.yml "./$dir"
+done

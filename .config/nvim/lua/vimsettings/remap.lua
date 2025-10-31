@@ -47,7 +47,7 @@ vim.keymap.set("n", "]d", function()
 end, { desc = "Remove current quickfix item and go to next" })
 
 vim.keymap.set("n", "<leader>r", function()
-    local yanked = vim.fn.getreg("0"):gsub("\n", "")
+    local yanked = vim.fn.getreg("+"):gsub("\n", "")
     if yanked == "" then return end
     vim.cmd('normal! "_ciw' .. yanked)
 end)

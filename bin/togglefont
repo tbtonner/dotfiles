@@ -1,0 +1,25 @@
+#!/bin/bash
+
+CONFIG="$HOME/dotfiles/.config/alacritty/alacritty.toml"
+PRIMARY=17
+SECONDARY=15
+
+# Extract current font size
+CURRENT=$(grep -E '^[[:space:]]*size[[:space:]]*=[[:space:]]*[0-9]+' "$CONFIG" | grep -oE '[0-9]+')
+
+# If an argument is passed, use it as the target
+if [[ -n "$1" ]]; then
+    NEW="$1"
+else
+    # No argument: toggle between PRIMARY and SECONDARY
+    if [[ "$CURRENT" == "$PRIMARY" ]]; then
+        NEW="$SECONDARY"
+    else
+        NEW="$PRIMARY"
+    fi
+fi
+
+# Replace the line
+sed -i '' -E "s/^[[:space:]]*size[[:space:]]*=[[:space:]]*[0-9]+/size = $NEW/" "$CONFIG"
+
+echo "Font size changed from $CURRENT to $NEW"

@@ -24,6 +24,10 @@ function awsAssumeGuardiansStage
     export AWS_DEFAULT_REGION=us-east-1
 end
 
+function dd-log-star
+    dd-log-escape $argv[1] | sed -E 's/%[a-zA-Z0-9]/*/g' | pbcopy
+end
+
 # git aliases
 alias g='git'
 alias gst='git status'
@@ -64,9 +68,6 @@ alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
 
 # jwt
 alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:Password123! | jq -r ".jwt"'
-
-# font
-alias togglefont='awk \'/size *= *[0-9]+/ {if ($3 == 17) $3=15; else if ($3 == 15) $3=17} 1\' ~/.config/alacritty/alacritty.toml > /tmp/alacritty.tmp; and mv /tmp/alacritty.tmp ~/.config/alacritty/alacritty.toml'
 
 # binds
 bind \el 'clear; commandline -f repaint'

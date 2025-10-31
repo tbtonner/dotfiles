@@ -1,7 +1,0 @@
-#!/bin/bash
-
-aws eks update-kubeconfig --alias stage-cp --name stage-201909301815-cp-eks --region us-east-1
-
-kubectl get pod --selector=app=couchbase
-
-kubectl port-forward cp-couchbase-$2 $1:8091

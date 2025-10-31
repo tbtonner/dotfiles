@@ -1,6 +1,12 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR DB_REGION:us\x2deast\x2d1
+SETUVAR DEV_COUCHBASE_CLUSTER_NAME:dev\x2d201909301908\x2dcp\x2deks
+SETUVAR DEV_COUCHBASE_POD_NAME:dev\x2d201909301908\x2dcp\x2deks
+SETUVAR SBX_COUCHBASE_POD_NAME:cp\x2dcouchbase\x2d0000
 SETUVAR SKIPPOSTCHECKOUT:true
+SETUVAR STAGE_COUCHBASE_CLUSTER_NAME:stage\x2d201909301815\x2dcp\x2deks
+SETUVAR STAGE_COUCHBASE_POD_NAME:stage\x2d201909301815\x2dcp\x2deks
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_jomik_2F_fish_2D_gruvbox_files:\x7e/\x2econfig/fish/functions/theme_gruvbox\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
