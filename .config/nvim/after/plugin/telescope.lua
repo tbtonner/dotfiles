@@ -16,6 +16,7 @@ vim.keymap.set("n", "gf", function() builtin.treesitter({ initial_mode = "normal
 vim.keymap.set("n", "gJ", function() builtin.jumplist({ initial_mode = "normal", show_line = false }) end, {})
 vim.keymap.set("n", "gm", function() builtin.marks({ initial_mode = "normal" }) end, {})
 vim.keymap.set("n", "gq", function() builtin.quickfix({ initial_mode = "normal" }) end, {})
+vim.keymap.set("n", "gn", function() require("telescope").extensions.noice.noice({ initial_mode = "normal" }) end, {})
 
 local focus_preview = function(prompt_bufnr)
     local action_state = require("telescope.actions.state")

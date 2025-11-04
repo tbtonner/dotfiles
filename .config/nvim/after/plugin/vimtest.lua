@@ -6,4 +6,4 @@ vim.keymap.set("n", "<leader>tv", ':TestVisit<cr>', { silent = true })
 
 vim.g['test#go#gotest#options'] = '--count 1'
 
-vim.cmd("let test#strategy = 'vimux'")
+vim.cmd("let test#strategy = 'basic'")

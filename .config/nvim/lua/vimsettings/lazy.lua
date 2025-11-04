@@ -44,8 +44,8 @@ require("lazy").setup({
     { 'neovim/nvim-lspconfig' },
     { "nvim-lualine/lualine.nvim" },
     { "rebelot/kanagawa.nvim" },
-    { "nvim-lua/plenary.nvim", },
+    { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope.nvim" },
-    { "vim-test/vim-test",                          dependencies = { "preservim/vimux" } },
-    { "nvim-neo-tree/neo-tree.nvim",                dependencies = { "MunifTanjim/nui.nvim" } },
+    { "vim-test/vim-test" },
+    { "nvim-neo-tree/neo-tree.nvim",                dependencies = { "MunifTanjim/nui.nvim" }, },
 })
