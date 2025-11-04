@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     { "zbirenbaum/copilot.lua" },
-    { 'stevearc/dressing.nvim' },
+    { "stevearc/dressing.nvim" },
     { "chrisgrieser/nvim-various-textobjs" },
     { "lewis6991/gitsigns.nvim" },
     { "FabijanZulj/blame.nvim" },
@@ -46,7 +46,6 @@ require("lazy").setup({
     { "rebelot/kanagawa.nvim" },
     { "nvim-lua/plenary.nvim", },
     { "nvim-telescope/telescope.nvim" },
-    { "karb94/neoscroll.nvim" },
     { "vim-test/vim-test",                          dependencies = { "preservim/vimux" } },
     { "nvim-neo-tree/neo-tree.nvim",                dependencies = { "MunifTanjim/nui.nvim" } },
 })
