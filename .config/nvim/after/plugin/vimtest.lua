@@ -1,9 +1,9 @@
-vim.keymap.set("n", "<leader>tn", ':TestNearest<cr>', { silent = true })
-vim.keymap.set("n", "<leader>tf", ':TestFile<cr>', { silent = true })
-vim.keymap.set("n", "<leader>ts", ':TestSuite<cr>', { silent = true })
-vim.keymap.set("n", "<leader>tl", ':TestLast<cr>', { silent = true })
-vim.keymap.set("n", "<leader>tv", ':TestVisit<cr>', { silent = true })
+require("neotest").setup({
+    adapters = {
+        require('neotest-go')({})
+    },
+})
 
-vim.g['test#go#gotest#options'] = '--count 1'
-
-vim.cmd("let test#strategy = 'basic'")
+vim.keymap.set('n', '<Leader>tn', ':lua require("neotest").run.run()<CR>', { desc = 'Run test' })
+vim.keymap.set('n', '<Leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>', { desc = 'Run file' })
+vim.keymap.set('n', '<Leader>tt', ':lua require("neotest").output.open()<CR>', { desc = 'Show test result' })

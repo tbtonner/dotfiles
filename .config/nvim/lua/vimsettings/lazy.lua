@@ -46,6 +46,18 @@ require("lazy").setup({
     { "rebelot/kanagawa.nvim" },
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope.nvim" },
-    { "vim-test/vim-test" },
-    { "nvim-neo-tree/neo-tree.nvim",                dependencies = { "MunifTanjim/nui.nvim" }, },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        dependencies = { "MunifTanjim/nui.nvim" },
+    },
+    {
+        "nvim-neotest/neotest",
+        dependencies = {
+            "nvim-neotest/nvim-nio",
+            "nvim-lua/plenary.nvim",
+            "antoinemadec/FixCursorHold.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-neotest/neotest-go",
+        },
+    }
 })

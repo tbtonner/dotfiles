@@ -32,5 +32,12 @@ require("noice").setup({
             },
             opts = { skip = true },
         },
+        {
+            view = "notify",
+            filter = {
+                event = "msg_show",
+                kind = "shell_out",
+            },
+        },
     },
 })
