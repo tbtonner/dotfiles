@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    { "folke/lazydev.nvim" },
     { "zbirenbaum/copilot.lua" },
     { "stevearc/dressing.nvim" },
     { "chrisgrieser/nvim-various-textobjs" },

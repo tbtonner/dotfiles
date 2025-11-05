@@ -1,5 +1,6 @@
 vim.opt.signcolumn = 'yes'
 
+require("lazydev").setup({})
 require('mason').setup({})
 require('mason-lspconfig').setup({
     automatic_enable = true,
