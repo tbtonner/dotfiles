@@ -28,18 +28,6 @@ function dd-log-star
     dd-log-escape $argv[1] | sed -E 's/%[a-zA-Z0-9]/*/g' | pbcopy
 end
 
-function smart_ctrl_z --description "Resume most recent stopped nvim job if any"
-    set job_id (jobs | awk '/stopped.*nvim/ {print $1}' | head -n1)
-
-    if set -q job_id
-        fg %$job_id
-    end
-end
-
-if status is-interactive
-    bind \cz smart_ctrl_z
-end
-
 # git aliases
 alias g='git'
 alias gst='git status'
