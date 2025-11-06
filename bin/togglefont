@@ -1,8 +1,8 @@
 #!/bin/bash
 
 CONFIG="$HOME/dotfiles/.config/alacritty/alacritty.toml"
-PRIMARY=17
-SECONDARY=15
+PRIMARY=21
+SECONDARY=19
 
 # Extract current font size
 CURRENT=$(grep -E '^[[:space:]]*size[[:space:]]*=[[:space:]]*[0-9]+' "$CONFIG" | grep -oE '[0-9]+')
