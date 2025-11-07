@@ -27,7 +27,7 @@ require("lazy").setup({
     { "tpope/vim-repeat" },
     { "windwp/nvim-autopairs" },
     { "christoomey/vim-tmux-navigator" },
-    { "AndrewRadev/splitjoin.vim" },
+    { "Wansmer/treesj" },
     { "ryanoasis/vim-devicons" },
     { "nvim-tree/nvim-web-devicons", },
     { "tpope/vim-surround" },

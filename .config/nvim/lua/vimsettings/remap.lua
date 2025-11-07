@@ -1,7 +1,7 @@
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<F6>", ':set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<cr>')
 
-vim.keymap.set("n", "<C-d>", ":q!<cr>")
+vim.keymap.set("n", "<C-d>", ":close!<cr>")
 vim.keymap.set("n", "<C-s>", ":silent wa | silent w<cr>")
 vim.keymap.set("n", "<C-c>", ':bp | bd #<cr>')
 
