@@ -19,7 +19,6 @@ require("lazy").setup({
     { "lewis6991/gitsigns.nvim" },
     { "FabijanZulj/blame.nvim" },
     { "f-person/git-blame.nvim" },
-    { "ray-x/lsp_signature.nvim" },
     { "neovim/nvim-lspconfig" },
     { 'VonHeikemen/lsp-zero.nvim' },
     { "fredrikaverpil/pr.nvim" },
