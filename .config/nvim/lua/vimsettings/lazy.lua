@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    { "folke/flash.nvim" },
     { "ruifm/gitlinker.nvim" },
     { "folke/lazydev.nvim" },
     { "stevearc/dressing.nvim" },
