@@ -1,3 +1,11 @@
 local flash = require("flash")
 
-vim.keymap.set({ "n", "x", "o" }, "s", flash.jump, { desc = "Flash" })
+flash.setup({
+    search = {
+        mode = function(str)
+            return "\\<" .. vim.pesc(str)
+        end,
+    },
+})
+
+vim.keymap.set({ "n", "x", "o" }, "s", flash.jump)
