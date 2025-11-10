@@ -10,6 +10,7 @@ fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
 fish_add_path /Users/tomtonner/bin
 fish_add_path /Users/tomtonner/.local/share/nvim/mason/bin/
+fish_add_path /Users/tomtonner/couchbase-cloud/.bin
 
 # functions
 function awsAssumeGuardians 
