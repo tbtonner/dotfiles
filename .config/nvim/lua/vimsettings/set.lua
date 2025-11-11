@@ -32,3 +32,5 @@ vim.opt.scrolloff      = 10
 vim.opt.updatetime     = 50
 
 vim.opt.history        = 1000
+vim.opt.undofile       = true
+vim.opt.undodir        = vim.fn.stdpath("data") .. "/undo"
