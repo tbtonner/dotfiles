@@ -35,19 +35,36 @@ require("lazy").setup({
     { "nvim-telescope/telescope.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim" },
     { "folke/noice.nvim" },
-    { "hrsh7th/nvim-cmp" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-nvim-lsp" },
     { "nvim-treesitter/nvim-treesitter" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
     { "nvim-lualine/lualine.nvim" },
     { "rebelot/kanagawa.nvim" },
     { "nvim-lua/plenary.nvim" },
     {
+        "williamboman/mason.nvim",
+        dependencies = {
+            { "williamboman/mason-lspconfig.nvim" },
+        }
+    },
+    {
         "nvim-neo-tree/neo-tree.nvim",
-        dependencies = { "MunifTanjim/nui.nvim" },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+    },
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            {
+                "L3MON4D3/LuaSnip",
+                dependencies = {
+                    { "rafamadriz/friendly-snippets" },
+                }
+            },
+            { "saadparwaiz1/cmp_luasnip" },
+            { "hrsh7th/cmp-buffer" },
+            { "hrsh7th/cmp-nvim-lsp" },
+        }
     },
     {
         "nvim-neotest/neotest",
