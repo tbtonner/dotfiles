@@ -5,8 +5,8 @@ vim.keymap.set("n", "<F6>", function()
     vim.notify("Spell Check: " .. (vim.o.spell and "On" or "Off"))
 end, { desc = "Toggle spell check" })
 
-vim.keymap.set("n", "U", "15k")
-vim.keymap.set("n", "D", "15j")
+vim.keymap.set("n", "U", "15<C-y>")
+vim.keymap.set("n", "D", "15<C-e>")
 
 vim.keymap.set("n", "<C-d>", ":close!<cr>")
 vim.keymap.set("n", "<C-s>", ":silent wa | silent w<cr>")
