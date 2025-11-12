@@ -1,5 +1,3 @@
-set fish_cursor_default block
-
 # Set UTF-8 locale for tmux and terminal
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
@@ -59,6 +57,7 @@ alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static,open-api'
 alias cbcld='go run ./cmd/cbclocal down'
 alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
 alias cbclr='go run ./cmd/cbclocal restart'
+alias cbclc='go run ./cmd/cbclocal hosted clusters'
 
 # vpn
 alias vpn='sudo ~/work/couchbase-cloud/scripts/cbc-setup-vpn.sh'
