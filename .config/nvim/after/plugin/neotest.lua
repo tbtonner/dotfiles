@@ -1,52 +1,56 @@
 local notify_consumer = function(client)
-    client.listeners.run = function(_, _, position_ids)
-        vim.schedule(function()
-            if position_ids and #position_ids == 1 then
-                local name = position_ids[1]:match("::(.+)$")
-                    or position_ids[1]:match(".+/([^/]+)$")
-                    or position_ids[1]
-                vim.notify("Running " .. name .. "...", vim.log.levels.INFO, { title = "Neotest" })
-            else
-                vim.notify("Running tests...", vim.log.levels.INFO, { title = "Neotest" })
+    local function read_output(result)
+        local output = result.output
+        if not output then return "" end
+        if type(output) == "string" then
+            local f = io.open(output, "r")
+            if f then
+                output = f:read("*a"); f:close()
             end
-        end)
+        end
+        return output:gsub("\27%[[0-9;]*m", "")
     end
 
+    client.listeners.run = function(_, _, position_ids)
+        vim.schedule(function()
+            local msg = "Running tests..."
+            if position_ids and #position_ids == 1 then
+                local name = position_ids[1]:match("::(.+)$") or position_ids[1]:match(".+/([^/]+)$") or position_ids[1]
+                msg = "Running " .. name .. "..."
+            end
+            vim.notify(msg, vim.log.levels.INFO, { title = "Neotest" })
+        end)
+    end
 
     client.listeners.results = function(_, results, partial)
         if partial then return end
 
-        local passed, failed = {}, {}
-        local test_count = 0
+        local failure_statuses = { failed = true, failure = true, error = true }
+        local grouped_failures = {}
 
         for test_id, result in pairs(results) do
             if test_id:match("::") then
-                test_count = test_count + 1
-                local test_name = test_id:match("::(.+)$") or test_id
-                if result.status == "passed" then
-                    table.insert(passed, test_name)
-                elseif result.status == "failed" then
-                    table.insert(failed, test_name)
-                else
-                    table.insert(passed, test_name .. " (" .. (result.status or "unknown") .. ")")
+                local top_test = test_id:match("^(.-)::") or test_id
+                if failure_statuses[result.status] then
+                    grouped_failures[top_test] = grouped_failures[top_test] or {}
+                    table.insert(grouped_failures[top_test], result)
                 end
             end
         end
 
         vim.schedule(function()
-            if test_count == 1 then
-                local name = passed[1] or failed[1]
-                local status = #failed > 0 and "failed" or "passed"
-                vim.notify(name .. ": " .. status, #failed > 0 and vim.log.levels.ERROR or vim.log.levels.INFO,
-                    { title = "Neotest" })
-            elseif test_count > 1 then
-                if #failed == 0 then
-                    vim.notify("All tests passed!", vim.log.levels.INFO, { title = "Neotest" })
-                else
-                    local msg = string.format("%d test(s) failed: %s", #failed, table.concat(failed, ", "))
-                    vim.notify(msg, vim.log.levels.ERROR, { title = "Neotest" })
+            if next(grouped_failures) then
+                for top_test, fails in pairs(grouped_failures) do
+                    local combined = table.concat(
+                        vim.tbl_map(function(f) return read_output(f) end, fails),
+                        "\n\n"
+                    )
+                    vim.notify(combined, vim.log.levels.ERROR, { title = "Neotest Failure: " .. top_test })
                 end
+                return
             end
+
+            vim.notify("All tests passed!", vim.log.levels.INFO, { title = "Neotest" })
         end)
     end
 end
