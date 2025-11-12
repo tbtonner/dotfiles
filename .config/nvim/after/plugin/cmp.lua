@@ -4,12 +4,6 @@ cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
-        { name = 'luasnip' },
-    },
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end
     },
     mapping = cmp.mapping.preset.insert({
         -- <C-CR>/<C-u> to confirm selection

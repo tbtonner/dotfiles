@@ -1,6 +1,4 @@
-local neotest = require("neotest")
-
-notify_consumer = function(client)
+local notify_consumer = function(client)
     client.listeners.run = function(_, _, position_ids)
         vim.schedule(function()
             if position_ids and #position_ids == 1 then
@@ -53,10 +51,15 @@ notify_consumer = function(client)
     end
 end
 
-neotest.setup({
+require("neotest").setup({
     adapters = {
-        require('neotest-go')({
-            go_test_args = { "-v", "-count=1" },
+        require('neotest-golang')({
+            runner = "gotestsum",
+            go_test_args = {
+                "-v",
+                "-count=1",
+            },
+            warn_test_name_dupes = false,
         })
     },
     consumers = {
@@ -65,9 +68,11 @@ neotest.setup({
     quickfix = {
         enabled = false,
     },
+    discovery = { enabled = false },
 })
 
 vim.keymap.set('n', '<Leader>tn', ':lua require("neotest").run.run()<CR>', { desc = 'Run test' })
 vim.keymap.set('n', '<Leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>', { desc = 'Run file' })
+vim.keymap.set('n', '<Leader>td', ':lua require("neotest").run.run(vim.fn.expand("%:p:h"))<CR>', { desc = 'Run dir' })
 vim.keymap.set('n', '<Leader>tt', ':lua require("neotest").output.open({ enter = true, auto_close = true })<CR>',
     { desc = 'Show test result' })

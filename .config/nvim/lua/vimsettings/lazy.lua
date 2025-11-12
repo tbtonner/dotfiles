@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { "folke/flash.nvim" },
     { "ruifm/gitlinker.nvim" },
     { "folke/lazydev.nvim" },
     { "stevearc/dressing.nvim" },
@@ -38,8 +37,14 @@ require("lazy").setup({
     { "nvim-treesitter/nvim-treesitter" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
     { "nvim-lualine/lualine.nvim" },
-    { "rebelot/kanagawa.nvim" },
     { "nvim-lua/plenary.nvim" },
+    { "rebelot/kanagawa.nvim" },
+    {
+        "folke/flash.nvim",
+        config = function()
+            require("flash").setup()
+        end,
+    },
     {
         "williamboman/mason.nvim",
         dependencies = {
@@ -55,13 +60,6 @@ require("lazy").setup({
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            {
-                "L3MON4D3/LuaSnip",
-                dependencies = {
-                    { "rafamadriz/friendly-snippets" },
-                }
-            },
-            { "saadparwaiz1/cmp_luasnip" },
             { "hrsh7th/cmp-buffer" },
             { "hrsh7th/cmp-nvim-lsp" },
         }
@@ -73,7 +71,10 @@ require("lazy").setup({
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "nvim-neotest/neotest-go",
+            {
+                "fredrikaverpil/neotest-golang",
+                commit = "cac1039",
+            }
         },
     }
 })
