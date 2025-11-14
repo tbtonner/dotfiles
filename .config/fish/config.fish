@@ -70,8 +70,8 @@ alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
 alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:Password123! | jq -r ".jwt"'
 
 # binds
-bind \el 'clear; commandline -f repaint'
 bind \u00AC 'clear; commandline -f repaint'
+bind -M insert \u00AC 'clear; commandline -f repaint'
 
 # prompt
 set -g theme_display_time yes

@@ -1,4 +1,5 @@
 vim.g.mapleader        = " "
+vim.opt.shell          = "/bin/bash"
 
 vim.opt.spelllang      = "en"
 vim.opt.clipboard      = "unnamedplus"
