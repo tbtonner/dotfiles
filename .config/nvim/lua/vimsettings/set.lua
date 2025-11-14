@@ -6,6 +6,7 @@ vim.opt.clipboard      = "unnamedplus"
 
 vim.opt.nu             = true
 vim.opt.relativenumber = true
+vim.opt.wrap           = false
 
 vim.opt.termguicolors  = true
 vim.opt.cursorline     = true
