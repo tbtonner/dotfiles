@@ -39,6 +39,12 @@ require("neo-tree").setup({
             ["/"] = "noop",
             ["f"] = "noop",
             ["<C-f>"] = "noop",
+            ["<Esc>"] = function(state)
+                require("neo-tree.command").execute({
+                    action = "close",
+                    source = state.source,
+                })
+            end,
         },
     },
 })

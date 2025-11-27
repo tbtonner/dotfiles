@@ -49,6 +49,7 @@ alias gac='gaa; gc -m'
 alias gacn='gaa; gc --no-verify -m'
 alias gcp='git cherry-pick'
 alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
+alias com='echo "Updated in https://github.com/couchbasecloud/couchbase-cloud/pull/PULLNUM/commits/$(gcom)"'
 
 # cbclocal aliases
 alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
