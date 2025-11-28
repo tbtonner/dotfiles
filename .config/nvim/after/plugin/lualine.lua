@@ -20,10 +20,9 @@ require('lualine').setup {
     sections = {
         lualine_a = { 'mode' },
         lualine_b = {
-            { 'branch',                      fmt = function(str) return str:sub(1, 50) end },
             'diff',
             'diagnostics',
-            { noice.api.statusline.mode.get, cond = noice.api.statusline.mode.has,         color = { fg = "#ff9e64" }, },
+            { noice.api.statusline.mode.get, cond = noice.api.statusline.mode.has, color = { fg = "#ff9e64" }, },
         },
         lualine_c = { { 'filename', path = 1 } },
 
