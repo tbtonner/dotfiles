@@ -8,7 +8,7 @@ fish_add_path /Users/tomtonner/.cargo/bin
 fish_add_path /Users/tomtonner/work/server/install/bin
 fish_add_path /Users/tomtonner/bin
 fish_add_path /Users/tomtonner/.local/share/nvim/mason/bin/
-fish_add_path /Users/tomtonner/couchbase-cloud/.bin
+fish_add_path /Users/tomtonner/work/couchbase-cloud/.bin
 
 # functions
 function awsAssumeGuardians 
@@ -39,6 +39,21 @@ function com
     end
 
     echo "Updated in https://github.com/couchbasecloud/couchbase-cloud/pull/$p/commits/$(gcom)"
+end
+
+function rgsed
+    if test (count $argv) -ne 2
+        echo "Usage: rgsed <original> <replacement>"
+        return 1
+    end
+
+    set original $argv[1]
+    set replacement $argv[2]
+
+    for file in (rg -l -- "$original")
+        # macOS sed needs '' for -i option
+        sed -i '' "s/$original/$replacement/g" "$file"
+    end
 end
 
 # git aliases

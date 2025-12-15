@@ -53,7 +53,7 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/tomtonner/couchbase\x2dcloud/\x2ebin\x1e/Users/tomtonner/\x2elocal/share/nvim/mason/bin\x1e/opt/homebrew/opt/ruby/bin\x1e/Users/tomtonner/bin\x1e/usr/bin\x1e/Users/tomtonner/\x2ecargo/bin\x1e/Users/tomtonner/work/server/install/bin\x1e/Users/tomtonner/go/bin\x1e/opt/homebrew/bin
+SETUVAR fish_user_paths:/Users/tomtonner/work/couchbase\x2dcloud/\x2ebin\x1e/Users/tomtonner/couchbase\x2dcloud/\x2ebin\x1e/Users/tomtonner/\x2elocal/share/nvim/mason/bin\x1e/opt/homebrew/opt/ruby/bin\x1e/Users/tomtonner/bin\x1e/usr/bin\x1e/Users/tomtonner/\x2ecargo/bin\x1e/Users/tomtonner/work/server/install/bin\x1e/Users/tomtonner/go/bin\x1e/opt/homebrew/bin
 SETUVAR internaltoken:cb\x2d5ts6xdkn\x2dsh4l\x2dsn18\x2dz9yp\x2d2qo1pr9osq5d
 SETUVAR internaltokendev:cb\x2d5ts6xdkn\x2dsh4l\x2dsn18\x2dz9yp\x2d2qo1pr9osq5d
 SETUVAR internaltokenstage:cb\x2d08f255ee\x2d9120\x2d4e37\x2dbc8d\x2dc58eb43150fb

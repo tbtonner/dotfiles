@@ -15,6 +15,7 @@ require("lazy").setup({
     { "ruifm/gitlinker.nvim" },
     { "folke/lazydev.nvim" },
     { "stevearc/dressing.nvim" },
+    { "zbirenbaum/copilot.lua" },
     { "chrisgrieser/nvim-various-textobjs" },
     { "lewis6991/gitsigns.nvim" },
     { "FabijanZulj/blame.nvim" },
