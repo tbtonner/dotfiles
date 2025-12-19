@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { "ruifm/gitlinker.nvim" },
     { "folke/lazydev.nvim" },
+    { "MeanderingProgrammer/render-markdown.nvim" },
+    { "LunarVim/bigfile.nvim" },
     { "stevearc/dressing.nvim" },
     { "zbirenbaum/copilot.lua" },
     { "chrisgrieser/nvim-various-textobjs" },
