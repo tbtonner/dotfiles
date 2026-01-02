@@ -4,7 +4,6 @@ cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
-        { name = "spell" },
     },
     mapping = cmp.mapping.preset.insert({
         -- <C-CR>/<C-u> to confirm selection
