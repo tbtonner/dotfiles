@@ -1,8 +1,9 @@
 vim.g.mapleader        = " "
 vim.opt.shell          = "/bin/bash"
 
-vim.opt.spelllang      = "en"
+vim.opt.spelllang      = "en_gb"
 vim.opt.clipboard      = "unnamedplus"
+vim.opt.spellsuggest   = { "best", 9 }
 
 vim.opt.nu             = true
 vim.opt.relativenumber = true

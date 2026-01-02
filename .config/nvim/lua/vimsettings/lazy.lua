@@ -31,6 +31,7 @@ require("lazy").setup({
     { "christoomey/vim-tmux-navigator" },
     { "Wansmer/treesj" },
     { "ryanoasis/vim-devicons" },
+    { "f3fora/cmp-spell" },
     { "nvim-tree/nvim-web-devicons", },
     { "tpope/vim-surround" },
     { "tpope/vim-unimpaired" },

@@ -82,7 +82,7 @@ alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
 # cbclocal aliases
 alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
 alias cbclocal='go run ./cmd/cbclocal'
-alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static,open-api'
+alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static'
 alias cbcld='go run ./cmd/cbclocal down'
 alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
 alias cbclr='go run ./cmd/cbclocal restart'
