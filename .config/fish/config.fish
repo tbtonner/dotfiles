@@ -2,6 +2,14 @@
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 
+# vi key bindings
+set -g fish_key_bindings fish_vi_key_bindings
+
+# working dir
+if test (pwd) = $HOME
+    cd /Users/tomtonner/work/couchbase-cloud
+end
+
 # paths
 fish_add_path /Users/tomtonner/go/bin
 fish_add_path /Users/tomtonner/.cargo/bin
@@ -12,13 +20,13 @@ fish_add_path /Users/tomtonner/work/couchbase-cloud/.bin
 
 # functions
 function awsAssumeGuardians 
-	cbc-aws-assumerole -account dbaas-test-0005 -profile cbc-main -duration 43200
+    cbc-aws-assumerole -account dbaas-test-0005 -profile cbc-main -duration 43200
     export AWS_PROFILE=dbaas-test-0005-temp
     export AWS_DEFAULT_REGION=us-east-1
 end
 
 function awsAssumeGuardiansStage
-	cbc-aws-assumerole -account dbaas-stage-0001 -profile cbc-main
+    cbc-aws-assumerole -account dbaas-stage-0001 -profile cbc-main
     export AWS_PROFILE=dbaas-stage-0001-temp
     export AWS_DEFAULT_REGION=us-east-1
 end
@@ -102,6 +110,12 @@ alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:
 bind \u00AC 'clear; commandline -f repaint'
 bind -M insert \u00AC 'clear; commandline -f repaint'
 
+# always use block cursor
+set -g fish_cursor_default block
+set -g fish_cursor_insert block
+set -g fish_cursor_replace_one block
+set -g fish_cursor_visual block
+
 # prompt
 set -g theme_display_time yes
 set -g theme_display_group no
@@ -109,29 +123,12 @@ set -g theme_display_hostname no
 set -g theme_display_rw no
 set -g theme_display_virtualenv yes
 
-set theme_primary                                   88a662
-set theme_secondary                                 e46876
-set theme_primary_variant                           8e79af
-set theme_time                                      6780b1
-set theme_prompt                                    ffffff
-set theme_hilight                                   e4c284
+set kanagawa_green  76946A
+set kanagawa_red    C34043
+set kanagawa_purple 958FB8
+set kanagawa_gold   C0A36E
 
-set -g theme_color_user                             $theme_hilight
-set -g theme_color_host                             $theme_primary_variant
-set -g theme_color_separator                        brblack
-set -g theme_color_normal                           normal
-set -g theme_color_time                             $theme_time
-set -g theme_color_path                             $theme_primary
-set -g theme_color_prompt                           $theme_prompt
-set -g theme_color_virtualenv                       $theme_secondary
-set -g theme_color_status_prefix                    $theme_hilight
-set -g theme_color_status_jobs                      $theme_primary
-set -g theme_color_status_rw                        $theme_primary
-set -g theme_display_group                          no
-set -g theme_prompt_segment_separator_color         $theme_primary
-set -g theme_prompt_userhost_separator              '.'
-set -g __fish_git_prompt_char_branch_begin          '['
-set -g __fish_git_prompt_char_branch_end            ']'
-set -g __fish_git_prompt_color_branch_begin         brblack
-set -g __fish_git_prompt_color_branch_end           brblack
-set -g __fish_git_prompt_color_branch               $theme_secondary
+set -g theme_color_time               $kanagawa_purple
+set -g theme_color_user               $kanagawa_gold
+set -g theme_color_path               $kanagawa_green
+set -g __fish_git_prompt_color_branch $kanagawa_red

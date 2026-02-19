@@ -4,6 +4,8 @@ vim.opt.shell          = "/bin/bash"
 vim.opt.spelllang      = "en_gb"
 vim.opt.clipboard      = "unnamedplus"
 
+vim.opt.guicursor      = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
+
 vim.opt.nu             = true
 vim.opt.relativenumber = true
 vim.opt.wrap           = true
