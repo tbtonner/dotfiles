@@ -116,6 +116,26 @@ set -g fish_cursor_insert block
 set -g fish_cursor_replace_one block
 set -g fish_cursor_visual block
 
+# colours (kanagawa)
+set kanagawa_black 16161D
+set kanagawa_red C34043
+set kanagawa_green 76946A
+set kanagawa_gold C0A36E
+set kanagawa_blue 7E9CD8
+set kanagawa_purple 957FB8
+set kanagawa_green_blue 6A9589
+set kanagawa_sand C8C093
+set kanagawa_grey 727169
+set kanagawa_light_red  E82424
+set kanagawa_light_green 98BB6C
+set kanagawa_dark_sand E6C384
+set kanagawa_bright_blue 7FB4CA
+set kanagawa_dark_purple 938AA9
+set kanagawa_teal 7AA89F
+set kanagawa_white DCD7BA
+set kanagawa_orange FFA066
+set kanagawa_bright_red FF5D62
+
 # prompt
 set -g theme_display_time yes
 set -g theme_display_group no
@@ -123,12 +143,7 @@ set -g theme_display_hostname no
 set -g theme_display_rw no
 set -g theme_display_virtualenv yes
 
-set kanagawa_green  76946A
-set kanagawa_red    C34043
-set kanagawa_purple 958FB8
-set kanagawa_gold   C0A36E
-
-set -g theme_color_time               $kanagawa_purple
-set -g theme_color_user               $kanagawa_gold
-set -g theme_color_path               $kanagawa_green
-set -g __fish_git_prompt_color_branch $kanagawa_red
+set -g theme_color_time               $kanagawa_sand
+set -g theme_color_user               $kanagawa_blue
+set -g theme_color_path               $kanagawa_light_green
+set -g __fish_git_prompt_color_branch $kanagawa_bright_red
