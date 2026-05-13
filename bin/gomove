@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+    echo "usage: gomove <from-path> <to-path>"
+    echo "  e.g: gomove internal/foo internal/bar"
+    exit 1
+fi
+
+BASE="github.com/couchbasecloud/couchbase-cloud"
+gomvpkg -from "$BASE/$1" -to "$BASE/$2"
+make gazelle

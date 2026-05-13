@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+    echo "usage: gcob <url> [description...]"
+    exit 1
+fi
+
+url="$1"
+shift
+
+ticket="${url##*/}"
+
+if [[ $# -gt 0 ]]; then
+    desc=$(IFS=_; printf '%s' "$*")
+    git checkout -b "${ticket}_${desc}"
+else
+    git checkout -b "$ticket"
+fi
