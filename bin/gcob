@@ -11,6 +11,13 @@ shift
 
 ticket="${url##*/}"
 
+existing=$(git branch --list "${ticket}*" | sed 's/^[* ]*//' | head -1)
+if [[ -n "$existing" ]]; then
+    echo "Branch '${existing}' already exists, switching to it."
+    git checkout "$existing"
+    exit 0
+fi
+
 if [[ $# -gt 0 ]]; then
     desc=$(IFS=_; printf '%s' "$*")
     git checkout -b "${ticket}_${desc}"
