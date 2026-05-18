@@ -12,7 +12,7 @@ tmux capture-pane -peS -32768 \
 cp /tmp/tmux-capture.txt "/tmp/tmux-captures/$(date +%Y%m%d_%H%M%S).txt"
 ls -t /tmp/tmux-captures/*.txt 2>/dev/null | tail -n +21 | xargs rm -f 2>/dev/null || true
 
-nvim_cmd="NVIM_APPNAME=nvim-capture nvim -c 'setlocal buftype=nofile bufhidden=wipe noswapfile conceallevel=3' -c 'lua require(\"baleia\").setup({}).once(0)' -c 'normal! G' /tmp/tmux-capture.txt"
+nvim_cmd="NVIM_APPNAME=nvim-capture nvim -c 'setlocal buftype=nofile bufhidden=wipe noswapfile conceallevel=3 nowrap' -c 'lua require(\"baleia\").setup({}).once(0)' -c 'normal! G' /tmp/tmux-capture.txt"
 
 if [ "$mode" = "popup" ]; then
   tmux display-popup -E -b rounded -S fg=#DCD7BA -w 90% -h 90% "$nvim_cmd"
