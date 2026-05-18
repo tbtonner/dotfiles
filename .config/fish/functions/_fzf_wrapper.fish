@@ -7,7 +7,7 @@ function _fzf_wrapper --description "Prepares some environment variables before 
     # If FZF_DEFAULT_OPTS is not set, then set some sane defaults.
     # See https://github.com/junegunn/fzf#environment-variables
     if not set --query FZF_DEFAULT_OPTS
-        set --export FZF_DEFAULT_OPTS '--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*" --bind ctrl-j:down,ctrl-k:up,ctrl-d:half-page-down,ctrl-u:half-page-up'
+        set --export FZF_DEFAULT_OPTS '--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*" --bind ctrl-j:down,ctrl-k:up,ctrl-d:half-page-down,ctrl-u:half-page-up --color=border:#DCD7BA'
     end
 
     if set --query TMUX
