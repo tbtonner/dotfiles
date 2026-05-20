@@ -7,7 +7,7 @@ function rgsed
     set original $argv[1]
     set replacement $argv[2]
 
-    for file in (rg -l -- "$original")
-        sed -i '' "s/$original/$replacement/g" "$file"
+    for file in (rg -l --glob '!go.*' -- "$original")
+        sed -i '' "s|$original|$replacement|g" "$file"
     end
 end
