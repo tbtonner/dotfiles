@@ -38,33 +38,6 @@ require("lazy").setup({
     },
 
     {
-        "milanglacier/minuet-ai.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require('minuet').setup({
-                provider = 'gemini',
-                provider_options = {
-                    gemini = {
-                        model = 'gemini-2.5-flash',
-                        stream = true,
-                    },
-                },
-                virtualtext = {
-                    enabled = true,
-                    auto_trigger_ft = { "*" },
-                    keymap = {
-                        accept = "\20", -- <C-Tab>/<C-t> to accept
-                        show = "<C-;>",
-                        dismiss = "<C-e>",
-                        next = "<C-l>",
-                        prev = "<C-h>",
-                    },
-                },
-            })
-        end,
-    },
-
-    {
         "FabijanZulj/blame.nvim",
     },
 
@@ -177,6 +150,23 @@ require("lazy").setup({
                     auto_show = true,
                     window = { border = "none" },
                 },
+            },
+        },
+    },
+
+    {
+        "stevearc/conform.nvim",
+        event = "BufWritePre",
+        opts = {
+            format_after_save = {
+                lsp_format = "fallback",
+            },
+            formatters_by_ft = {
+                go                = { "goimports" },
+                typescript        = { "prettier" },
+                typescriptreact   = { "prettier" },
+                javascript        = { "prettier" },
+                javascriptreact   = { "prettier" },
             },
         },
     },

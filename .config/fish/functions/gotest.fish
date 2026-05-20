@@ -28,17 +28,17 @@ function gotest --description "Run Go tests by name or package"
         set search_dir $argv[2]
     end
 
-    set matches (rg -l "func .*$test_name" --glob "*_test.go" $search_dir 2>/dev/null)
+    set matches (rg --line-number --no-heading --with-filename --color=never "func .*$test_name" --glob "*_test.go" $search_dir 2>/dev/null)
 
     if test (count $matches) -eq 0
         echo "No test matching '$test_name' found in '$search_dir'"
         return 1
     end
 
-    # Collect unique package dirs
+    # Collect unique package dirs from file:line:content matches
     set pkg_dirs
     for m in $matches
-        set d (dirname $m)
+        set d (dirname (string split -m1 ':' $m)[1])
         if not contains $d $pkg_dirs
             set pkg_dirs $pkg_dirs $d
         end
@@ -47,13 +47,26 @@ function gotest --description "Run Go tests by name or package"
     # fzf picker when multiple packages match
     if test (count $pkg_dirs) -gt 1
         if command -q fzf
-            set selected (printf '%s\n' $pkg_dirs | _fzf_wrapper --multi \
-                --prompt="packages> " \
-                --header="tab=toggle  ctrl-a=all  enter=run")
-            if test $status -ne 0; or test (count $selected) -eq 0
-                return 0
+            set -l preview 'bat --color=always --highlight-line {2} --style=numbers,changes {1} 2>/dev/null || cat {1}'
+            set -l selected (for m in $matches
+                set -l parts (string split -m2 ':' $m)
+                printf '%s:%s\n' $parts[1] $parts[2]
+            end | _fzf_pick \
+                -m +i --delimiter=: \
+                "--prompt=matches> " \
+                "--header=tab=toggle  ctrl-a=all  ctrl-/:preview  enter=run" \
+                "--preview=$preview" \
+                "--preview-window=right:60%:+{2}-5" \
+                --bind=ctrl-/:toggle-preview)
+            test (count $selected) -eq 0; and return 0
+            # Extract unique package dirs from selected file:line entries
+            set pkg_dirs
+            for sel in $selected
+                set -l d (dirname (string split -m1 ':' $sel)[1])
+                if not contains $d $pkg_dirs
+                    set pkg_dirs $pkg_dirs $d
+                end
             end
-            set pkg_dirs $selected
         else
             echo "# Multiple packages found:"
             for d in $pkg_dirs

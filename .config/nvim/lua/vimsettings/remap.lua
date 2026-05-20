@@ -25,6 +25,12 @@ vim.keymap.set("n", "<leader>fp", function()
     vim.notify(filepath)
 end, { desc = "Copy file path" })
 
+vim.keymap.set("n", "<leader>fP", function()
+    local filepath = vim.fn.expand("%:.") .. ":" .. vim.fn.line(".")
+    vim.fn.setreg("+", filepath)
+    vim.notify(filepath)
+end, { desc = "Copy file path with line number" })
+
 vim.keymap.set("n", "<leader>qd", ':cdo execute "norm @q" | update<cr><cr>')
 vim.keymap.set("n", "<leader>qc", ':call setqflist([])<cr>')
 

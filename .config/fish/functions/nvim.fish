@@ -49,42 +49,30 @@ function _nvim_run_fzf
     set -l mode $argv[1]
     set -l items $argv[2..]
 
-    set -l input_file (mktemp)
-    set -l output_file (mktemp)
-    set -l wrapper (mktemp /tmp/nvim-picker-XXXXXX.sh)
-
+    set -l result
     if test "$mode" = rg
-        for match in $items
+        set -l preview 'bat --color=always --highlight-line {2} --style=numbers,changes {1} 2>/dev/null || cat {1}'
+        set result (for match in $items
             set -l p (string split -m2 ':' $match)
             printf '%s:%s\n' $p[1] $p[2]
-        end > $input_file
-        set -l preview 'bat --color=always --highlight-line {2} --style=numbers,changes {1} 2>/dev/null || cat {1}'
-        printf '#!/bin/sh\nfzf -m +i --delimiter=":" --layout=reverse --color="preview-border:#DCD7BA" --preview=%s --preview-window="right:60%%:+{2}-5" --bind="ctrl-/:toggle-preview" --expect="ctrl-v,ctrl-x" < %s > %s\n' \
-            (string escape -- $preview) \
-            (string escape -- $input_file) \
-            (string escape -- $output_file) > $wrapper
+        end | _fzf_pick \
+            -m +i --delimiter=: \
+            "--preview=$preview" \
+            "--preview-window=right:60%:+{2}-5" \
+            --bind=ctrl-/:toggle-preview \
+            --expect=ctrl-v,ctrl-x)
     else
-        printf '%s\n' $items > $input_file
         set -l preview 'bat --color=always --style=numbers,changes {} 2>/dev/null || cat {}'
-        printf '#!/bin/sh\nfzf -m +i --layout=reverse --color="preview-border:#DCD7BA" --preview=%s --preview-window="right:60%%" --bind="ctrl-/:toggle-preview" --expect="ctrl-v,ctrl-x" < %s > %s\n' \
-            (string escape -- $preview) \
-            (string escape -- $input_file) \
-            (string escape -- $output_file) > $wrapper
-    end
-    chmod +x $wrapper
-
-    if test -n "$TMUX"
-        tmux popup -d (pwd) -w 90% -h 90% -b rounded -S fg=#DCD7BA -E $wrapper
-    else
-        $wrapper
+        set result (printf '%s\n' $items | _fzf_pick \
+            -m +i \
+            "--preview=$preview" \
+            "--preview-window=right:60%" \
+            --bind=ctrl-/:toggle-preview \
+            --expect=ctrl-v,ctrl-x)
     end
 
-    if test -s $output_file
-        set -l result (cat $output_file)
-        _nvim_open_selections $result[1] $result[2..]
-    end
-
-    rm -f $input_file $output_file $wrapper
+    test (count $result) -eq 0; and return
+    _nvim_open_selections $result[1] $result[2..]
 end
 
 function nvim
@@ -96,25 +84,16 @@ function nvim
 
     # No-arg: fd-powered file picker from cwd.
     if test (count $argv) -eq 0
-        set -l output_file (mktemp)
-        set -l wrapper (mktemp /tmp/nvim-picker-XXXXXX.sh)
         set -l preview 'bat --color=always --style=numbers,changes {} 2>/dev/null || cat {}'
-        printf '#!/bin/sh\nfd --hidden --type f . | fzf -m +i --layout=reverse --color="preview-border:#DCD7BA" --preview=%s --preview-window="right:60%%" --bind="ctrl-/:toggle-preview" --expect="ctrl-v,ctrl-x" > %s\n' \
-            (string escape -- $preview) \
-            (string escape -- $output_file) > $wrapper
-        chmod +x $wrapper
-
-        if test -n "$TMUX"
-            tmux popup -d (pwd) -w 90% -h 90% -b rounded -S fg=#DCD7BA -E $wrapper
-        else
-            $wrapper
+        set -l result (fd --hidden --type f . | _fzf_pick \
+            -m +i \
+            "--preview=$preview" \
+            "--preview-window=right:60%" \
+            --bind=ctrl-/:toggle-preview \
+            --expect=ctrl-v,ctrl-x)
+        if test (count $result) -gt 0
+            _nvim_open_selections $result[1] $result[2..]
         end
-
-        if test -s $output_file
-            set -l lines (cat $output_file)
-            _nvim_open_selections $lines[1] $lines[2..]
-        end
-        rm -f $output_file $wrapper
         return
     end
 
