@@ -31,6 +31,16 @@ vim.keymap.set("n", "<leader>fP", function()
     vim.notify(filepath)
 end, { desc = "Copy file path with line number" })
 
+vim.keymap.set("v", "<leader>fp", function()
+    local filepath = vim.fn.expand("%:.")
+    local line_start = math.min(vim.fn.line("."), vim.fn.line("v"))
+    local line_end = math.max(vim.fn.line("."), vim.fn.line("v"))
+    local result = filepath .. ":" .. line_start .. (line_start ~= line_end and ("-" .. line_end) or "")
+    vim.fn.setreg("+", result)
+    vim.notify(result)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+end, { desc = "Copy file path with line range" })
+
 vim.keymap.set("n", "<leader>qd", ':cdo execute "norm @q" | update<cr><cr>')
 vim.keymap.set("n", "<leader>qc", ':call setqflist([])<cr>')
 
@@ -58,6 +68,23 @@ vim.keymap.set("n", "<leader>r", function()
         vim.cmd.normal({ args = { '"_ciw' .. text }, bang = true })
     end
 end, { desc = "Replace word with clipboard" })
+
+vim.api.nvim_create_user_command('E', function(opts)
+    local arg = opts.args
+    if arg == '' then
+        vim.cmd('edit')
+        return
+    end
+    local file, line = arg:match('^(.+):(%d+)$')
+    if file and line then
+        vim.cmd('edit ' .. vim.fn.fnameescape(file))
+        vim.api.nvim_win_set_cursor(0, { tonumber(line), 0 })
+    else
+        vim.cmd('edit ' .. vim.fn.fnameescape(arg))
+    end
+end, { nargs = '*', complete = 'file' })
+
+vim.cmd('cabbrev e E')
 
 vim.api.nvim_create_user_command('Fresh', function(opts)
     vim.cmd('silent! %bd')

@@ -6,7 +6,11 @@ function _nvim_open_selections
     set -l files
     set -l lnums
     for sel in $sels
-        if string match -qr '^.+:\d+$' -- $sel
+        if string match -qr '^.+:\d+-\d+$' -- $sel
+            set -l p (string split -r -m1 ':' $sel)
+            set -a files $p[1]
+            set -a lnums (string replace -r '^(\d+)-\d+$' '$1' $p[2])
+        else if string match -qr '^.+:\d+$' -- $sel
             set -l p (string split -r -m1 ':' $sel)
             set -a files $p[1]
             set -a lnums $p[2]
@@ -123,6 +127,11 @@ function nvim
         set parts (string split -m1 '#' $arg)
         set file $parts[1]
         set line (string replace -r '^L(\d+).*' '$1' $parts[2])
+    # Range suffix :start-end — take the start line.
+    else if string match -qr '^.+:\d+-\d+$' -- $arg
+        set parts (string split -r -m1 ':' $arg)
+        set file $parts[1]
+        set line (string replace -r '^(\d+)-\d+$' '$1' $parts[2])
     # Standard :line suffix.
     else if string match -qr '^.+:\d+$' -- $arg
         set parts (string split -r -m1 ':' $arg)

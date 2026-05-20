@@ -232,23 +232,27 @@ require("lazy").setup({
     {
         "ruifm/gitlinker.nvim",
         keys = {
-            {
-                "<leader>gl",
-                mode = {
-                    "n",
-                    "v",
-                },
-            },
+            { "<leader>gl", mode = { "n", "v" } },
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
-        opts = {
-            mappings = "<leader>gl",
-            opts = {
-                add_current_line_on_normal_mode = true,
-            },
-        },
+        config = function()
+            require("gitlinker").setup({
+                mappings = nil,
+                opts = {
+                    add_current_line_on_normal_mode = true,
+                },
+            })
+            local actions = require("gitlinker.actions")
+            vim.keymap.set("n", "<leader>gl", function()
+                require("gitlinker").get_buf_range_url("n", { action_callback = actions.copy_to_clipboard })
+            end, { desc = "Copy git link" })
+            vim.keymap.set("v", "<leader>gl", function()
+                require("gitlinker").get_buf_range_url("v", { action_callback = actions.copy_to_clipboard })
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+            end, { desc = "Copy git link for range" })
+        end,
     },
 
     {
