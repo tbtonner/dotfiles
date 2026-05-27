@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>tr", ":Telescope resume<cr>")
 vim.keymap.set("n", "gb", picker("buffers", { show_line = false }))
 vim.keymap.set("n", "gd", picker("lsp_definitions", { show_line = false }))
 vim.keymap.set("n", "gi", picker("lsp_implementations", { show_line = false }))
-vim.keymap.set("n", "gr", picker("lsp_references", { show_line = false }))
+vim.keymap.set("n", "gr", picker("lsp_references", { show_line = false, include_declaration = false, include_current_line = false }))
 vim.keymap.set("n", "ge", picker("diagnostics", { show_line = false, severity_limit = "Error" }))
 vim.keymap.set("n", "gJ", picker("jumplist", { show_line = false }))
 

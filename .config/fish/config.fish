@@ -55,6 +55,15 @@ alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=int
 alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
 alias cplint='golangci-lint run --new-from-rev=main --config cv/golangci.yml'
 
+# background upgrade of claude-code, once per day
+if status is-interactive
+    set -l stamp ~/.cache/brew-upgrade-claude-code-stamp
+    if not test -f $stamp; or test (find $stamp -mtime +1 | count) -gt 0
+        fish -c "brew upgrade claude-code >/dev/null 2>&1; touch $stamp" &
+        disown
+    end
+end
+
 function idcp
     jq '.[].id' -r $argv | pbcopy
 end

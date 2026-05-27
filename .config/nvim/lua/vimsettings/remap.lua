@@ -75,7 +75,7 @@ vim.api.nvim_create_user_command('E', function(opts)
         vim.cmd('edit')
         return
     end
-    local file, line = arg:match('^(.+):(%d+)$')
+    local file, line = arg:match('^(.+):(%d+)%-?%d*$')
     if file and line then
         vim.cmd('edit ' .. vim.fn.fnameescape(file))
         vim.api.nvim_win_set_cursor(0, { tonumber(line), 0 })

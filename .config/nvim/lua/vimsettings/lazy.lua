@@ -158,9 +158,7 @@ require("lazy").setup({
         "stevearc/conform.nvim",
         event = "BufWritePre",
         opts = {
-            format_after_save = {
-                lsp_format = "fallback",
-            },
+            format_after_save = {},
             formatters_by_ft = {
                 go                = { "goimports" },
                 typescript        = { "prettier" },
