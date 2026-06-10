@@ -1,10 +1,27 @@
 function gotest --description "Run Go tests by name or package"
     if test (count $argv) -lt 1
-        echo "Usage: gotest <test_name_or_package> [search_dir]"
+        echo "Usage: gotest <test_name_or_package> [search_dir] [-- test_flags...]"
         return 1
     end
 
     set arg $argv[1]
+
+    # Split remaining args into positional (search_dir) and extra flags
+    # Anything starting with `-` (or after a literal `--`) is forwarded to the test binary.
+    set positional
+    set extra_flags
+    set forward_all 0
+    for a in $argv[2..]
+        if test $forward_all -eq 1
+            set extra_flags $extra_flags $a
+        else if test "$a" = --
+            set forward_all 1
+        else if string match -qr '^-' -- $a
+            set extra_flags $extra_flags $a
+        else
+            set positional $positional $a
+        end
+    end
 
     # Package/path mode: existing dir, existing .go file, or ends with ...
     if test -d $arg; or test -f $arg; or string match -q '*...' $arg
@@ -17,15 +34,15 @@ function gotest --description "Run Go tests by name or package"
             set pkg "$pkg/..."
         end
         echo "# Running all tests in ./$pkg"
-        gotestsum --format testdox -- -count=1 ./$pkg
+        gotestsum --format testdox -- -count=1 ./$pkg $extra_flags
         return
     end
 
     # Test name search mode
     set test_name $arg
     set search_dir "."
-    if test (count $argv) -ge 2
-        set search_dir $argv[2]
+    if test (count $positional) -ge 1
+        set search_dir $positional[1]
     end
 
     set matches (rg --line-number --no-heading --with-filename --color=never "func .*$test_name" --glob "*_test.go" $search_dir 2>/dev/null)
@@ -81,5 +98,5 @@ function gotest --description "Run Go tests by name or package"
     end
 
     echo "# Running '$test_name' in: $pkg_dirs"
-    gotestsum --format testdox -- -run $test_name -count=1 $pkg_args
+    gotestsum --format testdox -- -run $test_name -count=1 $pkg_args $extra_flags
 end
