@@ -5,10 +5,14 @@ current=$(tmux display-message -p '#S')
 
 selected=$(tmux list-sessions -F '#{session_name}' \
   | fzf -m \
-        --prompt='kill> ' \
-        --header='tab=multi-select  enter=kill  ctrl-/=toggle preview' \
+        --no-input \
+        --no-info \
+        --prompt='search> ' \
+        --header='j/k=move  tab=multi-select  enter=kill  /=search  esc=quit' \
         --preview='tmux capture-pane -ep -t {} 2>/dev/null' \
         --preview-window='right:60%' \
+        --bind='j:down,k:up,g:first,G:last' \
+        --bind='/:show-input+unbind(j,k,g,G)' \
         --bind='ctrl-/:toggle-preview' || true)
 
 [ -z "$selected" ] && exit 0

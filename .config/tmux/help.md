@@ -19,6 +19,7 @@ Prefix: `C-a`
 | `h` / `l` | prev / next window |
 | `,` | rename window |
 | `x` | kill window |
+| `w` | window picker across all sessions (popup, hjkl) |
 
 ## Sessions
 
@@ -26,9 +27,21 @@ Prefix: `C-a`
 |---|---|
 | `[` / `]` | prev / next session |
 | `S` | new session (current path) |
-| `f` | session picker (fzf popup) |
-| `w` | window picker across all sessions (fzf popup) |
-| `K` | kill session(s) (fzf multi-select) |
+| `.` | rename session |
+| `f` | session picker (popup, hjkl) |
+| `K` | kill session(s) (popup, hjkl, tab multi-select) |
+
+### Inside a picker
+
+| Key | Action |
+|---|---|
+| `j` / `k` | move down / up |
+| `g` / `G` | jump to top / bottom |
+| `enter` | accept |
+| `tab` | toggle select (kill picker only) |
+| `/` | switch to fuzzy search |
+| `ctrl-/` | toggle preview |
+| `esc` | close picker |
 
 ## Copy / paste
 
