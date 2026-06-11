@@ -3,6 +3,7 @@ require("noice").setup({
         override = {
             ["cmp.entry.get_documentation"] = true,
         },
+        signature = { enabled = false },
     },
     cmdline = {
         view = "cmdline",

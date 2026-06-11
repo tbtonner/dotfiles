@@ -50,6 +50,11 @@ require("lazy").setup({
     },
 
     {
+        "ray-x/lsp_signature.nvim",
+        event = "LspAttach",
+    },
+
+    {
         "folke/ts-comments.nvim",
         opts = {},
     },
