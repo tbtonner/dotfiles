@@ -189,7 +189,15 @@ require("lazy").setup({
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        opts = {},
+        opts = {
+            ignore = function(buf)
+                local win = vim.fn.bufwinid(buf)
+                if win == -1 then
+                    return false
+                end
+                return vim.api.nvim_win_get_config(win).relative ~= ""
+            end,
+        },
     },
 
     {
