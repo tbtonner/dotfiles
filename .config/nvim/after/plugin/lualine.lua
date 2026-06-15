@@ -31,5 +31,5 @@ require('lualine').setup {
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
     },
-    options = { refresh = { statusline = 100 } },
+    options = { theme = 'kanagawa', refresh = { statusline = 100 } },
 }

@@ -119,6 +119,47 @@ require("lazy").setup({
     },
 
     {
+        "folke/sidekick.nvim",
+        config = function()
+            require("sidekick").setup({
+                nes = { enabled = true },
+                cli = {
+                    win = {
+                        layout = "float",
+                        float = {
+                            width = 0.85,
+                            height = 0.85,
+                            border = "rounded",
+                            title = "  Claude ",
+                            title_pos = "center",
+                        },
+                    },
+                },
+            })
+
+            -- ghost-text inline completions (Copilot LSP) as you type
+            vim.lsp.inline_completion.enable(true)
+
+            -- ctrl+tab (ghostty sends \x14 -> <C-t>):
+            -- apply a Next Edit Suggestion, else accept the inline completion, else literal <C-t>
+            vim.keymap.set({ "n", "i" }, "<C-t>", function()
+                if require("sidekick").nes_jump_or_apply() then
+                    return
+                end
+                if vim.lsp.inline_completion.get() then
+                    return
+                end
+                return "<C-t>"
+            end, { expr = true, silent = true, desc = "Apply NES / accept inline completion" })
+
+            -- open AI CLI tools
+            vim.keymap.set({ "n", "v" }, "<leader>a", function()
+                require("sidekick.cli").toggle({ name = "claude", focus = true })
+            end, { silent = true, desc = "Sidekick Toggle Claude" })
+        end,
+    },
+
+    {
         "saghen/blink.cmp",
         version = "*",
         dependencies = { { "xzbdmw/colorful-menu.nvim", opts = {} } },
@@ -276,30 +317,6 @@ require("lazy").setup({
             },
         },
         config = true,
-    },
-
-    {
-        "greggh/claude-code.nvim",
-        keys = {
-            "<leader>at",
-            "<leader>ai",
-        },
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        opts = {
-            window = {
-                position = "vertical botright",
-            },
-            keymaps = {
-                toggle = {
-                    terminal = "<leader>at",
-                    variants = {
-                        continue = "<leader>ai",
-                    },
-                },
-            },
-        },
     },
 
     {
