@@ -8,8 +8,8 @@ end, { desc = "Toggle spell check" })
 vim.keymap.set("n", "U", "15<C-y>")
 vim.keymap.set("n", "D", "15<C-e>")
 
-vim.keymap.set("n", "<C-d>", ":q!<cr>")
-vim.keymap.set("t", "<C-d>", [[<C-\><C-n>:q!<CR>]])
+vim.keymap.set("n", "<C-d>", ":close<cr>")
+vim.keymap.set("t", "<C-d>", [[<C-\><C-n>:q!<cr>]])
 vim.keymap.set("n", "<C-s>", ":silent wa | silent w<cr>")
 vim.keymap.set("n", "<C-c>", ':bp | bd #<cr>')
 
