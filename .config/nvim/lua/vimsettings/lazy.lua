@@ -34,15 +34,16 @@ require("lazy").setup({
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
-        opts = {},
+        opts = {
+            current_line_blame = true,
+            current_line_blame_opts = { virt_text = false, delay = 300 },
+            current_line_blame_formatter = ' <author> • <author_time:%Y-%m-%d> ',
+            current_line_blame_formatter_nc = '',
+        },
     },
 
     {
         "FabijanZulj/blame.nvim",
-    },
-
-    {
-        "f-person/git-blame.nvim",
     },
 
     {

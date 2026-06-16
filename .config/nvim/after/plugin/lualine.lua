@@ -1,5 +1,13 @@
 local noice = require("noice")
-local git_blame = require('gitblame')
+
+local function gitsigns_blame()
+    local line = vim.b.gitsigns_blame_line
+    if line ~= nil then
+        vim.b._blame_cache = line
+        return line
+    end
+    return vim.b._blame_cache or ""
+end
 
 local function searchcount()
     local sc = vim.fn.searchcount({ recompute = 1 })
@@ -26,7 +34,7 @@ require('lualine').setup {
         lualine_c = { { 'filename', path = 1 } },
 
         lualine_x = {
-            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
+            gitsigns_blame,
             { quickfix_position, color = { fg = "#e0af68" } },
             { searchcount, color = { fg = "#7dcfff" } },
             'selectioncount',
