@@ -3,17 +3,15 @@ local git_blame = require('gitblame')
 
 local function searchcount()
     local sc = vim.fn.searchcount({ recompute = 1 })
-    if sc.total == 0 then
-        return ""
-    end
-    return string.format("[%d/%d]", sc.current, sc.total)
+    if sc.total == 0 then return "" end
+    return string.format("󰍉 %d/%d", sc.current, sc.total)
 end
 
 local function quickfix_position()
     local qflist = vim.fn.getqflist()
     if #qflist == 0 then return "" end
     local idx = vim.fn.getqflist({ idx = 0 }).idx
-    return string.format("[%d/%d]", idx, #qflist)
+    return string.format("󰁨 %d/%d", idx, #qflist)
 end
 
 require('lualine').setup {
@@ -27,7 +25,13 @@ require('lualine').setup {
         },
         lualine_c = { { 'filename', path = 1 } },
 
-        lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }, quickfix_position, searchcount, 'selectioncount', 'filetype' },
+        lualine_x = {
+            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
+            { quickfix_position, color = { fg = "#e0af68" } },
+            { searchcount, color = { fg = "#7dcfff" } },
+            'selectioncount',
+            'filetype',
+        },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
     },
