@@ -153,9 +153,26 @@ require("lazy").setup({
             end, { expr = true, silent = true, desc = "Apply NES / accept inline completion" })
 
             -- open AI CLI tools
-            vim.keymap.set({ "n", "v" }, "<leader>a", function()
+            vim.keymap.set({ "n", "v" }, "<leader>ai", function()
                 require("sidekick.cli").toggle({ name = "claude", focus = true })
             end, { silent = true, desc = "Sidekick Toggle Claude" })
+
+            -- Next Edit Suggestion controls
+            vim.keymap.set("n", "#", function()
+                require("sidekick.nes").jump()
+            end, { silent = true, desc = "Sidekick NES Jump" })
+            vim.keymap.set("n", "<leader>aa", function()
+                require("sidekick.nes").apply()
+            end, { silent = true, desc = "Sidekick NES Apply" })
+            vim.keymap.set("n", "<leader>ac", function()
+                require("sidekick.nes").clear()
+            end, { silent = true, desc = "Sidekick NES Clear" })
+            vim.keymap.set("n", "<leader>at", function()
+                require("sidekick.nes").toggle()
+            end, { silent = true, desc = "Sidekick NES Toggle" })
+            vim.keymap.set("n", "<leader>au", function()
+                require("sidekick.nes").update()
+            end, { silent = true, desc = "Sidekick NES Update" })
         end,
     },
 
