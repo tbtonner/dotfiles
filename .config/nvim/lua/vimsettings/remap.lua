@@ -17,7 +17,16 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("v", "<leader>s", [["zyy:%s/<C-r>z/<C-r>z/gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>s", function()
+    vim.cmd('normal! "zy')
+    local text = vim.fn.getreg("z")
+    local search = "\\V" .. vim.fn.escape(text, "/\\")
+    local replace = vim.fn.escape(text, "/\\&~")
+    vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes("<Esc>:%s/" .. search .. "/" .. replace .. "/gI<Left><Left><Left>", true, false, true),
+        "n", false
+    )
+end, { desc = "Substitute visual selection" })
 
 vim.keymap.set("n", "<leader>fp", function()
     local filepath = vim.fn.expand("%:.")
