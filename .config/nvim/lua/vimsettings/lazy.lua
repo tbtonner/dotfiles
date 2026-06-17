@@ -178,9 +178,42 @@ require("lazy").setup({
     },
 
     {
+        "L3MON4D3/LuaSnip",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+
+            local ls = require("luasnip")
+            local iferr = ls.snippet("iferr", {
+                ls.text_node({ "if err != nil {", "\treturn " }),
+                ls.insert_node(1, "err"),
+                ls.text_node({ "", "}" }),
+            })
+            ls.add_snippets("go", { iferr })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "go",
+                callback = function()
+                    vim.keymap.set("n", "<leader>if", function()
+                        local row = vim.api.nvim_win_get_cursor(0)[1]
+                        local indent = vim.api.nvim_get_current_line():match("^(%s*)")
+                        vim.api.nvim_buf_set_lines(0, row, row, false, { indent })
+                        vim.api.nvim_win_set_cursor(0, { row + 1, #indent })
+                        vim.cmd("startinsert!")
+                        vim.schedule(function() ls.snip_expand(iferr) end)
+                    end, { buffer = true, desc = "Insert if err != nil block" })
+                end,
+            })
+        end,
+    },
+
+    {
         "saghen/blink.cmp",
         version = "*",
-        dependencies = { { "xzbdmw/colorful-menu.nvim", opts = {} } },
+        dependencies = {
+            { "xzbdmw/colorful-menu.nvim", opts = {} },
+            "L3MON4D3/LuaSnip",
+        },
         opts = {
             keymap = {
                 preset = "none",
@@ -190,8 +223,11 @@ require("lazy").setup({
                 ["<C-e>"] = { "hide", "fallback" },
                 ["<C-space>"] = { "show" },
             },
+            snippets = {
+                preset = "luasnip",
+            },
             sources = {
-                default = { "lsp", "buffer" },
+                default = { "lsp", "snippets", "buffer" },
             },
             completion = {
                 menu = {
