@@ -84,6 +84,17 @@ vim.api.nvim_create_user_command('E', function(opts)
         vim.cmd('edit')
         return
     end
+    if arg:match('github%.com/') then
+        local gh_file = arg:match('/blob/[^/]+/([^#]+)')
+        if gh_file then
+            vim.cmd('edit ' .. vim.fn.fnameescape(gh_file))
+            local gh_line = arg:match('#L(%d+)')
+            if gh_line then
+                vim.api.nvim_win_set_cursor(0, { tonumber(gh_line), 0 })
+            end
+            return
+        end
+    end
     local file, line = arg:match('^(.+):(%d+)%-?%d*$')
     if file and line then
         vim.cmd('edit ' .. vim.fn.fnameescape(file))

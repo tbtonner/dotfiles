@@ -32,12 +32,12 @@ alias gql='git ql'
 alias gup='git pull --rebase'
 alias gp='git push'
 alias gc='git commit'
+alias gcn='gc --no-verify -m'
 alias gco='git checkout'
 alias gg='git gud'
-alias ga='git add'
+alias ga='git add -p'
 alias gaa='git add .'
-alias gac='gaa; gc -m'
-alias gacn='gaa; gc --no-verify -m'
+alias gacn='gaa; gcn'
 alias gcp='git cherry-pick'
 alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
 
@@ -100,7 +100,10 @@ set kanagawa_orange FFA066
 set kanagawa_bright_red FF5D62
 
 # prompt
+set -g theme_prompt_char_normal '❯'
+set -g theme_color_prompt $kanagawa_sand
 set -g theme_display_time yes
+set -g theme_display_time_format '+%H:%M'
 set -g theme_display_group no
 set -g theme_display_hostname no
 set -g theme_display_rw no

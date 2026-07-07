@@ -10,6 +10,8 @@ url="$1"
 shift
 
 ticket="${url##*/}"
+ticket="${ticket%%\?*}" # strip query string
+ticket="${ticket%%#*}"  # strip fragment
 
 existing=$(git branch --list "${ticket}*" | sed 's/^[* ]*//' | head -1)
 if [[ -n "$existing" ]]; then
