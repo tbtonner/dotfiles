@@ -102,7 +102,12 @@ vim.api.nvim_create_user_command('E', function(opts)
     else
         vim.cmd('edit ' .. vim.fn.fnameescape(arg))
     end
-end, { nargs = '*', complete = 'file' })
+end, {
+    nargs = '*',
+    complete = function(arglead)
+        return vim.fn.getcompletion(arglead, 'file')
+    end,
+})
 
 vim.cmd('cabbrev e E')
 
