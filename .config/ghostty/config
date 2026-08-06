@@ -35,10 +35,6 @@ shell-integration-features = cursor,sudo,title
 mouse-hide-while-typing = true
 resize-overlay = never
 
-# translucent background
-background-opacity = 0.9
-background-blur = 10
-
 # auto-apply updates on next launch
 auto-update = download
 

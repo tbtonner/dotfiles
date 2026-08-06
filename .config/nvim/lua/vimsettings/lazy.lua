@@ -120,60 +120,54 @@ require("lazy").setup({
     },
 
     {
-        "folke/sidekick.nvim",
+        "milanglacier/minuet-ai.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
-            require("sidekick").setup({
-                nes = { enabled = true },
-                cli = {
-                    win = {
-                        layout = "float",
-                        float = {
-                            width = 0.85,
-                            height = 0.85,
-                            border = "rounded",
-                            title = "  Claude ",
-                            title_pos = "center",
+            local model = "qwen2.5-coder:3b-base"
+
+            require("minuet").setup({
+                provider = "openai_fim_compatible",
+                n_completions = 1,
+                context_window = 512,
+                request_timeout = 5,
+                throttle = 400,
+                debounce = 100,
+                provider_options = {
+                    openai_fim_compatible = {
+                        api_key = "TERM",
+                        name = "Ollama",
+                        end_point = "http://localhost:11434/v1/completions",
+                        model = model,
+                        optional = {
+                            max_tokens = 64,
+                            top_p = 0.9,
                         },
+                        template = {
+                            prompt = function(before, after, _)
+                                return "<|fim_prefix|>" .. before .. "<|fim_suffix|>" .. after .. "<|fim_middle|>"
+                            end,
+                            suffix = false,
+                        },
+                    },
+                },
+                lsp = {
+                    enabled_ft = { "*" },
+                    completion = { enable = false },
+                    inline_completion = {
+                        enable = true,
+                        enabled_auto_trigger_ft = { "*" },
                     },
                 },
             })
 
-            -- ghost-text inline completions (Copilot LSP) as you type
             vim.lsp.inline_completion.enable(true)
 
-            -- ctrl+tab (ghostty sends \x14 -> <C-t>):
-            -- apply a Next Edit Suggestion, else accept the inline completion, else literal <C-t>
             vim.keymap.set({ "n", "i" }, "<C-t>", function()
-                if require("sidekick").nes_jump_or_apply() then
-                    return
-                end
                 if vim.lsp.inline_completion.get() then
                     return
                 end
                 return "<C-t>"
-            end, { expr = true, silent = true, desc = "Apply NES / accept inline completion" })
-
-            -- open AI CLI tools
-            vim.keymap.set({ "n", "v" }, "<leader>ai", function()
-                require("sidekick.cli").toggle({ name = "claude", focus = true })
-            end, { silent = true, desc = "Sidekick Toggle Claude" })
-
-            -- Next Edit Suggestion controls
-            vim.keymap.set("n", "#", function()
-                require("sidekick.nes").jump()
-            end, { silent = true, desc = "Sidekick NES Jump" })
-            vim.keymap.set("n", "<leader>aa", function()
-                require("sidekick.nes").apply()
-            end, { silent = true, desc = "Sidekick NES Apply" })
-            vim.keymap.set("n", "<leader>ac", function()
-                require("sidekick.nes").clear()
-            end, { silent = true, desc = "Sidekick NES Clear" })
-            vim.keymap.set("n", "<leader>at", function()
-                require("sidekick.nes").toggle()
-            end, { silent = true, desc = "Sidekick NES Toggle" })
-            vim.keymap.set("n", "<leader>au", function()
-                require("sidekick.nes").update()
-            end, { silent = true, desc = "Sidekick NES Update" })
+            end, { expr = true, silent = true, desc = "Accept inline completion" })
         end,
     },
 

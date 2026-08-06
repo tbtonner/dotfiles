@@ -40,13 +40,14 @@ alias gaa='git add .'
 alias gacn='gaa; gcn'
 alias gcp='git cherry-pick'
 alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
+alias ghs='gh stack'
 
 # cbclocal aliases
 alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
 alias cbclocal='go run ./cmd/cbclocal'
 alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static'
 alias cbcld='go run ./cmd/cbclocal down'
-alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db'
+alias cbcldf='go run ./cmd/cbclocal down --force; docker volume rm cbclocal_db; docker volume prune -f'
 alias cbclr='go run ./cmd/cbclocal restart'
 alias cbclc='go run ./cmd/cbclocal hosted clusters'
 
@@ -55,17 +56,16 @@ alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=int
 alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
 alias cplint='golangci-lint run --new-from-rev=main --config cv/golangci.yml'
 
-# background upgrade of claude-code, once per day
-if status is-interactive
-    set -l stamp ~/.cache/brew-upgrade-claude-code-stamp
-    if not test -f $stamp; or test (find $stamp -mtime +1 | count) -gt 0
-        fish -c "brew upgrade claude-code >/dev/null 2>&1; touch $stamp" &
-        disown
-    end
-end
-
 function idcp
     jq '.[].id' -r $argv | pbcopy
+end
+
+function fusion
+    echo 'fusion enable:'
+    echo '{"value":true}' | http PUT http://localhost:8080/internal/support/features/$localoid/flags/fusion-rebalances -A bearer -a the-secret-token-for-internal-support
+
+    echo '8.1.0 enable:'
+    echo '{"value":true}' | http PUT http://localhost:8080/internal/support/features/$localoid/flags/enable-eight-one-zero -A bearer -a the-secret-token-for-internal-support
 end
 
 # jwt

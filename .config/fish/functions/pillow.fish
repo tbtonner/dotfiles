@@ -5,6 +5,5 @@ function pillow
         -P "'"(cbc-cluster-admin-password $dbid)"'" \
         --min-size=1024 --max-size=1024 \
         --num-items=20000000 --num-threads=32 \
-        --batch-size=500 --populate-only --sequential \
-        --key-prefix=genA-
+        --batch-size=500 --populate-only
 end

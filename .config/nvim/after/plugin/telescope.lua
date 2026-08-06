@@ -1,9 +1,26 @@
 local builtin = require('telescope.builtin')
 local actions = require("telescope.actions")
+local make_entry = require("telescope.make_entry")
 
 local function picker(name, extra)
     local opts = vim.tbl_extend("force", { initial_mode = "normal" }, extra or {})
     return function() builtin[name](opts) end
+end
+
+local function lsp_implementations()
+    local curr_file = vim.api.nvim_buf_get_name(0)
+    local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+
+    local opts = { initial_mode = "normal", show_line = false }
+    local make = make_entry.gen_from_quickfix(opts)
+    opts.entry_maker = function(item)
+        if item.filename == curr_file and item.lnum == curr_line then
+            return nil
+        end
+        return make(item)
+    end
+
+    builtin.lsp_implementations(opts)
 end
 
 vim.keymap.set('n', '<C-p>', builtin.find_files)
@@ -12,7 +29,7 @@ vim.keymap.set("n", "<leader>tr", ":Telescope resume<cr>")
 
 vim.keymap.set("n", "gb", picker("buffers", { show_line = false }))
 vim.keymap.set("n", "gd", picker("lsp_definitions", { show_line = false }))
-vim.keymap.set("n", "gi", picker("lsp_implementations", { show_line = false }))
+vim.keymap.set("n", "gi", lsp_implementations)
 vim.keymap.set("n", "gr", picker("lsp_references", { show_line = false, include_declaration = false, include_current_line = false }))
 vim.keymap.set("n", "ge", picker("diagnostics", { show_line = false, severity_limit = "Error" }))
 vim.keymap.set("n", "gJ", picker("jumplist", { show_line = false }))

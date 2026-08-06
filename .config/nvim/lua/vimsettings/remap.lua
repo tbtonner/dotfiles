@@ -57,6 +57,9 @@ vim.keymap.set("n", "]]", function() vim.diagnostic.jump({ count = 1, float = tr
 vim.keymap.set("n", "[[", function() vim.diagnostic.jump({ count = -1, float = true }) end,
     { desc = "Previous diagnostic" })
 
+vim.keymap.set("n", "]g", function() require("gitsigns").nav_hunk("next") end, { desc = "Next git hunk" })
+vim.keymap.set("n", "[g", function() require("gitsigns").nav_hunk("prev") end, { desc = "Previous git hunk" })
+
 vim.keymap.set("n", "]d", function()
     local qf = vim.fn.getqflist()
     local idx = vim.fn.getqflist({ idx = 0 }).idx

@@ -1,4 +1,10 @@
 #!/bin/bash
+# Module-native package move. Replaces the old gomvpkg-based version, which
+# could not work in a Go module checkout (gomvpkg resolves via $GOPATH/src).
+#
+# Does what gomvpkg used to: moves the directory, rewrites the full import
+# path repo-wide, renames the package identifier (and its qualified refs),
+# then regenerates BUILD files.
 set -euo pipefail
 
 if [[ $# -ne 2 ]]; then
@@ -8,5 +14,47 @@ if [[ $# -ne 2 ]]; then
 fi
 
 BASE="github.com/couchbasecloud/couchbase-cloud"
-gomvpkg -from "$BASE/$1" -to "$BASE/$2"
+FROM="${1%/}"
+TO="${2%/}"
+
+# Work from the repo root so paths resolve regardless of cwd.
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
+if [[ ! -d "$FROM" ]]; then
+    echo "error: source dir not found: $FROM" >&2
+    exit 1
+fi
+if [[ -e "$TO" ]]; then
+    echo "error: destination already exists: $TO" >&2
+    exit 1
+fi
+
+FROM_PKG=$(basename "$FROM")
+TO_PKG=$(basename "$TO")
+
+echo "==> moving directory"
+mkdir -p "$(dirname "$TO")"
+git mv "$FROM" "$TO"
+
+echo "==> rewriting import path ($BASE/$FROM -> $BASE/$TO)"
+# \b after the path keeps internal/foo from matching internal/foobar.
+rg -l --fixed-strings "$BASE/$FROM" -- . | while IFS= read -r f; do
+    perl -i -pe "s{\Q$BASE/$FROM\E\b}{$BASE/$TO}g" "$f"
+done
+
+if [[ "$FROM_PKG" != "$TO_PKG" ]]; then
+    echo "==> renaming package identifier ($FROM_PKG -> $TO_PKG)"
+    # Import paths were already rewritten above, so a word-boundary match on
+    # the bare identifier only hits the `package` clause and qualified refs
+    # (e.g. fusionbiller.Foo), not the path string.
+    rg -l "\b${FROM_PKG}\b" --type go -- . | while IFS= read -r f; do
+        perl -i -pe "s{\b\Q$FROM_PKG\E\b}{$TO_PKG}g" "$f"
+    done
+    echo "    NOTE: verify no unrelated identifier named '$FROM_PKG' was renamed."
+fi
+
+echo "==> make gazelle"
 make gazelle
+
+echo "==> done. Build to confirm:  go build ./..."
