@@ -53,6 +53,8 @@ end, { desc = "Copy file path with line range" })
 vim.keymap.set("n", "<leader>qd", ':cdo execute "norm @q" | update<cr><cr>')
 vim.keymap.set("n", "<leader>qc", ':call setqflist([])<cr>')
 
+vim.keymap.set("n", "<leader>re", ':restart<cr><cr>')
+
 vim.keymap.set("n", "]]", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "[[", function() vim.diagnostic.jump({ count = -1, float = true }) end,
     { desc = "Previous diagnostic" })
