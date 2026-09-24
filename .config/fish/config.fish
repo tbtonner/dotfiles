@@ -73,6 +73,10 @@ alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:
 alias jwtMember='http POST http://localhost:8080/sessions -a tom.tonner1@couchbase.com:Password1# | jq -r ".jwt"'
 alias jwtProject='http POST http://localhost:8080/sessions -a tom.tonner2@couchbase.com:Password1# | jq -r ".jwt"'
 
+# taskmaster eod, eow abbr
+abbr -a due_eod --position anywhere --regex 'due:eod'  'due:today+18h'
+abbr -a due_eow --position anywhere --regex 'due:eow'  'due:friday+18h'
+
 # always use block cursor
 set -g fish_cursor_default block
 set -g fish_cursor_insert block

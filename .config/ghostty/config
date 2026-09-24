@@ -24,7 +24,7 @@ keybind = ctrl+tab=text:\x14
 keybind = ctrl+enter=text:\x15
 
 # font
-font-size = 18
+font-size = 19
 font-family = Maple Mono NF
 
 # shell integration (cursor shape per vim mode, sudo prompt, auto title)

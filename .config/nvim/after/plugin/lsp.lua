@@ -8,7 +8,17 @@ vim.lsp.config("*", {
     capabilities = require('blink.cmp').get_lsp_capabilities(),
 })
 
+-- Run gopls as a shared daemon so NeoVim and other gopls clients (e.g. Claude Code) reuse one process instead of
+-- spawning one each. The daemon address is derived from the gopls binary, so clients must agree on the same path -
+-- hence the absolute mason path rather than whatever `gopls` $PATH happens to resolve to.
+--
+-- https://github.com/golang/tools/blob/master/gopls/doc/daemon.md
 vim.lsp.config("gopls", {
+    cmd = {
+        vim.fn.expand("$HOME/.local/share/nvim/mason/bin/gopls"),
+        "-remote=auto",
+        "-remote.listen.timeout=1h",
+    },
     settings = {
         gopls = {
             env = { GOFLAGS = "-tags=integration" },
