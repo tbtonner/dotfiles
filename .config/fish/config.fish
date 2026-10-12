@@ -19,6 +19,7 @@ fish_add_path $HOME/bin
 fish_add_path $HOME/.local/share/nvim/mason/bin/
 fish_add_path $HOME/couchbase-cloud/.bin
 fish_add_path $HOME/work/couchbase-cloud/.bin
+fish_add_path $HOME/.atuin/bin
 
 # arch (WSL)
 if test -f /etc/arch-release
