@@ -10,6 +10,6 @@ function tsync --description 'Sync Taskwarrior via the taskwarrior-sync git repo
     task sync; or return 1
     git -C $repo add -A
     git -C $repo diff --cached --quiet; and return 0
-    git -C $repo commit -qm "sync from "(hostname -s)
+    git -C $repo commit -qm "sync from "(string split -f1 . $hostname)
     git -C $repo push -q -u origin HEAD
 end
