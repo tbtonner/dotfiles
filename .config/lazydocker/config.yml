@@ -1,0 +1,29 @@
+gui:
+  returnImmediately: true
+  border: rounded
+  # lazydocker only takes the 8 ANSI colour names (no hex), so these pick up
+  # the kanagawa palette from the terminal config (wezterm/ghostty)
+  theme:
+    activeBorderColor:
+      - yellow
+      - bold
+    inactiveBorderColor:
+      - default
+    selectedLineBgColor:
+      - black
+    optionsTextColor:
+      - blue
+
+logs:
+  timestamps: true
+  since: '60m'
+
+customCommands:
+  containers:
+    - name: logs (hl)
+      attach: true
+      command: "sh -c 'docker logs {{ .Container.Name }} 2>&1 | hl'"
+    # Defining customCommands replaces lazydocker's default, so keep the shell entry
+    - name: bash
+      attach: true
+      command: 'docker exec -it {{ .Container.ID }} /bin/sh -c "if [ -e /bin/bash ]; then /bin/bash; else /bin/sh; fi"'

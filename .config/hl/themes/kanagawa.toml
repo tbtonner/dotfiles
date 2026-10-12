@@ -1,0 +1,90 @@
+#:schema https://raw.githubusercontent.com/pamburus/hl/v0.36.3/schema/json/theme.schema.v1.json
+
+# Kanagawa Wave, palette from rebelot/kanagawa.nvim lua/kanagawa/colors.lua
+#   fujiWhite #DCD7BA  oldWhite #C8C093  fujiGray #727169  sumiInk4 #54546D
+#   springBlue #7FB4CA crystalBlue #7E9CD8 oniViolet #957FB8 springGreen #98BB6C
+#   carpYellow #E6C384 sakuraPink #D27E99 surimiOrange #FFA066 waveRed #E46876
+
+version = "1.1"
+tags = ["dark", "truecolor"]
+
+[styles]
+[styles.primary]
+foreground = "#DCD7BA"
+
+[styles.secondary]
+modes = ["-faint"]
+foreground = "#727169"
+
+[styles.muted]
+foreground = "#54546D"
+
+[styles.strong]
+modes = ["-bold"]
+foreground = "#DCD7BA"
+
+[styles.accent]
+foreground = "#7E9CD8"
+
+[styles.accent-secondary]
+style = "secondary"
+foreground = "#957FB8"
+
+[styles.syntax]
+modes = ["bold"]
+foreground = "#C8C093"
+
+[styles.trace]
+foreground = "#727169"
+
+[styles.debug]
+foreground = "#957FB8"
+
+[styles.info]
+foreground = "#7FB4CA"
+
+[styles.warning]
+foreground = "#E6C384"
+
+[styles.error]
+foreground = "#E46876"
+
+[elements]
+[elements.time]
+foreground = "#727169"
+
+[elements.logger]
+foreground = "#957FB8"
+
+[elements.caller]
+modes = ["italic"]
+foreground = "#727169"
+
+[elements.field]
+style = "muted"
+
+[elements.level]
+style = "muted"
+
+[elements.string]
+foreground = "#98BB6C"
+
+[elements.number]
+foreground = "#D27E99"
+
+[elements.boolean]
+foreground = "#FFA066"
+
+[elements.null]
+foreground = "#E46876"
+
+[levels]
+[levels.warning]
+message.style = ["message", "warning"]
+
+[levels.error]
+message.style = ["message", "error"]
+
+[indicators.sync.failed.inner.style]
+foreground = "#E6C384"
+modes = ["bold"]

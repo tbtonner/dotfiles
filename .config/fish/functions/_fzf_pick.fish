@@ -5,8 +5,14 @@ function _fzf_pick --description "fzf picker with tmux popup; reads items from s
 
     cat > $input_file
 
-    # Escape each arg for sh; bake in shared style defaults first
-    set -l args_parts --layout=reverse '--color=preview-border:#DCD7BA' $argv
+    # Escape each arg for sh; bake in shared style defaults first.
+    # Start in "normal mode" like the tmux pickers: input hidden, j/k to move, / to search, q to quit.
+    # Callers can override --prompt/--header since later flags win.
+    set -l args_parts --layout=reverse '--color=preview-border:#DCD7BA' \
+        --no-input --no-info '--prompt=search> ' \
+        '--header=j/k=move  g/G=top/bottom  /=search  q=quit' \
+        --bind=j:down,k:up,g:first,G:last,q:abort '--bind=/:show-input+unbind(j,k,g,G,q)' \
+        $argv
     set -l args_str
     for arg in $args_parts
         set args_str $args_str (string escape -- $arg)

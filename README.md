@@ -13,6 +13,9 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | Git | `gitconfig` |
 | Taskwarrior | `.taskrc` |
 | Atuin | `.config/atuin/config.toml` |
+| Lazydocker | `.config/lazydocker/config.yml` |
+| hl (Kanagawa log theme) | `.config/hl/` |
+| fzf (Kanagawa colours) | `.config/fzf/kanagawa` |
 
 ## Tools
 
@@ -33,7 +36,7 @@ stow .
 ### WSL (Arch) + WezTerm on Windows
 
 ```sh
-pacman -S stow fish tmux neovim fzf fd ripgrep bat git-delta jq base-devel unzip tree-sitter-cli wl-clipboard
+pacman -S stow fish tmux neovim fzf fd ripgrep bat git-delta jq base-devel unzip tree-sitter-cli wl-clipboard lazydocker hl
 chsh -s /usr/bin/fish            # fish auto-execs tmux when $WSL_DISTRO_NAME is set
 stow .
 cp .config/wezterm/wezterm.lua /mnt/c/Users/<you>/.config/wezterm/   # plus Maple Mono NF in ./fonts

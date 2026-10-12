@@ -1,0 +1,4 @@
+#:schema https://raw.githubusercontent.com/pamburus/hl/v0.36.3/schema/json/config.schema.json
+
+# Only overrides; everything else comes from hl's built-in defaults
+theme = "kanagawa"

@@ -71,7 +71,7 @@ function gotest --description "Run Go tests by name or package"
             end | _fzf_pick \
                 -m +i --delimiter=: \
                 "--prompt=matches> " \
-                "--header=tab=toggle  ctrl-a=all  ctrl-/:preview  enter=run" \
+                "--header=j/k=move  /=search  tab=toggle  ctrl-a=all  ctrl-/:preview  enter=run" \
                 "--preview=$preview" \
                 "--preview-window=right:60%:+{2}-5" \
                 --bind=ctrl-/:toggle-preview)
