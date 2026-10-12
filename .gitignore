@@ -3,3 +3,4 @@
 .config/fish/conf.d/local.fish
 **/.DS_Store
 .gitconfig.local
+.config/atuin/atuin-receipt.json

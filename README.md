@@ -12,6 +12,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | Ghostty | `.config/ghostty/config` |
 | Git | `gitconfig` |
 | Taskwarrior | `.taskrc` |
+| Atuin | `.config/atuin/config.toml` |
 
 ## Tools
 

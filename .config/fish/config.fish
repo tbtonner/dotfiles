@@ -18,6 +18,7 @@ fish_add_path $HOME/work/server/install/bin
 fish_add_path $HOME/bin
 fish_add_path $HOME/.local/share/nvim/mason/bin/
 fish_add_path $HOME/couchbase-cloud/.bin
+fish_add_path $HOME/work/couchbase-cloud/.bin
 
 # arch (WSL)
 if test -f /etc/arch-release
@@ -156,3 +157,7 @@ set -g fish_pager_color_prefix       normal --bold --underline
 set -g fish_pager_color_completion   normal
 set -g fish_pager_color_description  B3A06D
 set -g fish_pager_color_progress     brwhite --background=cyan
+
+if status is-interactive
+    atuin init fish | source
+end

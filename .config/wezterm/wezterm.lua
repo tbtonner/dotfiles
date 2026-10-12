@@ -43,6 +43,9 @@ config.font_size = 13
 -- QoL polish
 config.hide_mouse_cursor_when_typing = true
 config.audible_bell = "Disabled"
+-- the click that focuses the window shouldn't reach tmux: a slight drag becomes a
+-- mouse selection that copy-pipes a "\n" over the Windows clipboard
+config.swallow_mouse_click_on_window_focus = true
 
 -- nvim keybindings (same as ghostty)
 config.keys = {
@@ -51,6 +54,8 @@ config.keys = {
     -- clear screen, keep scrollback (overrides default debug overlay)
     -- fish binds ¬ to clear (tmux eats C-l for pane nav)
     { key = "L", mods = "CTRL|SHIFT", action = act.SendString("¬") },
+    -- paste the Windows clipboard (vim visual block is still on C-q)
+    { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 }
 
 -- kanagawa theme
