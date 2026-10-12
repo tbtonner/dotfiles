@@ -11,7 +11,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | Tmux | `.config/tmux/tmux.conf` |
 | Ghostty | `.config/ghostty/config` |
 | Git | `gitconfig` |
-| Taskwarrior | `.taskrc` |
+| Taskwarrior | `.taskrc`, `.task/hooks/` |
 | Atuin | `.config/atuin/config.toml` |
 | Lazydocker | `.config/lazydocker/config.yml` |
 | hl (Kanagawa log theme) | `.config/hl/` |
