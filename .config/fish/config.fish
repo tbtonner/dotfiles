@@ -163,6 +163,3 @@ set -g fish_pager_color_completion   normal
 set -g fish_pager_color_description  B3A06D
 set -g fish_pager_color_progress     brwhite --background=cyan
 
-if status is-interactive
-    atuin init fish | source
-end
