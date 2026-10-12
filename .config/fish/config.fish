@@ -86,6 +86,11 @@ alias jwtProject='http POST http://localhost:8080/sessions -a tom.tonner2@couchb
 abbr -a due_eod --position anywhere --regex 'due:eod'  'due:today+18h'
 abbr -a due_eow --position anywhere --regex 'due:eow'  'due:friday+18h'
 
+# atuin history (overrides fzf.fish ctrl+r; up-arrow left as fish default)
+if command -q atuin
+    atuin init fish --disable-up-arrow | source
+end
+
 # always use block cursor
 set -g fish_cursor_default block
 set -g fish_cursor_insert block
