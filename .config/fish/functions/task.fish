@@ -1,6 +1,8 @@
-function task --wraps task --description 'Taskwarrior; bare `task` syncs first so the list is current'
+function task --wraps task --description 'Taskwarrior; bare `task` kicks off a background sync'
     if test (count $argv) -eq 0
-        tsync >/dev/null; or echo "task: sync failed - showing local copy" >&2
+        # Reuse the on-exit hook's detached, debounced, locked sync; the list
+        # below is the local copy, anything pulled shows on the next run.
+        echo sync | ~/.task/hooks/on-exit-tsync
     end
     command task $argv
 end
