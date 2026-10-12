@@ -49,7 +49,7 @@ Prefix: `C-a`
 |---|---|
 | `e` | enter copy-mode |
 | `v` | (in copy-mode) begin selection |
-| `y` | (in copy-mode) copy → pbcopy |
+| `y` | (in copy-mode) copy → system clipboard |
 | `P` | paste buffer |
 
 ## Capture

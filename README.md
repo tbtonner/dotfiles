@@ -28,3 +28,14 @@ git clone https://github.com/tbtonner/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow .
 ```
+
+### WSL (Arch) + WezTerm on Windows
+
+```sh
+pacman -S stow fish tmux neovim fzf fd ripgrep bat git-delta jq base-devel unzip tree-sitter-cli wl-clipboard
+chsh -s /usr/bin/fish            # fish auto-execs tmux when $WSL_DISTRO_NAME is set
+stow .
+cp .config/wezterm/wezterm.lua /mnt/c/Users/<you>/.config/wezterm/   # plus Maple Mono NF in ./fonts
+```
+
+Machine-specific git settings (gpg path, signing) go in `~/.gitconfig.local`.

@@ -52,3 +52,7 @@
 	insteadOf = https://github.com/
 [log]
 	date = local
+
+# per-machine overrides (not in repo)
+[include]
+	path = ~/.gitconfig.local

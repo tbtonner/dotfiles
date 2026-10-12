@@ -8,16 +8,24 @@ set -g fish_key_bindings fish_vi_key_bindings
 
 # working dir
 if test (pwd) = $HOME
-    cd /Users/tomtonner/work/couchbase-cloud
+    cd $HOME/work/couchbase-cloud
 end
 
 # paths
-fish_add_path /Users/tomtonner/go/bin
-fish_add_path /Users/tomtonner/.cargo/bin
-fish_add_path /Users/tomtonner/work/server/install/bin
-fish_add_path /Users/tomtonner/bin
-fish_add_path /Users/tomtonner/.local/share/nvim/mason/bin/
-fish_add_path /Users/tomtonner/couchbase-cloud/.bin
+fish_add_path $HOME/go/bin
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/work/server/install/bin
+fish_add_path $HOME/bin
+fish_add_path $HOME/.local/share/nvim/mason/bin/
+fish_add_path $HOME/couchbase-cloud/.bin
+
+# arch (WSL)
+if test -f /etc/arch-release
+    function pbcopy; wl-copy $argv; end
+    function pbpaste; wl-paste --no-newline $argv; end
+    function open; explorer.exe $argv; or true; end
+    set -gx BAT_CONFIG_PATH $HOME/bat/config
+end
 
 # git aliases
 alias g='git'
@@ -53,7 +61,7 @@ alias cbclc='go run ./cmd/cbclocal hosted clusters'
 
 # testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
-alias unittest='cat /Users/tomtonner/work/unittest.go | pbcopy'
+alias unittest='cat $HOME/work/unittest.go | pbcopy'
 alias cplint='golangci-lint run --new-from-rev=main --config cv/golangci.yml'
 
 function idcp
@@ -105,6 +113,7 @@ set kanagawa_bright_red FF5D62
 
 # prompt
 set -g theme_prompt_char_normal '❯'
+set -g theme_prompt_char_superuser '❯'
 set -g theme_color_prompt $kanagawa_sand
 set -g theme_display_time yes
 set -g theme_display_time_format '+%H:%M'

@@ -2,3 +2,4 @@
 .config/fish/typescript
 .config/fish/conf.d/local.fish
 **/.DS_Store
+.gitconfig.local

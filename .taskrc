@@ -1,4 +1,4 @@
-data.location=/Users/tomtonner/.task
+data.location=~/.task
 
 dateformat.report=a h:N
 
@@ -6,4 +6,4 @@ report.next.columns=id,depends,priority,project,tags,recur,scheduled.countdown,d
 report.next.labels=ID,Deps,P,Project,Tag,Recur,S,Due,In,Until,Description,Urg
 
 news.version=3.4.2
-sync.local.server_dir=\/Users\/tomtonner\/taskwarrior-sync
+sync.local.server_dir=~/taskwarrior-sync
