@@ -11,6 +11,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | Tmux | `.config/tmux/tmux.conf` |
 | Ghostty | `.config/ghostty/config` |
 | Git | `gitconfig` |
+| Taskwarrior | `.taskrc` |
 
 ## Tools
 

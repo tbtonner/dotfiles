@@ -53,7 +53,34 @@ end, { desc = "Copy file path with line range" })
 vim.keymap.set("n", "<leader>qd", ':cdo execute "norm @q" | update<cr><cr>')
 vim.keymap.set("n", "<leader>qc", ':call setqflist([])<cr>')
 
-vim.keymap.set("n", "<leader>re", ':restart<cr><cr>')
+-- :restart stops the old server with :qall, then reattaches the UI to a fresh one. When :qall refuses -- an unnamed
+-- modified buffer -- the reattach still happens and the old server is left running headless, holding its swapfiles.
+-- See the "dangling server process" note in :h :restart. Write everything first so :qall cannot refuse.
+local function blocks_qall(buf)
+    if not vim.api.nvim_buf_is_loaded(buf) or not vim.bo[buf].modified then
+        return false
+    end
+    return vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) == ""
+end
+
+local function restart_cleanly()
+    local blocked = vim.tbl_filter(blocks_qall, vim.api.nvim_list_bufs())
+    if #blocked > 0 then
+        vim.notify(("Restart aborted: %d unnamed modified buffer(s)"):format(#blocked), vim.log.levels.WARN)
+        return
+    end
+    local ok, err = pcall(vim.cmd, "wall")
+    if not ok then
+        vim.notify("Restart aborted, :wall failed: " .. err, vim.log.levels.ERROR)
+        return
+    end
+    vim.cmd("restart")
+end
+
+vim.keymap.set("n", "<leader>re", restart_cleanly, { desc = "Write all buffers, then restart" })
+
+-- ZR is a built-in in 0.12, next to ZZ/ZQ, and [count]ZR is ":restart +qall!" which discards changes. Shadow it.
+vim.keymap.set("n", "ZR", restart_cleanly, { desc = "Write all buffers, then restart" })
 
 vim.keymap.set("n", "]]", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
 vim.keymap.set("n", "[[", function() vim.diagnostic.jump({ count = -1, float = true }) end,
