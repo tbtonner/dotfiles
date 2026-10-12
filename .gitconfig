@@ -44,7 +44,7 @@
 [color]
 	ui = auto
 [gpg]
-	program = /usr/local/bin/gpg
+	program = gpg
 [push]
 	autoSetupRemote = true
 
