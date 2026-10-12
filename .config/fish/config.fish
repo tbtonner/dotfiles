@@ -86,6 +86,9 @@ alias jwtProject='http POST http://localhost:8080/sessions -a tom.tonner2@couchb
 abbr -a due_eod --position anywhere --regex 'due:eod'  'due:today+18h'
 abbr -a due_eow --position anywhere --regex 'due:eow'  'due:friday+18h'
 
+# fzf.fish: drop the ctrl+v variable search (ctrl+v goes raw to claude/vim)
+fzf_configure_bindings --variables=
+
 # atuin history (overrides fzf.fish ctrl+r; up-arrow left as fish default)
 if command -q atuin
     atuin init fish --disable-up-arrow | source

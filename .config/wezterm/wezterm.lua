@@ -39,6 +39,10 @@ config.scrollback_lines = 10000
 config.font_dirs = { wezterm.config_dir .. "/fonts" }
 config.font = wezterm.font("Maple Mono NF")
 config.font_size = 13
+config.font_rules = {
+    { intensity = "Half", italic = false, font = wezterm.font("Maple Mono NF", { weight = "Regular", foreground = "#727169" }) },
+    { intensity = "Half", italic = true,  font = wezterm.font("Maple Mono NF", { weight = "Regular", style = "Italic", foreground = "#727169" }) },
+}
 
 -- QoL polish
 config.hide_mouse_cursor_when_typing = true
@@ -54,8 +58,6 @@ config.keys = {
     -- clear screen, keep scrollback (overrides default debug overlay)
     -- fish binds ¬ to clear (tmux eats C-l for pane nav)
     { key = "L", mods = "CTRL|SHIFT", action = act.SendString("¬") },
-    -- paste the Windows clipboard (vim visual block is still on C-q)
-    { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 }
 
 -- kanagawa theme
