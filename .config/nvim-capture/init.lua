@@ -30,6 +30,7 @@ end
 
 -- quit
 vim.keymap.set("n", "q", "<cmd>q!<cr>")
+vim.keymap.set("n", "<Esc>", "<cmd>q!<cr>")
 
 -- error/warning highlights
 vim.fn.matchadd("ErrorMsg", [[\c\(error\|failed\|fatal\|fail\)]])
