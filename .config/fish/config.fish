@@ -125,6 +125,7 @@ set kanagawa_teal 7AA89F
 set kanagawa_white DCD7BA
 set kanagawa_orange FFA066
 set kanagawa_bright_red FF5D62
+set kanagawa_wave_red E46876
 
 # prompt
 set -g theme_prompt_char_normal '❯'
@@ -141,6 +142,13 @@ set -g theme_color_time               $kanagawa_sand
 set -g theme_color_user               $kanagawa_blue
 set -g theme_color_path               $kanagawa_light_green
 set -g __fish_git_prompt_color_branch $kanagawa_bright_red
+
+# git state markers (match ~/.claude/statusline.sh)
+set -g __fish_git_prompt_color_stagedstate    $kanagawa_light_green
+set -g __fish_git_prompt_color_dirtystate     $kanagawa_dark_sand
+set -g __fish_git_prompt_color_untrackedfiles $kanagawa_grey
+set -g __fish_git_prompt_color_invalidstate   $kanagawa_wave_red
+set -g __fish_git_prompt_color_upstream       $kanagawa_teal
 
 # syntax highlighting
 set -g fish_color_normal             normal
