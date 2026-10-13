@@ -16,7 +16,7 @@ config.window_close_confirmation = "NeverPrompt"
 -- window: tmux owns tabs/status, so no tab bar
 config.enable_tab_bar = false
 config.window_decorations = "TITLE | RESIZE"
-config.window_padding = { left = 4, right = 4, top = 4, bottom = 0 }
+config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.adjust_window_size_when_changing_font_size = false
 
 -- rendering (fps settings are u8 in wezterm, so 255 is the max)
@@ -26,7 +26,7 @@ config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 
 -- start windowed
-config.initial_cols = 161
+config.initial_cols = 159
 config.initial_rows = 43
 
 -- cursor
