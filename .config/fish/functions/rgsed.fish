@@ -8,6 +8,7 @@ function rgsed
     set replacement $argv[2]
 
     for file in (rg -l --glob '!go.*' -- "$original")
-        sed -i '' "s|$original|$replacement|g" "$file"
+        # -i.bak works on both BSD (macOS) and GNU sed; `-i ''` is BSD-only
+        sed -i.rgsed-bak "s|$original|$replacement|g" "$file"; and rm -f "$file.rgsed-bak"
     end
 end

@@ -35,6 +35,11 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 	side-by-side = true
 	line-numbers = true
+	# kanagawa springGreen (strings) / peachRed (return) hues, darkened: lines, then changed words (match .claude/themes/kanagawa.json)
+	plus-style = syntax "#354620"
+	minus-style = syntax "#4A1C1D"
+	plus-emph-style = syntax "#557034"
+	minus-emph-style = syntax "#762D2F"
 
 [merge]
     conflictstyle = diff3

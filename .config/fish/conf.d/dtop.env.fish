@@ -1,1 +1,1 @@
-test -f /etc/arch-release; or source "$HOME/.local/bin/env.fish"
+test -f "$HOME/.local/bin/env.fish"; and source "$HOME/.local/bin/env.fish"

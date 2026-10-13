@@ -12,6 +12,8 @@ if test (pwd) = $HOME
 end
 
 # paths
+# homebrew (macOS): Ghostty/tmux start with the bare launchd PATH
+test -d /opt/homebrew/bin; and fish_add_path /opt/homebrew/bin /opt/homebrew/sbin
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/work/server/install/bin

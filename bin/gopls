@@ -12,7 +12,9 @@
 set -euo pipefail
 
 gopls_bin="$HOME/.local/share/nvim/mason/bin/gopls"
-shared_root="$(realpath -m "$HOME/work/couchbase-cloud")"
+# Physical path like nvim's resolve(); `realpath -m` / `sha256sum` are GNU-only, so stick to pwd -P / shasum.
+physpath() { (cd "$1" 2>/dev/null && pwd -P) || printf '%s' "$1"; }
+shared_root="$(physpath "$HOME/work/couchbase-cloud")"
 
 if [[ $# -gt 0 && "$1" != "serve" ]]; then
     exec "$gopls_bin" "$@"
@@ -33,9 +35,9 @@ if [[ -z "$id" ]]; then
         fi
         dir="$(dirname "$dir")"
     done
-    root="$(realpath -m "${root:-$PWD}")"
+    root="$(physpath "${root:-$PWD}")"
     if [[ "$root" != "$shared_root" ]]; then
-        id="$(printf '%s' "$root" | sha256sum | cut -c1-8)"
+        id="$(printf '%s' "$root" | shasum -a 256 | cut -c1-8)"
     fi
 fi
 

@@ -36,9 +36,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>q!<cr>")
 vim.fn.matchadd("ErrorMsg", [[\c\(error\|failed\|fatal\|fail\)]])
 vim.fn.matchadd("WarningMsg", [[\c\(warning\|warn\)]])
 
--- named captures history
+-- named captures history (same dir as capture-to-nvim.sh: $TMPDIR is per-user on macOS, /tmp on Linux)
+local capdir = (vim.env.TMPDIR or "/tmp"):gsub("/+$", "") .. "/tmux-captures-" .. vim.uv.getuid()
 vim.keymap.set("n", "H", function()
-  local files = vim.fn.glob("/tmp/tmux-captures/*.txt", false, true)
+  local files = vim.fn.glob(capdir .. "/2*.txt", false, true)
   if vim.tbl_isempty(files) then
     vim.notify("No saved captures")
     return

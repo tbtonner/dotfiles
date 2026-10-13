@@ -22,6 +22,8 @@ copy-on-select = clipboard
 # nvim keybindings
 keybind = ctrl+tab=text:\x14
 keybind = ctrl+enter=text:\x15
+# clear screen, keep scrollback: fish binds ¬ to clear (tmux eats C-l for pane nav)
+keybind = ctrl+shift+l=text:\xc2\xac
 
 # font
 font-size = 19

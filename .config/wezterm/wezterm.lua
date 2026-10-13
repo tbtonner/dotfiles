@@ -26,8 +26,8 @@ config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 
 -- start windowed
-config.initial_cols = 140
-config.initial_rows = 40
+config.initial_cols = 161
+config.initial_rows = 43
 
 -- cursor
 config.default_cursor_style = "SteadyBlock"
