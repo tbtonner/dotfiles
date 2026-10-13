@@ -28,7 +28,9 @@ fish_add_path $HOME/.atuin/bin
 if test -f /etc/arch-release
     function pbcopy; wl-copy $argv; end
     function pbpaste; wl-paste --no-newline $argv; end
-    function open; explorer.exe $argv; or true; end
+    function open; xdg-open $argv; end
+    # gh, python webbrowser, Claude Code etc. use $BROWSER
+    set -gx BROWSER firefox-win
 end
 
 # tmux passes truecolor (Tc override); stop Claude Code clamping to 256 colours

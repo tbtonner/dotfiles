@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Open URLs (and local files) in Windows Firefox from WSL; used as $BROWSER and xdg-open.
+ff="/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
+args=()
+for a in "$@"; do
+	case "$a" in
+		file://*) args+=("$(wslpath -w "${a#file://}")") ;;
+		*://* | about:* | mailto:*) args+=("$a") ;;
+		-*) args+=("$a") ;;
+		*) if [ -e "$a" ]; then args+=("$(wslpath -w "$(realpath "$a")")"); else args+=("$a"); fi ;;
+	esac
+done
+# detach so the caller (gh, Claude Code, ...) doesn't wait on the Windows process
+nohup "$ff" "${args[@]}" >/dev/null 2>&1 &

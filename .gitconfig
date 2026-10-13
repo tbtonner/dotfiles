@@ -34,12 +34,17 @@
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 	side-by-side = true
+	# delta ignores bat's config file, so name the kanagawa.tmTheme (extras/tmTheme, in ~/.config/bat/themes) here
+	syntax-theme = kanagawa
 	line-numbers = true
 	# kanagawa springGreen (strings) / peachRed (return) hues, darkened: lines, then changed words (match .claude/themes/kanagawa.json)
 	plus-style = syntax "#354620"
 	minus-style = syntax "#4A1C1D"
 	plus-emph-style = syntax "#557034"
 	minus-emph-style = syntax "#762D2F"
+	# line-number gutters default to ANSI green/red; pin them to the same kanagawa hues
+	line-numbers-plus-style = "#98BB6C"
+	line-numbers-minus-style = "#FF5D62"
 
 [merge]
     conflictstyle = diff3

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# WSL has no desktop: send URLs to Windows Firefox, everything else to Explorer.
+case "$1" in
+	*://* | about:* | mailto:*) exec firefox-win "$@" ;;
+	*.html | *.htm | *.pdf | *.svg) exec firefox-win "$@" ;;
+	*) explorer.exe "$(wslpath -w "$(realpath "${1:-.}")")" || true ;;
+esac
