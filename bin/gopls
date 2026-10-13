@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Wrapper so plain `gopls` callers (e.g. the Claude Code gopls-lsp plugin, which runs `gopls` with no flags) attach to
+# the same shared gopls daemon NeoVim uses instead of spawning a private process each.
+#
+# Mirrors gopls_cmd() in .config/nvim/after/plugin/lsp.lua - keep the two in sync:
+#   - the main checkout (~/work/couchbase-cloud) uses the plain `-remote=auto` socket
+#   - any other checkout/worktree gets `-remote=auto;<first 8 of sha256(root)>`
+#   - $GOPLS_REMOTE overrides: an explicit id, or "off" for a private gopls
+# The daemon socket is derived from the executable path, so this must exec the mason binary NeoVim uses.
+#
+# Subcommands (`gopls version`, `gopls check ...`) pass straight through untouched.
+set -euo pipefail
+
+gopls_bin="$HOME/.local/share/nvim/mason/bin/gopls"
+shared_root="$(realpath -m "$HOME/work/couchbase-cloud")"
+
+if [[ $# -gt 0 && "$1" != "serve" ]]; then
+    exec "$gopls_bin" "$@"
+fi
+
+id="${GOPLS_REMOTE:-}"
+if [[ "$id" == "off" ]]; then
+    exec "$gopls_bin" "$@"
+fi
+
+if [[ -z "$id" ]]; then
+    root=""
+    dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        if [[ -e "$dir/go.work" || -e "$dir/go.mod" || -e "$dir/.git" ]]; then
+            root="$dir"
+            break
+        fi
+        dir="$(dirname "$dir")"
+    done
+    root="$(realpath -m "${root:-$PWD}")"
+    if [[ "$root" != "$shared_root" ]]; then
+        id="$(printf '%s' "$root" | sha256sum | cut -c1-8)"
+    fi
+fi
+
+if [[ -n "$id" ]]; then
+    remote="-remote=auto;$id"
+else
+    remote="-remote=auto"
+fi
+
+exec "$gopls_bin" "$remote" -remote.listen.timeout=1h "$@"

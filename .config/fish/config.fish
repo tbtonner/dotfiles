@@ -15,8 +15,9 @@ end
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/work/server/install/bin
-fish_add_path $HOME/bin
 fish_add_path $HOME/.local/share/nvim/mason/bin/
+# ~/bin must beat mason so bin/gopls (shared-daemon wrapper) shadows the mason gopls
+fish_add_path --move $HOME/bin
 fish_add_path $HOME/couchbase-cloud/.bin
 fish_add_path $HOME/work/couchbase-cloud/.bin
 fish_add_path $HOME/.atuin/bin
