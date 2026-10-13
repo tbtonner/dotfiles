@@ -16,6 +16,8 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | Lazydocker | `.config/lazydocker/config.yml` |
 | hl (Kanagawa log theme) | `.config/hl/` |
 | fzf (Kanagawa colours) | `.config/fzf/kanagawa` |
+| bat (Kanagawa theme) | `.config/bat/` |
+| Claude Code (settings, Kanagawa theme, git status line) | `.claude/settings.json`, `.claude/themes/`, `.claude/statusline.sh` |
 
 ## Tools
 
@@ -31,6 +33,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 git clone https://github.com/tbtonner/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow .
+bat cache --build   # register .config/bat/themes
 ```
 
 ### WSL (Arch) + WezTerm on Windows

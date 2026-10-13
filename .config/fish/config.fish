@@ -26,8 +26,10 @@ if test -f /etc/arch-release
     function pbcopy; wl-copy $argv; end
     function pbpaste; wl-paste --no-newline $argv; end
     function open; explorer.exe $argv; or true; end
-    set -gx BAT_CONFIG_PATH $HOME/bat/config
 end
+
+# tmux passes truecolor (Tc override); stop Claude Code clamping to 256 colours
+set -gx CLAUDE_CODE_TMUX_TRUECOLOR 1
 
 # git aliases
 alias g='git'
