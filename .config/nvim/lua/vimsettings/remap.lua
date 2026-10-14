@@ -77,8 +77,6 @@ local function restart_cleanly()
     vim.cmd("restart")
 end
 
-vim.keymap.set("n", "<leader>R", restart_cleanly, { desc = "Write all buffers, then restart" })
-
 -- ZR is a built-in in 0.12, next to ZZ/ZQ, and [count]ZR is ":restart +qall!" which discards changes. Shadow it.
 vim.keymap.set("n", "ZR", restart_cleanly, { desc = "Write all buffers, then restart" })
 
