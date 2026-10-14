@@ -41,3 +41,12 @@ vim.opt.signcolumn     = "yes"
 vim.opt.history        = 1000
 vim.opt.undofile       = true
 vim.opt.undodir        = vim.fn.stdpath("data") .. "/undo"
+
+-- No hard wrap or ruler in markdown/text; long lines still soft-wrap visually via `wrap`
+vim.api.nvim_create_autocmd("FileType", {
+    pattern  = { "markdown", "text" },
+    callback = function()
+        vim.opt_local.textwidth   = 0
+        vim.opt_local.colorcolumn = ""
+    end,
+})

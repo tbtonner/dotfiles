@@ -58,6 +58,8 @@ config.keys = {
     -- clear screen, keep scrollback (overrides default debug overlay)
     -- fish binds ¬ to clear (tmux eats C-l for pane nav)
     { key = "L", mods = "CTRL|SHIFT", action = act.SendString("¬") },
+    { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+    { key = "V", mods = "CTRL|SHIFT", action = act.SendString("\x16") },
 }
 
 -- kanagawa theme

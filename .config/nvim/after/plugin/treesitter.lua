@@ -8,7 +8,10 @@ vim.api.nvim_create_autocmd("FileType", {
         if vim.bo[buf].buftype ~= "" then return end
         local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
         if not lang then return end
-        require("nvim-treesitter").install({ lang })
+        local ts = require("nvim-treesitter")
+        if vim.tbl_contains(ts.get_available(), lang) then
+            ts.install({ lang })
+        end
         pcall(vim.treesitter.start, buf, lang)
         pcall(vim.keymap.del, "n", "]]", { buffer = buf })
         pcall(vim.keymap.del, "n", "[[", { buffer = buf })
