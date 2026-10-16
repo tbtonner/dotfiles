@@ -15,8 +15,8 @@ gui:
       - blue
 
 logs:
-  timestamps: true
-  since: '60m'
+  since: '120m'
+  pipeThrough: 'hl --color always -P'
 
 customCommands:
   containers:

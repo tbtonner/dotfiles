@@ -39,7 +39,7 @@ bat cache --build   # register .config/bat/themes
 ### WSL (Arch) + WezTerm on Windows
 
 ```sh
-pacman -S stow fish tmux neovim fzf fd ripgrep bat git-delta jq base-devel unzip tree-sitter-cli wl-clipboard lazydocker hl
+pacman -S stow fish tmux neovim fzf fd ripgrep bat git-delta jq base-devel unzip tree-sitter-cli wl-clipboard hl
 chsh -s /usr/bin/fish            # fish auto-execs tmux when $WSL_DISTRO_NAME is set
 stow .
 cp .config/wezterm/wezterm.lua /mnt/c/Users/<you>/.config/wezterm/   # plus Maple Mono NF in ./fonts
