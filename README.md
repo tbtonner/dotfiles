@@ -17,7 +17,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | hl (Kanagawa log theme) | `.config/hl/` |
 | fzf (Kanagawa colours) | `.config/fzf/kanagawa` |
 | bat (Kanagawa theme) | `.config/bat/` |
-| Claude Code (settings, Kanagawa theme, git status line) | `.claude/settings.json`, `.claude/themes/`, `.claude/statusline.sh` |
+| Claude Code (global instructions, settings, Kanagawa theme, git status line) | `.claude/CLAUDE.md`, `.claude/settings.json`, `.claude/themes/`, `.claude/statusline.sh` |
 
 ## Tools
 
