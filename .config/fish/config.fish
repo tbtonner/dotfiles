@@ -42,8 +42,17 @@ alias gst='git status'
 alias gs='git stash'
 alias grh='git reset --hard'
 alias gsp='git stash pop'
-function gd --wraps='git diff' --description 'git diff excluding tests and bazel files'
-    git diff $argv -- . ':!*_test.go' ':!*.bazel' ':!*.bzl' ':!**/BUILD'
+function gd --wraps='git diff' --description 'git diff including untracked files, excluding tests and bazel files'
+    set -l excludes ':!*_test.go' ':!*.bazel' ':!*.bzl' ':!**/BUILD'
+    begin
+        git --no-pager diff $argv -- . $excludes
+        # Untracked files show as new files; skipped for --cached/--staged, which only cover the index.
+        if not contains -- --cached $argv; and not contains -- --staged $argv
+            for f in (git ls-files --others --exclude-standard -- . $excludes)
+                git --no-pager diff --no-index -- /dev/null $f
+            end
+        end
+    end | delta --dark
 end
 alias gdc='git diff --cached'
 alias gl='git pull'
@@ -53,7 +62,6 @@ alias gp='git push'
 alias gc='git commit'
 alias gcn='gc --no-verify -m'
 alias gco='git checkout'
-alias gg='git gud'
 alias ga='git add -p'
 alias gaa='git add .'
 alias gacn='gaa; gcn'
