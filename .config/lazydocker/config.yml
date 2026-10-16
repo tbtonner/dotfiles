@@ -23,6 +23,12 @@ customCommands:
     - name: logs (hl)
       attach: true
       command: "sh -c 'docker logs {{ .Container.Name }} 2>&1 | hl'"
+    # The Env tab can't be searched, so open it in the same nvim-capture setup as tmux prefix+a (q/Esc to quit). jq
+    # rather than docker's --format, whose {{ }} would clash with lazydocker's own templating. stdin has no filename to
+    # detect a filetype from, so set nvim's built-in env syntax (no treesitter parser exists for it).
+    - name: env (nvim)
+      attach: true
+      command: "sh -c 'docker inspect {{ .Container.ID }} | jq -r \".[0].Config.Env[]\" | sort | NVIM_APPNAME=nvim-capture nvim -c \"setlocal buftype=nofile bufhidden=wipe noswapfile nowrap filetype=env\" -'"
     # Defining customCommands replaces lazydocker's default, so keep the shell entry
     - name: bash
       attach: true
