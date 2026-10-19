@@ -70,12 +70,14 @@ alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
 alias ghs='gh stack'
 
 # cbclocal aliases
-alias cbc='go run ./cmd/cbclocal up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
+# Lifecycle commands go through cbcl (functions/cbcl.fish) so their logs render via hl. cbclocal/cbclc stay raw
+# because their output is often JSON meant for jq.
+alias cbc='cbcl up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
 alias cbclocal='go run ./cmd/cbclocal'
-alias cbclu='go run ./cmd/cbclocal up --with-services=ui-static'
-alias cbcld='go run ./cmd/cbclocal down'
-alias cbcldf='go run ./cmd/cbclocal down --force'
-alias cbclr='go run ./cmd/cbclocal restart'
+alias cbclu='cbcl up --with-services=ui-static'
+alias cbcld='cbcl down'
+alias cbcldf='cbcl down --force'
+alias cbclr='cbcl restart'
 alias cbclc='go run ./cmd/cbclocal hosted clusters'
 
 # testing aliases
