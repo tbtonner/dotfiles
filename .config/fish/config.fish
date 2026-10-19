@@ -31,6 +31,8 @@ if test -f /etc/arch-release
     function open; xdg-open $argv; end
     # gh, python webbrowser, Claude Code etc. use $BROWSER
     set -gx BROWSER firefox-win
+    # ~/winhome/<TAB> reaches the Windows profile
+    test -e ~/winhome; or ln -s /mnt/c/Users/Tom ~/winhome
 end
 
 # tmux passes truecolor (Tc override); stop Claude Code clamping to 256 colours
