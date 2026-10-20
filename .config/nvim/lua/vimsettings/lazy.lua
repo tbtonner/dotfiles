@@ -69,10 +69,6 @@ require("lazy").setup({
     },
 
     {
-        "christoomey/vim-tmux-navigator",
-    },
-
-    {
         "nvim-tree/nvim-web-devicons",
     },
 

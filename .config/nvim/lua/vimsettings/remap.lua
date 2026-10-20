@@ -5,6 +5,22 @@ vim.keymap.set("n", "<F6>", function()
     vim.notify("Spell Check: " .. (vim.o.spell and "On" or "Off"))
 end, { desc = "Toggle spell check" })
 
+-- C-hjkl move between nvim splits, then hand over to tmux at the edge. The tmux side lives in
+-- ~/.config/tmux/navigate.sh, which falls through to the next window or session at the edge of the tmux window.
+local function navigate(wincmd, tmux_dir)
+    local win = vim.api.nvim_get_current_win()
+    vim.cmd.wincmd(wincmd)
+    if vim.api.nvim_get_current_win() ~= win or not vim.env.TMUX then
+        return
+    end
+    vim.system({ vim.fn.expand("~/.config/tmux/navigate.sh"), tmux_dir, vim.env.TMUX_PANE })
+end
+
+for key, dirs in pairs({ h = { "h", "L" }, j = { "j", "D" }, k = { "k", "U" }, l = { "l", "R" } }) do
+    vim.keymap.set("n", "<C-" .. key .. ">", function() navigate(dirs[1], dirs[2]) end,
+        { desc = "Move to split, tmux pane, window or session" })
+end
+
 vim.keymap.set("n", "U", "15<C-y>")
 vim.keymap.set("n", "D", "15<C-e>")
 

@@ -10,6 +10,8 @@ Prefix: `C-a`
 | `s` | split horizontal (top/bottom) |
 | `d` | kill pane |
 | `C-h` / `C-j` / `C-k` / `C-l` | move between panes (no prefix; vim-aware) |
+| `C-h` / `C-l` at the edge | prev / next window |
+| `C-k` / `C-j` at the edge | prev / next session |
 
 ## Windows
 
