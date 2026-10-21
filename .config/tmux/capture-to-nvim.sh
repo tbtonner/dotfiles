@@ -18,7 +18,8 @@ tmux capture-pane -peS -32768 \
 cp "$capfile" "$capdir/$(date +%Y%m%d_%H%M%S).txt"
 ls -t "$capdir"/2*.txt 2>/dev/null | tail -n +21 | xargs rm -f 2>/dev/null || true
 
-nvim_cmd="NVIM_APPNAME=nvim-capture nvim -c 'setlocal buftype=nofile bufhidden=wipe noswapfile conceallevel=3 nowrap' -c 'lua require(\"baleia\").setup({}).once(0)' -c 'normal! G' '$capfile'"
+# nvim-capture/init.lua makes capture files a read-only, ANSI-coloured scratch view.
+nvim_cmd="$HOME/.config/nvim-capture/bin/nvim-capture '$capfile'"
 
 if [ "$mode" = "popup" ]; then
   tmux display-popup -E -b rounded -S fg=#DCD7BA -w 90% -h 90% "$nvim_cmd"

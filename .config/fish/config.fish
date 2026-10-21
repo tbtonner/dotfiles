@@ -1,7 +1,8 @@
 # Set UTF-8 locale for tmux and terminal
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-set -x EDITOR nvim
+# Programs that shell out to an editor get the lightweight prefix+a nvim-capture config; typing nvim gets the full one
+set -x EDITOR ~/.config/nvim-capture/bin/nvim-capture
 
 # vi key bindings
 set -g fish_key_bindings fish_vi_key_bindings

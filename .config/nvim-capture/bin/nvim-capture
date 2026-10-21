@@ -1,0 +1,5 @@
+#!/bin/sh
+# nvim with the lightweight capture config (../init.lua). Used as $EDITOR and by tmux prefix+a.
+# A single executable rather than `env NVIM_APPNAME=... nvim` so tools that don't split $EDITOR on spaces still work,
+# and the basename contains "nvim" so Claude Code passes +<line> when opening a file at a line.
+NVIM_APPNAME=nvim-capture exec nvim "$@"

@@ -1,5 +1,8 @@
 require("lazydev").setup({})
-require('mason').setup({})
+-- Explicit root (the default for this config) so the nvim-capture config, which sources this file, finds the same servers.
+require('mason').setup({
+    install_root_dir = vim.fn.expand("$HOME/.local/share/nvim/mason"),
+})
 require('mason-lspconfig').setup({
     automatic_enable = true,
 })
