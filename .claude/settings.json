@@ -41,7 +41,18 @@
   },
   "enabledPlugins": {
     "lua-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "core@couchbase-claude": true,
+    "couchbase@couchbase-claude": true,
+    "couchbase-cloud@couchbase-claude": true
+  },
+  "extraKnownMarketplaces": {
+    "couchbase-claude": {
+      "source": {
+        "source": "github",
+        "repo": "couchbaselabs/couchbase-claude"
+      }
+    }
   },
   "theme": "custom:kanagawa",
   "editorMode": "vim",

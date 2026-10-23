@@ -12,3 +12,16 @@ for a in "$@"; do
 done
 # detach so the caller (gh, Claude Code, ...) doesn't wait on the Windows process
 nohup "$ff" "${args[@]}" >/dev/null 2>&1 &
+
+# with komorebi tiling, jump to the workspace holding Firefox so the new tab is in view. KOMOREBI_CONFIG_HOME is passed
+# explicitly because WSL's copy of the Windows environment can be stale, and komorebic exits if it's invalid.
+komorebic="/mnt/c/Program Files/komorebi/bin/komorebic.exe"
+if [ -x "$komorebic" ] && tasklist.exe /fi "imagename eq komorebi.exe" 2>/dev/null | rg -qi komorebi.exe; then
+	(
+		cd /mnt/c || exit
+		sleep 0.5
+		home="$(cmd.exe /c 'echo %USERPROFILE%' | tr -d '\r')"
+		KOMOREBI_CONFIG_HOME="$home\\.config\\komorebi" WSLENV="${WSLENV:+$WSLENV:}KOMOREBI_CONFIG_HOME" \
+			"$komorebic" eager-focus firefox.exe
+	) >/dev/null 2>&1 &
+fi

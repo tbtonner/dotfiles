@@ -1,0 +1,76 @@
+.shell powershell
+
+# Windows-only hotkeys for komorebi (macOS uses skhd with an skhdrc in this directory instead). whkd finds this file
+# via WHKD_CONFIG_HOME=%USERPROFILE%\.config\komorebi; run `komorebi-win-sync` from WSL after editing.
+# Only the left Win key works as the modifier. Win+L is free because locking is turned off with the registry policy
+# DisableLockWorkstation=1; without that, Windows locks the PC before whkd sees the key.
+
+# Reload
+win + o                 : taskkill /f /im whkd.exe; Start-Process whkd -WindowStyle hidden
+win + shift + o         : komorebic reload-configuration
+
+win + q                 : komorebic close
+win + m                 : komorebic minimize
+
+# Focus windows. h/l cross to the next workspace at the edge via cross_boundary_behaviour in komorebi.json;
+# j/k stay within the workspace.
+win + h                 : komorebic focus left
+win + j                 : komorebic focus down
+win + k                 : komorebic focus up
+win + l                 : komorebic focus right
+win + shift + oem_4     : komorebic cycle-focus previous # oem_4 is [
+win + shift + oem_6     : komorebic cycle-focus next # oem_6 is ]
+
+# Move windows
+win + shift + h         : komorebic move left
+win + shift + j         : komorebic move down
+win + shift + k         : komorebic move up
+win + shift + l         : komorebic move right
+win + shift + return    : komorebic promote
+
+# Stack windows
+win + left              : komorebic stack left
+win + down              : komorebic stack down
+win + up                : komorebic stack up
+win + right             : komorebic stack right
+win + oem_1             : komorebic unstack # oem_1 is ;
+win + oem_4             : komorebic cycle-stack previous # oem_4 is [
+win + oem_6             : komorebic cycle-stack next # oem_6 is ]
+
+# Resize
+win + oem_plus          : komorebic resize-axis horizontal increase
+win + oem_minus         : komorebic resize-axis horizontal decrease
+win + shift + oem_plus  : komorebic resize-axis vertical increase
+win + shift + oem_minus : komorebic resize-axis vertical decrease
+
+# Manipulate windows
+win + t                 : komorebic toggle-float
+win + shift + f         : komorebic toggle-monocle
+
+# Window manager options
+win + shift + r         : komorebic retile
+win + p                 : komorebic toggle-pause
+
+# Layouts
+win + x                 : komorebic flip-layout horizontal
+win + y                 : komorebic flip-layout vertical
+
+# Workspaces
+win + 1                 : komorebic focus-workspace 0
+win + 2                 : komorebic focus-workspace 1
+win + 3                 : komorebic focus-workspace 2
+win + 4                 : komorebic focus-workspace 3
+win + 5                 : komorebic focus-workspace 4
+win + 6                 : komorebic focus-workspace 5
+win + 7                 : komorebic focus-workspace 6
+win + 8                 : komorebic focus-workspace 7
+
+# Move windows across workspaces
+win + shift + 1         : komorebic move-to-workspace 0
+win + shift + 2         : komorebic move-to-workspace 1
+win + shift + 3         : komorebic move-to-workspace 2
+win + shift + 4         : komorebic move-to-workspace 3
+win + shift + 5         : komorebic move-to-workspace 4
+win + shift + 6         : komorebic move-to-workspace 5
+win + shift + 7         : komorebic move-to-workspace 6
+win + shift + 8         : komorebic move-to-workspace 7

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Copy the shared komorebi config from dotfiles to %USERPROFILE%\.config\komorebi and reload it if komorebi is running.
+# Windows reads it there via KOMOREBI_CONFIG_HOME and WHKD_CONFIG_HOME (symlinks across the WSL boundary aren't
+# reliable). macOS doesn't need this: stow links ~/.config/komorebi, which is komorebi-for-mac's default location.
+set -euo pipefail
+
+src="$HOME/dotfiles/.config/komorebi"
+winhome="$(wslpath "$(cd /mnt/c && cmd.exe /c 'echo %USERPROFILE%' 2>/dev/null | tr -d '\r')")"
+dst="$winhome/.config/komorebi"
+
+mkdir -p "$dst"
+cp "$src/komorebi.json" "$src/komorebi.bar.json" "$src/whkdrc" "$dst/"
+cp "$src/komorebi-toggle.cmd" "$winhome/Documents/"
+echo "synced to $dst (and komorebi-toggle.cmd to Documents)"
+
+if ! tasklist.exe /fi "imagename eq komorebi.exe" 2>/dev/null | rg -qi komorebi.exe; then
+	exit 0
+fi
+# WSL's inherited Windows env goes stale (PATH, KOMOREBI_CONFIG_HOME), so reload them from the registry first.
+# whkd doesn't watch its config, so restart it to pick up whkdrc changes.
+(cd /mnt/c && powershell.exe -NoProfile -Command '
+foreach ($n in "Path", "KOMOREBI_CONFIG_HOME", "WHKD_CONFIG_HOME") {
+	$v = @("Machine", "User") | ForEach-Object { [Environment]::GetEnvironmentVariable($n, $_) } | Where-Object { $_ }
+	Set-Item "env:$n" ($v -join ";")
+}
+komorebic reload-configuration
+taskkill /f /im whkd.exe *> $null
+Start-Process whkd -WindowStyle hidden')
+echo "reloaded komorebi and whkd"

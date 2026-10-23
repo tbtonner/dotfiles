@@ -18,6 +18,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | fzf (Kanagawa colours) | `.config/fzf/kanagawa` |
 | bat (Kanagawa theme) | `.config/bat/` |
 | Claude Code (global instructions, settings, Kanagawa theme, git status line) | `.claude/CLAUDE.md`, `.claude/settings.json`, `.claude/themes/`, `.claude/statusline.sh` |
+| komorebi tiling WM (shared Windows/macOS config, bar, whkd hotkeys) | `.config/komorebi/` |
 
 ## Tools
 
@@ -44,5 +45,18 @@ chsh -s /usr/bin/fish            # fish auto-execs tmux when $WSL_DISTRO_NAME is
 stow .
 cp .config/wezterm/wezterm.lua /mnt/c/Users/<you>/.config/wezterm/   # plus Maple Mono NF in ./fonts
 ```
+
+### komorebi on Windows
+
+`komorebi.json` and `komorebi.bar.json` are shared with [komorebi-for-mac](https://github.com/LGUG2Z/komorebi-for-mac), which reads `~/.config/komorebi` (linked by stow); each OS ignores keys it doesn't know. Windows reads copies instead, found via two user environment variables:
+
+```powershell
+# admin PowerShell; also set HKLM\SYSTEM\CurrentControlSet\Control\FileSystem LongPathsEnabled=1
+winget install LGUG2Z.komorebi; winget install LGUG2Z.whkd
+[Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', "$env:USERPROFILE\.config\komorebi", 'User')
+[Environment]::SetEnvironmentVariable('WHKD_CONFIG_HOME', "$env:USERPROFILE\.config\komorebi", 'User')
+```
+
+Then run `komorebi-win-sync` from WSL (copies the config and `whkdrc`, and puts `komorebi-toggle.cmd` in Documents) and `komorebic fetch-asc` once on Windows. Start and stop everything with `Documents\komorebi-toggle.cmd`; it also runs [AutoHideMouseCursor](https://www.softwareok.com/?seite=Microsoft/AutoHideMouseCursor) from `%USERPROFILE%\Apps\AutoHideMouseCursor\` if it is there. Hotkeys use the left Win key; Win+L only works with locking disabled (`HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`, `DisableLockWorkstation=1`).
 
 Machine-specific git settings (gpg path, signing) go in `~/.gitconfig.local`.

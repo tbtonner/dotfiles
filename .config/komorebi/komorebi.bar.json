@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.41/schema.bar.json",
+  "monitor": {
+    "index": 0,
+    "work_area_offset": { "left": 0, "top": 28, "right": 0, "bottom": 28 }
+  },
+  "height": 28,
+  "font_size": 13,
+  "font_family": "Maple Mono NF",
+  "theme": {
+    "palette": "Custom",
+    "accent": "Base0A",
+    "colours": {
+      "base_00": "#1F1F28",
+      "base_01": "#16161D",
+      "base_02": "#2A2A37",
+      "base_03": "#54546D",
+      "base_04": "#727169",
+      "base_05": "#DCD7BA",
+      "base_06": "#C8C093",
+      "base_07": "#717C7C",
+      "base_08": "#C34043",
+      "base_09": "#FFA066",
+      "base_0a": "#E6C384",
+      "base_0b": "#76946A",
+      "base_0c": "#6A9589",
+      "base_0d": "#7E9CD8",
+      "base_0e": "#957FB8",
+      "base_0f": "#D27E99"
+    }
+  },
+  "left_widgets": [
+    {
+      "Komorebi": {
+        "workspaces": { "enable": true, "hide_empty_workspaces": true, "display": "AllIconsAndText" },
+        "layout": { "enable": true },
+        "focused_window": { "enable": false, "show_icon": true }
+      }
+    }
+  ],
+  "center_widgets": [
+    { "Media": { "enable": true, "display": "Full" } }
+  ],
+  "right_widgets": [
+    { "Update": { "enable": true } },
+    { "Cpu": { "enable": true, "auto_select_over": 80 } },
+    { "Memory": { "enable": true, "auto_select_over": 80 } },
+    { "Date": { "enable": true, "format": "DayDateMonthYear" } },
+    { "Time": { "enable": true, "format": "TwentyFourHour" } }
+  ]
+}
