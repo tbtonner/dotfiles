@@ -18,8 +18,8 @@ win + h                 : komorebic focus left
 win + j                 : komorebic focus down
 win + k                 : komorebic focus up
 win + l                 : komorebic focus right
-win + shift + oem_4     : komorebic cycle-focus previous # oem_4 is [
-win + shift + oem_6     : komorebic cycle-focus next # oem_6 is ]
+win + p                 : komorebic cycle-workspace previous
+win + n                 : komorebic cycle-workspace next
 
 # Move windows
 win + shift + h         : komorebic move left
@@ -44,12 +44,13 @@ win + shift + oem_plus  : komorebic resize-axis vertical increase
 win + shift + oem_minus : komorebic resize-axis vertical decrease
 
 # Manipulate windows
-win + t                 : komorebic toggle-float
-win + shift + f         : komorebic toggle-monocle
+win + f                 : komorebic toggle-float
+win + shift + f         : komorebic toggle-tiling # float every window on the workspace, or tile them again
+win + z                 : komorebic toggle-monocle
 
 # Window manager options
 win + shift + r         : komorebic retile
-win + p                 : komorebic toggle-pause
+win + shift + p         : komorebic toggle-pause
 
 # Layouts
 win + x                 : komorebic flip-layout horizontal

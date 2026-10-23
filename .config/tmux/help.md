@@ -10,6 +10,8 @@ Prefix: `C-a`
 | `s` | split horizontal (top/bottom) |
 | `d` | kill pane |
 | `C-h` / `C-j` / `C-k` / `C-l` | move between panes (no prefix; vim-aware) |
+| `C-f` | session picker (no prefix; vim-aware) |
+| `C-p` | window picker across all sessions (no prefix; vim-aware) |
 | `C-h` / `C-l` at the edge | prev / next window |
 | `C-k` / `C-j` at the edge | prev / next session |
 
@@ -21,7 +23,7 @@ Prefix: `C-a`
 | `h` / `l` | prev / next window |
 | `,` | rename window |
 | `x` | kill window |
-| `w` | window picker across all sessions (popup, hjkl) |
+| `w` | window picker across all sessions (popup, hjkl); also `C-p` without prefix |
 
 ## Sessions
 
@@ -30,7 +32,6 @@ Prefix: `C-a`
 | `[` / `]` | prev / next session |
 | `S` | new session (current path) |
 | `.` | rename session |
-| `f` | session picker (popup, hjkl) |
 | `K` | kill session(s) (popup, hjkl, tab multi-select) |
 
 ### Inside a picker

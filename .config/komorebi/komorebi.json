@@ -22,6 +22,8 @@
   },
   "ignore_rules": [],
   "floating_applications": [],
+  "toggle_float_placement": "CenterAndResize",
+  "floating_window_aspect_ratio": [16, 10],
   "manage_rules": [],
   "monitors": [
     {
