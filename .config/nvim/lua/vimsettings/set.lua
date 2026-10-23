@@ -3,6 +3,16 @@ vim.opt.shell          = "/bin/bash"
 
 vim.opt.spelllang      = "en_gb"
 vim.opt.clipboard      = "unnamedplus"
+-- WSL: use the Windows clipboard directly. WSLg (which wl-copy needs) is disabled: its compositor crash-looped and stole
+-- focus every couple of minutes
+if vim.fn.has("wsl") == 1 then
+    vim.g.clipboard = {
+        name = "win32yank",
+        copy = { ["+"] = "win32yank.exe -i --crlf", ["*"] = "win32yank.exe -i --crlf" },
+        paste = { ["+"] = "win32yank.exe -o --lf", ["*"] = "win32yank.exe -o --lf" },
+        cache_enabled = 0,
+    }
+end
 
 vim.opt.guicursor      = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
 

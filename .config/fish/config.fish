@@ -27,14 +27,23 @@ fish_add_path $HOME/.atuin/bin
 
 # arch (WSL)
 if test -f /etc/arch-release
-    function pbcopy; wl-copy $argv; end
-    function pbpaste; wl-paste --no-newline $argv; end
+    if set -q WSL_DISTRO_NAME
+        # Windows clipboard directly; WSLg (needed by wl-copy) is disabled
+        function pbcopy; win32yank.exe -i --crlf $argv; end
+        function pbpaste; win32yank.exe -o --lf $argv; end
+    else
+        function pbcopy; wl-copy $argv; end
+        function pbpaste; wl-paste --no-newline $argv; end
+    end
     function open; xdg-open $argv; end
     # gh, python webbrowser, Claude Code etc. use $BROWSER
     set -gx BROWSER firefox-win
     # ~/winhome/<TAB> reaches the Windows profile
     test -e ~/winhome; or ln -s /mnt/c/Users/Tom ~/winhome
 end
+
+# pinentry-curses prompts on this tty when there's no GUI pinentry (e.g. WSL without WSLg)
+status is-interactive; and set -gx GPG_TTY (tty)
 
 # tmux passes truecolor (Tc override); stop Claude Code clamping to 256 colours
 set -gx CLAUDE_CODE_TMUX_TRUECOLOR 1

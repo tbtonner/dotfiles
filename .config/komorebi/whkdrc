@@ -50,7 +50,7 @@ win + z                 : komorebic toggle-monocle
 
 # Window manager options
 win + shift + r         : komorebic retile
-win + shift + p         : komorebic toggle-pause
+win + ctrl + p          : komorebic toggle-pause # away from win + p and the win + shift move keys
 
 # Layouts
 win + x                 : komorebic flip-layout horizontal

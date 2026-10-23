@@ -44,7 +44,8 @@
     "gopls-lsp@claude-plugins-official": true,
     "core@couchbase-claude": true,
     "couchbase@couchbase-claude": true,
-    "couchbase-cloud@couchbase-claude": true
+    "couchbase-cloud@couchbase-claude": true,
+    "caveman@caveman": true
   },
   "extraKnownMarketplaces": {
     "couchbase-claude": {
@@ -52,9 +53,15 @@
         "source": "github",
         "repo": "couchbaselabs/couchbase-claude"
       }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
     }
   },
+  "tui": "fullscreen",
   "theme": "custom:kanagawa",
-  "editorMode": "vim",
-  "tui": "fullscreen"
+  "editorMode": "vim"
 }
