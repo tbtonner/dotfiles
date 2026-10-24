@@ -17,7 +17,8 @@ if ! tasklist.exe /fi "imagename eq komorebi.exe" 2>/dev/null | rg -qi komorebi.
 	exit 0
 fi
 # WSL's inherited Windows env goes stale (PATH, KOMOREBI_CONFIG_HOME), so reload them from the registry first.
-# whkd doesn't watch its config, so restart it to pick up whkdrc changes.
+# whkd doesn't watch its config, so restart it to pick up whkdrc changes. Start it through WMI rather than
+# Start-Process: a process started from WSL lives in WSL's process tree and dies on `wsl --shutdown`.
 (cd /mnt/c && powershell.exe -NoProfile -Command '
 foreach ($n in "Path", "KOMOREBI_CONFIG_HOME", "WHKD_CONFIG_HOME") {
 	$v = @("Machine", "User") | ForEach-Object { [Environment]::GetEnvironmentVariable($n, $_) } | Where-Object { $_ }
@@ -25,5 +26,8 @@ foreach ($n in "Path", "KOMOREBI_CONFIG_HOME", "WHKD_CONFIG_HOME") {
 }
 komorebic reload-configuration
 taskkill /f /im whkd.exe *> $null
-Start-Process whkd -WindowStyle hidden')
+$whkd = (Get-Command whkd).Source
+$hidden = New-CimInstance -ClassName Win32_ProcessStartup -ClientOnly -Property @{ ShowWindow = [uint16]0 }
+$cmd = "`"$whkd`" --config `"$env:WHKD_CONFIG_HOME\whkdrc`""
+Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = $cmd; ProcessStartupInformation = $hidden } | Out-Null')
 echo "reloaded komorebi and whkd"
