@@ -10,8 +10,8 @@ dst="$winhome/.config/komorebi"
 
 mkdir -p "$dst"
 cp "$src/komorebi.json" "$src/komorebi.bar.json" "$src/whkdrc" "$dst/"
-cp "$src/komorebi-toggle.cmd" "$winhome/Documents/"
-echo "synced to $dst (and komorebi-toggle.cmd to Documents)"
+cp "$src/tilemanager-toggle.cmd" "$winhome/Documents/"
+echo "synced to $dst (and tilemanager-toggle.cmd to Documents)"
 
 if ! tasklist.exe /fi "imagename eq komorebi.exe" 2>/dev/null | rg -qi komorebi.exe; then
 	exit 0

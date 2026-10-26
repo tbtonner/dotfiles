@@ -57,6 +57,6 @@ winget install LGUG2Z.komorebi; winget install LGUG2Z.whkd
 [Environment]::SetEnvironmentVariable('WHKD_CONFIG_HOME', "$env:USERPROFILE\.config\komorebi", 'User')
 ```
 
-Then run `komorebi-win-sync` from WSL (copies the config and `whkdrc`, and puts `komorebi-toggle.cmd` in Documents) and `komorebic fetch-asc` once on Windows. Start and stop everything with `Documents\komorebi-toggle.cmd`; it also runs [AutoHideMouseCursor](https://www.softwareok.com/?seite=Microsoft/AutoHideMouseCursor) from `%USERPROFILE%\Apps\AutoHideMouseCursor\` if it is there. Hotkeys use the left Win key; Win+L only works with locking disabled (`HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`, `DisableLockWorkstation=1`).
+Then run `komorebi-win-sync` from WSL (copies the config and `whkdrc`, and puts `tilemanager-toggle.cmd` in Documents) and `komorebic fetch-asc` once on Windows. Start and stop everything with `Documents\tilemanager-toggle.cmd`. Hotkeys use the left Win key; Win+L only works with locking disabled (`HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`, `DisableLockWorkstation=1`).
 
 Machine-specific git settings (gpg path, signing) go in `~/.gitconfig.local`.
