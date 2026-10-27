@@ -106,10 +106,7 @@ alias jwtProject='http POST http://localhost:8080/sessions -a tom.tonner2@couchb
 abbr -a due_eod --position anywhere --regex 'due:eod'  'due:today+18h'
 abbr -a due_eow --position anywhere --regex 'due:eow'  'due:friday+18h'
 
-# fzf.fish: drop the ctrl+v variable search (ctrl+v goes raw to claude/vim)
-fzf_configure_bindings --variables=
-
-# atuin history (overrides fzf.fish ctrl+r; up-arrow left as fish default)
+# atuin history on ctrl+r (up-arrow left as fish default)
 if command -q atuin
     atuin init fish --disable-up-arrow | source
 end
@@ -177,7 +174,8 @@ set -g __fish_git_prompt_char_upstream_behind (set_color $kanagawa_wave_red)' â†
 
 # fish's git prompt runs `git -c core.fsmonitor= status`, bypassing the fsmonitor daemon enabled in ~/.gitconfig.
 # Autoload it first, then redefine its helper without that override so the prompt gets the watcher's speed-up.
-if status is-interactive; and functions -q fish_git_prompt
+# No is-interactive guard: fish-async-prompt renders the prompt in a non-interactive `fish -c` child.
+if functions -q fish_git_prompt
     function __fish_git_prompt_status_porcelain_modulo_rename_source
         set -l skip false
         for line in (git status --porcelain -z $argv | string split0)
