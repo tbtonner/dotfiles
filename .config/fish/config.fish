@@ -70,6 +70,8 @@ alias gcp='git cherry-pick'
 alias gcom='git log -1 --pretty=format:"%h" | tr -d "\n"'
 alias ghs='gh stack'
 
+alias t='task'
+
 # cbclocal aliases
 # Lifecycle commands go through cbcl (functions/cbcl.fish) so their logs render via hl. cbclocal/cbclc stay raw
 # because their output is often JSON meant for jq.
