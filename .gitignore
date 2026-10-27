@@ -4,4 +4,3 @@
 **/.DS_Store
 .gitconfig.local
 .config/atuin/atuin-receipt.json
-.config/komorebi/applications.json

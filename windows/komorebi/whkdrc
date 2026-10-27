@@ -1,7 +1,7 @@
 .shell powershell
 
-# Windows-only hotkeys for komorebi (macOS uses skhd with an skhdrc in this directory instead). whkd finds this file
-# via WHKD_CONFIG_HOME=%USERPROFILE%\.config\komorebi; run `komorebi-win-sync` from WSL after editing.
+# Hotkeys for komorebi. whkd finds this file via WHKD_CONFIG_HOME=%USERPROFILE%\.config\komorebi; run
+# `komorebi-win-sync` from WSL after editing.
 # Only the left Win key works as the modifier. Win+L is free because locking is turned off with the registry policy
 # DisableLockWorkstation=1; without that, Windows locks the PC before whkd sees the key.
 

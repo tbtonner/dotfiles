@@ -18,7 +18,7 @@ Personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
 | fzf (Kanagawa colours) | `.config/fzf/kanagawa` |
 | bat (Kanagawa theme) | `.config/bat/` |
 | Claude Code (global instructions, settings, Kanagawa theme, git status line) | `.claude/CLAUDE.md`, `.claude/settings.json`, `.claude/themes/`, `.claude/statusline.sh` |
-| komorebi tiling WM (shared Windows/macOS config, bar, whkd hotkeys) | `.config/komorebi/` |
+| komorebi tiling WM on Windows (config, bar, whkd hotkeys; not stowed) | `windows/komorebi/` |
 
 ## Tools
 
@@ -48,7 +48,7 @@ cp .config/wezterm/wezterm.lua /mnt/c/Users/<you>/.config/wezterm/   # plus Mapl
 
 ### komorebi on Windows
 
-`komorebi.json` and `komorebi.bar.json` are shared with [komorebi-for-mac](https://github.com/LGUG2Z/komorebi-for-mac), which reads `~/.config/komorebi` (linked by stow); each OS ignores keys it doesn't know. Windows reads copies instead, found via two user environment variables:
+The config in `windows/komorebi/` is Windows-only, so `.stow-local-ignore` keeps stow from linking it. Windows reads copies, found via two user environment variables:
 
 ```powershell
 # admin PowerShell; also set HKLM\SYSTEM\CurrentControlSet\Control\FileSystem LongPathsEnabled=1

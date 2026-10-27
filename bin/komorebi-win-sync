@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Copy the shared komorebi config from dotfiles to %USERPROFILE%\.config\komorebi and reload it if komorebi is running.
+# Copy the komorebi config from dotfiles to %USERPROFILE%\.config\komorebi and reload it if komorebi is running.
 # Windows reads it there via KOMOREBI_CONFIG_HOME and WHKD_CONFIG_HOME (symlinks across the WSL boundary aren't
-# reliable). macOS doesn't need this: stow links ~/.config/komorebi, which is komorebi-for-mac's default location.
+# reliable). The config lives in windows/komorebi, which stow ignores, so it isn't linked anywhere.
 set -euo pipefail
 
-src="$HOME/dotfiles/.config/komorebi"
+src="$HOME/dotfiles/windows/komorebi"
 winhome="$(wslpath "$(cd /mnt/c && cmd.exe /c 'echo %USERPROFILE%' 2>/dev/null | tr -d '\r')")"
 dst="$winhome/.config/komorebi"
 

@@ -1,0 +1,12 @@
+# Replaces stow's built-in ignore list, so its relevant defaults are repeated here.
+\.git
+\.gitignore
+\.gitmodules
+.+~
+\#.*\#
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Windows-only config, copied into place by bin/komorebi-win-sync rather than linked.
+^/windows
