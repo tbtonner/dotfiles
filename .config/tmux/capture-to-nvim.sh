@@ -3,10 +3,6 @@
 # Usage: capture-to-nvim.sh popup|window
 set -e
 
-# tmux's run-shell launches with a minimal PATH that omits Homebrew, so
-# `tmux` and `nvim` are not found unless we re-add it here.
-export PATH="/opt/homebrew/bin:$PATH"
-
 mode="${1:-popup}"
 
 capdir="${TMPDIR:-/tmp}/tmux-captures-$(id -u)"
