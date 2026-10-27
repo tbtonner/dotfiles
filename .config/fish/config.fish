@@ -176,6 +176,22 @@ set -g __fish_git_prompt_char_invalidstate    ' !'
 set -g __fish_git_prompt_char_upstream_ahead  ' ↑'
 set -g __fish_git_prompt_char_upstream_behind (set_color $kanagawa_wave_red)' ↓'
 
+# fish's git prompt runs `git -c core.fsmonitor= status`, bypassing the fsmonitor daemon enabled in ~/.gitconfig.
+# Autoload it first, then redefine its helper without that override so the prompt gets the watcher's speed-up.
+if status is-interactive; and functions -q fish_git_prompt
+    function __fish_git_prompt_status_porcelain_modulo_rename_source
+        set -l skip false
+        for line in (git status --porcelain -z $argv | string split0)
+            if $skip
+                set skip false
+                continue
+            end
+            printf %s\n $line
+            string match -rq -- ^[RC] $line; and set skip true
+        end
+    end
+end
+
 # syntax highlighting
 set -g fish_color_normal             normal
 set -g fish_color_command            b294bb

@@ -7,6 +7,9 @@
 	gpgsign = true
 [core]
 	editor = nvim
+	# builtin file watcher + untracked cache: keeps git status (and the fish prompt) fast in big repos
+	fsmonitor = true
+	untrackedCache = true
 [pull]
 	ff = only
 [core]
