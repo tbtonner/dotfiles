@@ -14,7 +14,8 @@ end
 
 # paths
 # homebrew (macOS): Ghostty/tmux start with the bare launchd PATH
-test -d /opt/homebrew/bin; and fish_add_path /opt/homebrew/bin /opt/homebrew/sbin
+# --move: must beat /usr/bin so brew git wins over Apple's slow xcrun shim
+test -d /opt/homebrew/bin; and fish_add_path --move /opt/homebrew/bin /opt/homebrew/sbin
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/work/server/install/bin
@@ -107,7 +108,8 @@ abbr -a due_eod --position anywhere --regex 'due:eod'  'due:today+18h'
 abbr -a due_eow --position anywhere --regex 'due:eow'  'due:friday+18h'
 
 # atuin history on ctrl+r (up-arrow left as fish default)
-if command -q atuin
+# Interactive only: fish-async-prompt's `fish -c` prompt child sources this file on every prompt
+if status is-interactive; and command -q atuin
     atuin init fish --disable-up-arrow | source
 end
 
@@ -171,6 +173,14 @@ set -g __fish_git_prompt_char_untrackedfiles  ' ?'
 set -g __fish_git_prompt_char_invalidstate    ' !'
 set -g __fish_git_prompt_char_upstream_ahead  ' ↑'
 set -g __fish_git_prompt_char_upstream_behind (set_color $kanagawa_wave_red)' ↓'
+
+# fish-async-prompt paints an empty prompt until its background render lands, as it only shows a placeholder once a
+# previous prompt exists. Seed one so a new shell (e.g. a tmux split) shows a prompt char straight away.
+if status is-interactive; and set -q __async_prompt_tmpdir
+    set_color $theme_color_prompt >$__async_prompt_tmpdir/{$fish_pid}_fish_prompt
+    printf '%s ' $theme_prompt_char_normal >>$__async_prompt_tmpdir/{$fish_pid}_fish_prompt
+    set_color normal >>$__async_prompt_tmpdir/{$fish_pid}_fish_prompt
+end
 
 # fish's git prompt runs `git -c core.fsmonitor= status`, bypassing the fsmonitor daemon enabled in ~/.gitconfig.
 # Autoload it first, then redefine its helper without that override so the prompt gets the watcher's speed-up.
