@@ -54,18 +54,7 @@ alias gst='git status'
 alias gs='git stash'
 alias grh='git reset --hard'
 alias gsp='git stash pop'
-function gd --wraps='git diff' --description 'git diff including untracked files, excluding bazel files'
-    set -l excludes ':!*.bazel' ':!*.bzl' ':!**/BUILD'
-    begin
-        git --no-pager diff $argv -- . $excludes
-        # Untracked files show as new files; skipped for --cached/--staged, which only cover the index.
-        if not contains -- --cached $argv; and not contains -- --staged $argv
-            for f in (git ls-files --others --exclude-standard -- . $excludes)
-                git --no-pager diff --no-index -- /dev/null $f
-            end
-        end
-    end | delta --dark
-end
+alias gd='git diff'
 alias gdc='git diff --cached'
 alias gl='git pull'
 alias gql='git ql'
