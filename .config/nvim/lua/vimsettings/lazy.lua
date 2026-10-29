@@ -47,7 +47,30 @@ require("lazy").setup({
         opts = {
             bigfile = {},
             input = {},
-            picker = { ui_select = true },
+            picker = {
+                ui_select = true,
+                sources = {
+                    files = { exclude = { "mocks" } },
+                    grep = { exclude = { "mocks" } },
+                    buffers = {
+                        win = { list = { keys = { ["<C-c>"] = "bufdelete" } } },
+                    },
+                },
+                win = {
+                    input = {
+                        keys = { ["<C-space>"] = { "toggle_live", mode = { "i", "n" } } },
+                    },
+                    list = {
+                        keys = {
+                            ["<C-space>"] = "toggle_live",
+                            ["<Tab>"] = "focus_preview",
+                        },
+                    },
+                    preview = {
+                        keys = { ["<Tab>"] = "focus_list" },
+                    },
+                },
+            },
         },
     },
 
@@ -90,15 +113,6 @@ require("lazy").setup({
     {
         "kylechui/nvim-surround",
         opts = {},
-    },
-
-    {
-        "nvim-telescope/telescope.nvim",
-    },
-
-    {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
     },
 
     {

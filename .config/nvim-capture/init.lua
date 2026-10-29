@@ -22,7 +22,7 @@ pcall(require, "vimsettings.remap")
 pcall(vim.cmd.colorscheme, "kanagawa")
 
 -- Same LSP setup as the main config (servers, shared gopls daemon). after/ is not on the runtimepath here, so source it
--- directly. gd/gi/gr are telescope pickers in the main config; use the built-in quickfix versions instead.
+-- directly. gd/gi/gr are snacks pickers in the main config; use the built-in quickfix versions instead.
 local ok_lsp, lsp_err = pcall(dofile, vim.fn.expand("~/.config/nvim/after/plugin/lsp.lua"))
 if not ok_lsp then
   vim.notify("nvim-capture: LSP setup failed: " .. lsp_err, vim.log.levels.WARN)
