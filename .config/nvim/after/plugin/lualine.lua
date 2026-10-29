@@ -14,6 +14,7 @@ local blame_colors = {
     "#9CABCA",
 }
 
+-- Maps a commit hash to a stable palette colour; grey for no hash or an uncommitted (all-zero) one.
 local function hash_to_color(hash)
     if not hash or hash == "" or hash:match("^0+$") then
         return "#727169"
@@ -23,6 +24,8 @@ local function hash_to_color(hash)
     return blame_colors[(n % #blame_colors) + 1]
 end
 
+-- Gitsigns blame text for the current line, caching it and its hash so the last value stays shown when gitsigns has
+-- none.
 local function gitsigns_blame()
     local line = vim.b.gitsigns_blame_line
     if line ~= nil then
@@ -37,12 +40,14 @@ local function gitsigns_blame()
     return vim.b._blame_cache or ""
 end
 
+-- Current/total search matches, or empty when there are none.
 local function searchcount()
     local sc = vim.fn.searchcount({ recompute = 1 })
     if sc.total == 0 then return "" end
     return string.format("󰍉 %d/%d", sc.current, sc.total)
 end
 
+-- Current/total quickfix position, or empty when the list is empty.
 local function quickfix_position()
     local qflist = vim.fn.getqflist()
     if #qflist == 0 then return "" end

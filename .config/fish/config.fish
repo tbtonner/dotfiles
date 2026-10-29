@@ -4,15 +4,12 @@ set -x LC_ALL en_US.UTF-8
 # Programs that shell out to an editor get the lightweight prefix+a nvim-capture config; typing nvim gets the full one
 set -x EDITOR ~/.config/nvim-capture/bin/nvim-capture
 
-# vi key bindings
 set -g fish_key_bindings fish_vi_key_bindings
 
-# working dir
 if test (pwd) = $HOME
     cd $HOME/work/couchbase-cloud
 end
 
-# paths
 # homebrew (macOS): Ghostty/tmux start with the bare launchd PATH
 # --move: must beat /usr/bin so brew git wins over Apple's slow xcrun shim
 test -d /opt/homebrew/bin; and fish_add_path --move /opt/homebrew/bin /opt/homebrew/sbin
@@ -26,7 +23,7 @@ fish_add_path $HOME/couchbase-cloud/.bin
 fish_add_path $HOME/work/couchbase-cloud/.bin
 fish_add_path $HOME/.atuin/bin
 
-# arch (WSL)
+# Arch Linux (WSL or native): pbcopy/pbpaste/open shims so macOS habits and scripts work unchanged
 if test -f /etc/arch-release
     if set -q WSL_DISTRO_NAME
         # Windows clipboard directly; WSLg (needed by wl-copy) is disabled
@@ -49,7 +46,6 @@ status is-interactive; and set -gx GPG_TTY (tty)
 # tmux passes truecolor (Tc override); stop Claude Code clamping to 256 colours
 set -gx CLAUDE_CODE_TMUX_TRUECOLOR 1
 
-# git aliases
 alias g='git'
 alias gst='git status'
 alias gs='git stash'
@@ -72,7 +68,6 @@ alias ghs='gh stack'
 
 alias t='task'
 
-# cbclocal aliases
 # Lifecycle commands go through cbcl (functions/cbcl.fish) so their logs render via hl. cbclocal/cbclc stay raw
 # because their output is often JSON meant for jq.
 alias cbc='cbcl up --with-services=ui-static,scheduler,open-api,fm-ui-static,fm-gateway'
@@ -83,15 +78,16 @@ alias cbcldf='cbcl down --force'
 alias cbclr='cbcl restart'
 alias cbclc='go run ./cmd/cbclocal hosted clusters'
 
-# testing aliases
 alias integrationtest='godotenv -f ../local_test.env,local.env go test -tags=integration -count=1'
 alias unittest='cat $HOME/work/unittest.go | pbcopy'
 alias cplint='golangci-lint run --new-from-rev=main --config cv/golangci.yml'
 
+# Copy the .id of every element of a JSON array (file or stdin) to the clipboard.
 function idcp
     jq '.[].id' -r $argv | pbcopy
 end
 
+# Enable the fusion-rebalances and 8.1.0 feature flags for the local org in $localoid.
 function fusion
     echo 'fusion enable:'
     echo '{"value":true}' | http PUT http://localhost:8080/internal/support/features/$localoid/flags/fusion-rebalances -A bearer -a the-secret-token-for-internal-support
@@ -100,12 +96,10 @@ function fusion
     echo '{"value":true}' | http PUT http://localhost:8080/internal/support/features/$localoid/flags/enable-eight-one-zero -A bearer -a the-secret-token-for-internal-support
 end
 
-# jwt
 alias jwt='http POST http://localhost:8080/sessions -a tom.tonner@couchbase.com:Password123! | jq -r ".jwt"'
 alias jwtMember='http POST http://localhost:8080/sessions -a tom.tonner1@couchbase.com:Password1# | jq -r ".jwt"'
 alias jwtProject='http POST http://localhost:8080/sessions -a tom.tonner2@couchbase.com:Password1# | jq -r ".jwt"'
 
-# taskmaster eod, eow abbr
 abbr -a due_eod --position anywhere --regex 'due:eod'  'due:today+18h'
 abbr -a due_eow --position anywhere --regex 'due:eow'  'due:friday+18h'
 
@@ -115,13 +109,11 @@ if status is-interactive; and command -q atuin
     atuin init fish --disable-up-arrow | source
 end
 
-# always use block cursor
 set -g fish_cursor_default block
 set -g fish_cursor_insert block
 set -g fish_cursor_replace_one block
 set -g fish_cursor_visual block
 
-# colours (kanagawa)
 set kanagawa_black 16161D
 set kanagawa_red C34043
 set kanagawa_green 76946A
@@ -142,7 +134,6 @@ set kanagawa_orange FFA066
 set kanagawa_bright_red FF5D62
 set kanagawa_wave_red E46876
 
-# prompt
 set -g theme_prompt_char_normal '❯'
 set -g theme_prompt_char_superuser '❯'
 set -g theme_color_prompt $kanagawa_sand
@@ -201,7 +192,6 @@ if functions -q fish_git_prompt
     end
 end
 
-# syntax highlighting
 set -g fish_color_normal             normal
 set -g fish_color_command            b294bb
 set -g fish_color_keyword            normal

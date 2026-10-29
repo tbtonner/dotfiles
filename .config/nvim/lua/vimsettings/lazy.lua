@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
@@ -46,11 +46,28 @@ require("lazy").setup({
         },
         opts = {
             bigfile = {},
+            explorer = {},
+            -- The PR view folds by markdown section; open it expanded rather than at the default foldlevel of 0.
+            gh = { wo = { foldlevel = 99 } },
+            image = {},
             input = {},
+            quickfile = {},
             picker = {
                 ui_select = true,
                 sources = {
-                    files = { exclude = { "mocks" } },
+                    explorer = {
+                        hidden = true,
+                        jump = { close = true },
+                        layout = { preset = "sidebar", preview = false, hidden = { "input" } },
+                        win = {
+                            list = {
+                                -- Plain buffer search instead of jumping to the filter prompt.
+                                keys = { ["/"] = false },
+                                wo = { number = true, relativenumber = true },
+                            },
+                        },
+                    },
+                    files = { hidden = true, exclude = { "mocks" } },
                     grep = { exclude = { "mocks" } },
                     buffers = {
                         win = { list = { keys = { ["<C-c>"] = "bufdelete" } } },
@@ -133,10 +150,6 @@ require("lazy").setup({
     },
 
     {
-        "nvim-lua/plenary.nvim",
-    },
-
-    {
         "rebelot/kanagawa.nvim",
     },
 
@@ -210,8 +223,6 @@ require("lazy").setup({
         },
     },
 
-    -- Actually lazy
-
     {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown" },
@@ -267,101 +278,6 @@ require("lazy").setup({
         opts = {
             use_default_keymaps = false,
         },
-    },
-
-    {
-        "fredrikaverpil/pr.nvim",
-        cmd = "PRView",
-        keys = {
-            {
-                "<leader>gp",
-                "<cmd>PRView<cr>",
-            },
-        },
-        config = true,
-    },
-
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        cmd = "Neotree",
-        keys = {
-            {
-                "<F1>",
-                "<cmd>Neotree filesystem reveal toggle<cr>",
-            },
-        },
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "nvim-lua/plenary.nvim",
-        },
-        init = function()
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
-            vim.api.nvim_create_autocmd("BufEnter", {
-                group = vim.api.nvim_create_augroup("neotree_hijack_dir", { clear = true }),
-                once = true,
-                callback = function()
-                    if package.loaded["neo-tree"] then return end
-                    local stats = vim.uv.fs_stat(vim.fn.argv(0))
-                    if stats and stats.type == "directory" then
-                        require("neo-tree")
-                    end
-                end,
-            })
-        end,
-        config = function()
-            require("neo-tree").setup({
-                event_handlers = {
-                    {
-                        event = "file_open_requested",
-                        handler = function()
-                            require("neo-tree.command").execute({ action = "close" })
-                        end,
-                    },
-                    {
-                        event = "neo_tree_buffer_enter",
-                        handler = function()
-                            vim.opt_local.relativenumber = true
-                            vim.opt_local.nu = true
-                        end,
-                    },
-                },
-                default_component_configs = {
-                    git_status = {
-                        symbols = {
-                            added     = "",
-                            modified  = "",
-                            deleted   = "",
-                            renamed   = "",
-                            untracked = "",
-                            ignored   = "",
-                            unstaged  = "",
-                            staged    = "",
-                            conflict  = "",
-                        },
-                    },
-                },
-                filesystem = {
-                    filtered_items = {
-                        hide_dotfiles = false,
-                    },
-                },
-                window = {
-                    mappings = {
-                        ["/"] = "noop",
-                        ["f"] = "noop",
-                        ["<C-f>"] = "noop",
-                        ["<Esc>"] = function(state)
-                            require("neo-tree.command").execute({
-                                action = "close",
-                                source = state.source,
-                            })
-                        end,
-                    },
-                },
-            })
-        end,
     },
 
 })

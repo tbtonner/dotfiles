@@ -7,6 +7,7 @@ input=$(cat)
   IFS= read -r vim_mode
 } < <(jq -r '.workspace.current_dir // .cwd, .model.display_name // "", .vim.mode // ""' <<<"$input")
 
+# Print text ($2) in a 24-bit foreground colour ($1, "r;g;b").
 c() { printf '\033[38;2;%sm%s\033[0m' "$1" "$2"; }
 violet='149;127;184' green='152;187;108' brred='255;93;98'
 yellow='230;195;132' red='228;104;118' gray='114;113;105' aqua='122;168;159'
@@ -24,8 +25,10 @@ mode_pill() {
   printf '\033[1;38;2;22;22;29;48;2;%sm %s \033[0m\033[38;2;%sm\033[0m ' "$bg" "$1" "$bg"
 }
 
+# Branch plus staged/modified/untracked/conflict counts and ahead/behind upstream; empty outside a git repo.
 git_segment() {
   git -C "$dir" rev-parse --is-inside-work-tree &>/dev/null || return
+  # git in $dir, without taking optional locks that would contend with a git command running in the repo.
   g() { git --no-optional-locks -C "$dir" "$@" 2>/dev/null; }
   local branch staged=0 modified=0 untracked=0 conflicts=0 line x y state="" counts behind ahead
   branch=$(g branch --show-current)

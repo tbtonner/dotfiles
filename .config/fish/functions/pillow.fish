@@ -1,3 +1,4 @@
+# Print (not run) a cbc-pillowfight command that loads 20M 1 KiB docs into the pillow bucket of cluster $dbid.
 function pillow
     echo /opt/couchbase/bin/cbc-pillowfight \
         -U "couchbases://localhost/pillow?ssl=no_verify" \

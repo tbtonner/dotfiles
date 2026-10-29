@@ -7,10 +7,37 @@ end, { desc = "Toggle spell check" })
 
 -- C-hjkl move between nvim splits, then hand over to tmux at the edge. The tmux side lives in
 -- ~/.config/tmux/navigate.sh, which falls through to the next window or session at the edge of the tmux window.
+--
+-- wincmd from a float picks an arbitrary neighbour, so step from the split a float is anchored to instead (e.g. the
+-- snacks explorer's list is a float inside its sidebar split). Floats anchored to the editor have no position to
+-- navigate from.
+--
+-- Returns the split to navigate from: the window itself, the split a float is anchored to, or nil.
+local function anchor_win(win)
+    local cfg = vim.api.nvim_win_get_config(win)
+    if cfg.relative == "" then
+        return win
+    end
+    if cfg.relative == "win" and cfg.win and vim.api.nvim_win_is_valid(cfg.win) then
+        return cfg.win
+    end
+    return nil
+end
+
+-- Moves one split in the wincmd direction; at the edge, restores the original window and hands over to tmux.
 local function navigate(wincmd, tmux_dir)
-    local win = vim.api.nvim_get_current_win()
+    local cur = vim.api.nvim_get_current_win()
+    local win = anchor_win(cur)
+    if not win then
+        return
+    end
+    vim.cmd("noautocmd call nvim_set_current_win(" .. win .. ")")
     vim.cmd.wincmd(wincmd)
-    if vim.api.nvim_get_current_win() ~= win or not vim.env.TMUX then
+    if vim.api.nvim_get_current_win() ~= win then
+        return
+    end
+    vim.cmd("noautocmd call nvim_set_current_win(" .. cur .. ")")
+    if not vim.env.TMUX then
         return
     end
     vim.system({ vim.fn.expand("~/.config/tmux/navigate.sh"), tmux_dir, vim.env.TMUX_PANE })
@@ -72,6 +99,8 @@ vim.keymap.set("n", "<leader>qc", ':call setqflist([])<cr>')
 -- :restart stops the old server with :qall, then reattaches the UI to a fresh one. When :qall refuses -- an unnamed
 -- modified buffer -- the reattach still happens and the old server is left running headless, holding its swapfiles.
 -- See the "dangling server process" note in :h :restart. Write everything first so :qall cannot refuse.
+--
+-- True for a loaded, modified, unnamed normal buffer, which :wall cannot write.
 local function blocks_qall(buf)
     if not vim.api.nvim_buf_is_loaded(buf) or not vim.bo[buf].modified then
         return false
@@ -79,6 +108,7 @@ local function blocks_qall(buf)
     return vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) == ""
 end
 
+-- Writes all buffers, then runs :restart; aborts if a buffer cannot be written.
 local function restart_cleanly()
     local blocked = vim.tbl_filter(blocks_qall, vim.api.nvim_list_bufs())
     if #blocked > 0 then

@@ -1,3 +1,4 @@
+# Set a global fish variable for each key=value query parameter in a URL.
 function stripParams
     set url (string collect -- $argv)
 

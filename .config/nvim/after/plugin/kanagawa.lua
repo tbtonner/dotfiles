@@ -17,6 +17,8 @@ require('kanagawa').setup({
             NormalFloat = { fg = theme.ui.float.fg, bg = "none" },
             FloatBorder = { fg = theme.ui.float.fg_border, bg = "none" },
             FloatTitle  = { fg = theme.ui.special, bg = "none", bold = true },
+            -- Snacks dims hidden paths with NonText, which made everything under .config unreadable in the explorer.
+            SnacksPickerPathHidden = { fg = theme.ui.fg },
         }
     end,
 })

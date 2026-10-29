@@ -1,3 +1,4 @@
+# Print an "Updated in <commit URL>" PR comment for HEAD; PR number from $argv[1], else $pullnum.
 function com
     set -l p "PULLNUM"
 

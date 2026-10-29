@@ -1,3 +1,4 @@
+# Run golangci-lint on each package with Go files changed vs a ref (default origin/main).
 function branchgolint
     set -l target
     if test (count $argv) -gt 0

@@ -1,3 +1,4 @@
+# Run go generate in each package with Go files changed vs a ref (default origin/main).
 function branchgogenerate
     set -l target
     if test (count $argv) -gt 0

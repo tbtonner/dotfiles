@@ -33,7 +33,6 @@ function logs --description "View docker container logs through hl, picking the 
         return 1
     end
 
-    # fzf picker when multiple containers match
     set -l name
     if test (count $containers) -eq 1
         set name (string split -f1 ' ' -- $containers[1])

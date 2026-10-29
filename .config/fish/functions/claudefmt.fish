@@ -3,7 +3,6 @@ function claudefmt --description 'Format a Claude Code transcript as Markdown an
     set -l file
 
     if test (count $argv) -ge 1; and test -f "$argv[1]"
-        # explicit path
         set file "$argv[1]"
     else if test (count $argv) -ge 1
         # session id or prefix — search across all projects

@@ -73,7 +73,6 @@ end
 vim.keymap.set("n", "q", quit_if_scratch("q"), { expr = true })
 vim.keymap.set("n", "<Esc>", quit_if_scratch("<Esc>"), { expr = true })
 
--- error/warning highlights
 vim.fn.matchadd("ErrorMsg", [[\c\(error\|failed\|fatal\|fail\)]])
 vim.fn.matchadd("WarningMsg", [[\c\(warning\|warn\)]])
 

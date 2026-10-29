@@ -1,3 +1,5 @@
+# Smart nvim: no args picks a file; file:line, path#L42 or a GitHub URL jumps to the line; any other word is searched
+# with rg, then fd, opening a single hit directly or offering an fzf picker. Flags, dirs and multiple args pass through.
 function nvim
     if test (count $argv) -eq 0
         _nvim_run_fzf files (fd --hidden --type f .)

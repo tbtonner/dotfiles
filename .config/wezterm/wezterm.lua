@@ -5,12 +5,10 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- shell
 if wezterm.target_triple:find("windows") then
     config.default_domain = "WSL:archlinux"
 end
 
--- don't prompt on close
 config.window_close_confirmation = "NeverPrompt"
 
 -- window: tmux owns tabs/status, so no tab bar
@@ -29,10 +27,8 @@ config.webgpu_power_preference = "HighPerformance"
 config.initial_cols = 159
 config.initial_rows = 43
 
--- cursor
 config.default_cursor_style = "SteadyBlock"
 
--- scrollback
 config.scrollback_lines = 10000
 
 -- font (Maple Mono NF bundled in ./fonts; wezterm's built-in Nerd Font symbols cover any gaps)
@@ -46,7 +42,6 @@ config.font_rules = {
     { intensity = "Half", italic = true,  font = wezterm.font("Maple Mono NF", { weight = "Regular", style = "Italic", foreground = "#727169" }) },
 }
 
--- QoL polish
 config.hide_mouse_cursor_when_typing = true
 config.audible_bell = "Disabled"
 -- the click that focuses the window shouldn't reach tmux: a slight drag becomes a

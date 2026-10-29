@@ -1,3 +1,4 @@
+# Replace <original> with <replacement> in every file rg finds it in, skipping go.* files (go.mod, go.sum).
 function rgsed
     if test (count $argv) -ne 2
         echo "Usage: rgsed <original> <replacement>"

@@ -1,3 +1,4 @@
+# Assume a 12-hour role in dbaas-test-0005 via cbc-aws-assumerole and switch to its temp profile.
 function awsAssumeGuardians
     cbc-aws-assumerole -account dbaas-test-0005 -profile cbc-main -duration 43200
     export AWS_PROFILE=dbaas-test-0005-temp

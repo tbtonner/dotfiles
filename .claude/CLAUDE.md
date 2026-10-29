@@ -27,6 +27,9 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 
 - Keep code flat: around 3 levels of indentation at most. Extract named helpers rather than nesting closures or
   conditionals. Table-driven tests and HCL are obvious exceptions.
+- Comment only what a reader can't see from the code: a workaround, an odd constraint, a non-obvious why. Don't
+  narrate what the code plainly does. The exception is functions and methods: give each new one a brief description
+  above it.
 - Wrap comments at 120 columns. Treat 120 as a soft limit for code: go over it when wrapping would hurt readability.
 - Go: use modern `range` loops (`for i := range n`, `for range n`) instead of C-style counter loops, unless you need an
   unusual step, a decrement, or to mutate the counter.

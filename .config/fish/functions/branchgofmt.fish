@@ -1,3 +1,4 @@
+# gofmt -w the Go files changed vs a ref (default origin/main).
 function branchgofmt
     set -l target branch
     if test (count $argv) -gt 0

@@ -1,21 +1,16 @@
-# shell
 command = /opt/homebrew/bin/tmux new-session -A -s main
 
-# don't prompt on close
 confirm-close-surface = false
 
 # open fullscreen on launch (native macOS Space)
 fullscreen = true
 
-# window
 window-width = 120
 window-height = 35
 
-# cursor
 cursor-style = block
 cursor-style-blink = false
 
-# scrollback & clipboard
 scrollback-limit = 10000
 copy-on-select = clipboard
 
@@ -25,7 +20,6 @@ keybind = ctrl+enter=text:\x15
 # clear screen, keep scrollback: fish binds ¬ to clear (tmux eats C-l for pane nav)
 keybind = ctrl+shift+l=text:\xc2\xac
 
-# font
 font-size = 19
 font-family = Maple Mono NF
 
@@ -33,7 +27,6 @@ font-family = Maple Mono NF
 shell-integration = fish
 shell-integration-features = cursor,sudo,title
 
-# QoL polish
 mouse-hide-while-typing = true
 resize-overlay = never
 

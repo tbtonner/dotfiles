@@ -26,7 +26,6 @@ function gotest --description "Run Go tests by name or package"
     # Package/path mode: existing dir, existing .go file, or ends with ...
     if test -d $arg; or test -f $arg; or string match -q '*...' $arg
         set pkg (string replace -r '^\./' '' $arg)
-        # If it's a .go file, use its directory as the package
         if string match -q '*.go' $pkg
             set pkg (dirname $pkg)
         end
@@ -52,7 +51,6 @@ function gotest --description "Run Go tests by name or package"
         return 1
     end
 
-    # Collect unique package dirs from file:line:content matches
     set pkg_dirs
     for m in $matches
         set d (dirname (string split -m1 ':' $m)[1])
@@ -61,7 +59,6 @@ function gotest --description "Run Go tests by name or package"
         end
     end
 
-    # fzf picker when multiple packages match
     if test (count $pkg_dirs) -gt 1
         if command -q fzf
             set -l preview 'bat --color=always --highlight-line {2} --style=numbers,changes {1} 2>/dev/null || cat {1}'
@@ -76,7 +73,6 @@ function gotest --description "Run Go tests by name or package"
                 "--preview-window=right:60%:+{2}-5" \
                 --bind=ctrl-/:toggle-preview)
             test (count $selected) -eq 0; and return 0
-            # Extract unique package dirs from selected file:line entries
             set pkg_dirs
             for sel in $selected
                 set -l d (dirname (string split -m1 ':' $sel)[1])

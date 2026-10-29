@@ -35,14 +35,16 @@
 
 [delta]
     navigate = true    # use n and N to move between diff sections
-    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    light = false
 	side-by-side = true
-	# delta ignores bat's config file, so name it here; kanagawa-nvim = upstream extras/tmTheme + the treesitter-only rules (calls, fields, operators, punctuation)
+	# delta ignores bat's config file, so name it here; kanagawa-nvim = upstream extras/tmTheme + the treesitter-only
+	# rules (calls, fields, operators, punctuation)
 	syntax-theme = kanagawa-nvim
 	line-numbers = true
 	# default 2 truncates long lines in side-by-side; wrap them fully instead
 	wrap-max-lines = unlimited
-	# kanagawa springGreen (strings) / peachRed (return) hues, kept dark so syntax colours survive but saturated: lines, then changed words (match .claude/themes/kanagawa.json)
+	# kanagawa springGreen (strings) / peachRed (return) hues, kept dark so syntax colours survive but saturated: lines,
+	# then changed words (match .claude/themes/kanagawa.json)
 	plus-style = syntax "#2E4423"
 	minus-style = syntax "#4A1C1D"
 	plus-emph-style = syntax "#3A5A26"

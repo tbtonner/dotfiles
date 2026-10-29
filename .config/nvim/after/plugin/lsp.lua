@@ -1,14 +1,11 @@
 require("lazydev").setup({})
--- Explicit root (the default for this config) so the nvim-capture config, which sources this file, finds the same servers.
+-- Explicit root (the default for this config) so the nvim-capture config, which sources this file, finds the same
+-- servers.
 require('mason').setup({
     install_root_dir = vim.fn.expand("$HOME/.local/share/nvim/mason"),
 })
 require('mason-lspconfig').setup({
     automatic_enable = true,
-})
-
-vim.lsp.config("*", {
-    capabilities = require('blink.cmp').get_lsp_capabilities(),
 })
 
 -- Run gopls as a shared daemon so NeoVim and other gopls clients (e.g. Claude Code) reuse one process instead of
@@ -31,6 +28,7 @@ vim.lsp.config("*", {
 local gopls_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/gopls")
 local gopls_shared_root = vim.fn.resolve(vim.fn.expand("$HOME/work/couchbase-cloud"))
 
+-- Builds the gopls command: private when $GOPLS_REMOTE is "off", otherwise a daemon keyed on the workspace root.
 local function gopls_cmd()
     local override = vim.env.GOPLS_REMOTE
     if override == "" then

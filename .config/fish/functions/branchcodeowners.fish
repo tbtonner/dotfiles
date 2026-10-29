@@ -1,3 +1,4 @@
+# List the CODEOWNERS of files changed vs a ref (default origin/main), grouped by owner.
 function branchcodeowners
     set -l target
     if test (count $argv) -gt 0

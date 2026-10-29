@@ -1,7 +1,3 @@
-require("nvim-treesitter").setup({
-    install_dir = vim.fn.stdpath("data") .. "/site",
-})
-
 vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         local buf = vim.api.nvim_get_current_buf()
@@ -13,6 +9,8 @@ vim.api.nvim_create_autocmd("FileType", {
             ts.install({ lang })
         end
         pcall(vim.treesitter.start, buf, lang)
+        -- Some filetype plugins map ]] and [[ buffer-locally, shadowing the diagnostic jumps in
+        -- lua/vimsettings/remap.lua.
         pcall(vim.keymap.del, "n", "]]", { buffer = buf })
         pcall(vim.keymap.del, "n", "[[", { buffer = buf })
     end,

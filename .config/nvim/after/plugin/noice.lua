@@ -1,8 +1,5 @@
 require("noice").setup({
     lsp = {
-        override = {
-            ["cmp.entry.get_documentation"] = true,
-        },
         signature = { enabled = false },
     },
     cmdline = {
