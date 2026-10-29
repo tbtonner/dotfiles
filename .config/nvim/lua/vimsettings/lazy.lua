@@ -11,6 +11,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- gitbrowse opens the URL by default; copy it instead.
+local function copy_url(url)
+    vim.fn.setreg("+", url)
+    vim.notify("Copied " .. url)
+end
+
 require("lazy").setup({
     {
         "folke/lazydev.nvim",
@@ -22,13 +28,27 @@ require("lazy").setup({
     },
 
     {
-        "LunarVim/bigfile.nvim",
-        event = "BufReadPre",
-        opts = {},
-    },
-
-    {
-        "stevearc/dressing.nvim",
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        keys = {
+            {
+                "<leader>gl",
+                function()
+                    require("snacks").gitbrowse({ what = "permalink", open = copy_url, notify = false })
+                    if vim.fn.mode():find("[vV]") then
+                        vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "nx", false)
+                    end
+                end,
+                mode = { "n", "x" },
+                desc = "Copy git link",
+            },
+        },
+        opts = {
+            bigfile = {},
+            input = {},
+            picker = { ui_select = true },
+        },
     },
 
     {
@@ -51,11 +71,6 @@ require("lazy").setup({
     },
 
     {
-        "ray-x/lsp_signature.nvim",
-        event = "LspAttach",
-    },
-
-    {
         "folke/ts-comments.nvim",
         opts = {},
     },
@@ -75,10 +90,6 @@ require("lazy").setup({
     {
         "kylechui/nvim-surround",
         opts = {},
-    },
-
-    {
-        "tpope/vim-unimpaired",
     },
 
     {
@@ -116,93 +127,11 @@ require("lazy").setup({
     },
 
     {
-        "milanglacier/minuet-ai.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local model = "qwen2.5-coder:3b-base"
-
-            require("minuet").setup({
-                provider = "openai_fim_compatible",
-                n_completions = 1,
-                context_window = 512,
-                request_timeout = 5,
-                throttle = 400,
-                debounce = 100,
-                provider_options = {
-                    openai_fim_compatible = {
-                        api_key = "TERM",
-                        name = "Ollama",
-                        end_point = "http://localhost:11434/v1/completions",
-                        model = model,
-                        optional = {
-                            max_tokens = 64,
-                            top_p = 0.9,
-                        },
-                        template = {
-                            prompt = function(before, after, _)
-                                return "<|fim_prefix|>" .. before .. "<|fim_suffix|>" .. after .. "<|fim_middle|>"
-                            end,
-                            suffix = false,
-                        },
-                    },
-                },
-                lsp = {
-                    enabled_ft = { "*" },
-                    completion = { enable = false },
-                    inline_completion = {
-                        enable = true,
-                        enabled_auto_trigger_ft = { "*" },
-                    },
-                },
-            })
-
-            vim.lsp.inline_completion.enable(true)
-
-            vim.keymap.set({ "n", "i" }, "<C-t>", function()
-                if vim.lsp.inline_completion.get() then
-                    return
-                end
-                return "<C-t>"
-            end, { expr = true, silent = true, desc = "Accept inline completion" })
-        end,
-    },
-
-    {
-        "L3MON4D3/LuaSnip",
-        dependencies = { "rafamadriz/friendly-snippets" },
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-
-            local ls = require("luasnip")
-            local iferr = ls.snippet("iferr", {
-                ls.text_node({ "if err != nil {", "\treturn " }),
-                ls.insert_node(1, "err"),
-                ls.text_node({ "", "}" }),
-            })
-            ls.add_snippets("go", { iferr })
-
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "go",
-                callback = function()
-                    vim.keymap.set("n", "<leader>if", function()
-                        local row = vim.api.nvim_win_get_cursor(0)[1]
-                        local indent = vim.api.nvim_get_current_line():match("^(%s*)")
-                        vim.api.nvim_buf_set_lines(0, row, row, false, { indent })
-                        vim.api.nvim_win_set_cursor(0, { row + 1, #indent })
-                        vim.cmd("startinsert!")
-                        vim.schedule(function() ls.snip_expand(iferr) end)
-                    end, { buffer = true, desc = "Insert if err != nil block" })
-                end,
-            })
-        end,
-    },
-
-    {
         "saghen/blink.cmp",
         version = "*",
         dependencies = {
             { "xzbdmw/colorful-menu.nvim", opts = {} },
-            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
         },
         opts = {
             keymap = {
@@ -213,8 +142,9 @@ require("lazy").setup({
                 ["<C-e>"] = { "hide", "fallback" },
                 ["<C-space>"] = { "show" },
             },
-            snippets = {
-                preset = "luasnip",
+            signature = {
+                enabled = true,
+                window = { border = "none" },
             },
             sources = {
                 default = { "lsp", "snippets", "buffer" },
@@ -323,32 +253,6 @@ require("lazy").setup({
         opts = {
             use_default_keymaps = false,
         },
-    },
-
-    {
-        "ruifm/gitlinker.nvim",
-        keys = {
-            { "<leader>gl", mode = { "n", "v" } },
-        },
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        config = function()
-            require("gitlinker").setup({
-                mappings = nil,
-                opts = {
-                    add_current_line_on_normal_mode = true,
-                },
-            })
-            local actions = require("gitlinker.actions")
-            vim.keymap.set("n", "<leader>gl", function()
-                require("gitlinker").get_buf_range_url("n", { action_callback = actions.copy_to_clipboard })
-            end, { desc = "Copy git link" })
-            vim.keymap.set("v", "<leader>gl", function()
-                require("gitlinker").get_buf_range_url("v", { action_callback = actions.copy_to_clipboard })
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
-            end, { desc = "Copy git link for range" })
-        end,
     },
 
     {
