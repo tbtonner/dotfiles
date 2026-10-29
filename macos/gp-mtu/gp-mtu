@@ -1,0 +1,18 @@
+#!/bin/bash
+# Clamp the GlobalProtect tunnel MTU. GlobalProtect brings its utun up at 1400, which plus tunnel overhead exceeds the
+# ~1460 path MTU on the home line, so large packets are silently dropped. Run as root by the com.tomtonner.gp-mtu
+# launchd daemon whenever DNS changes (GlobalProtect rewrites it on connect) and every 30s as a backstop.
+set -euo pipefail
+
+mtu=1300
+# 10.1/16 is only routed through the GlobalProtect tunnel, so its interface is the one to clamp.
+probe=10.1.0.1
+
+iface="$(route -n get "$probe" 2>/dev/null | awk '/interface:/ { print $2 }')"
+[[ "$iface" == utun* ]] || exit 0
+
+current="$(ifconfig "$iface" | awk '/mtu/ { print $NF; exit }')"
+((current > mtu)) || exit 0
+
+ifconfig "$iface" mtu "$mtu"
+logger -t gp-mtu "set $iface mtu $current -> $mtu"

@@ -5,6 +5,8 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 ## Communication
 
 - Always write in UK English: spelling ("behaviour", "colour", "randomise"), vocabulary and phrasing.
+- Name files by their full repo-relative path (`internal/csp/jobs/quota.go`, not `quota.go`), both in your responses and
+  in PR reviews. Short filenames are ambiguous in a large repo.
 
 ## Shell and tools
 

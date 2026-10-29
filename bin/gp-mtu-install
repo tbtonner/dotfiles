@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Install the macOS launchd daemon that clamps the GlobalProtect tunnel MTU (see macos/gp-mtu/gp-mtu). Copied rather
+# than linked: launchd wants root-owned files, and a root daemon running a script in the user-writable dotfiles would
+# be a privilege escalation. The source lives in macos/gp-mtu, which stow ignores. Re-run after editing it.
+set -euo pipefail
+
+if [[ "$(uname)" != Darwin ]]; then
+	echo "gp-mtu-install: macOS only" >&2
+	exit 1
+fi
+
+src="$HOME/dotfiles/macos/gp-mtu"
+label=com.tomtonner.gp-mtu
+plist="/Library/LaunchDaemons/$label.plist"
+
+sudo install -d -o root -g wheel -m 755 /usr/local/libexec
+sudo install -o root -g wheel -m 755 "$src/gp-mtu" /usr/local/libexec/gp-mtu
+sudo install -o root -g wheel -m 644 "$src/$label.plist" "$plist"
+
+sudo launchctl bootout "system/$label" 2>/dev/null || true
+sudo launchctl bootstrap system "$plist"
+echo "installed $label; check with: log show --last 5m --predicate 'process == \"logger\"' | rg gp-mtu"

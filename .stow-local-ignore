@@ -10,3 +10,6 @@
 
 # Windows-only config, copied into place by bin/komorebi-win-sync rather than linked.
 ^/windows
+
+# macOS launchd daemon, copied into /Library by bin/gp-mtu-install rather than linked.
+^/macos
