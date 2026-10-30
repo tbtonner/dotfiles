@@ -23,6 +23,19 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 - The dotfiles are managed with GNU stow (`cd ~/dotfiles; stow .`). New files go in `~/dotfiles` and get linked into
   place; never edit the linked copies under `~` as if they were separate files.
 
+## Couchbase Cloud prod data
+
+- For prod control-plane data, query supportal (an XDCR copy of prod, so it can lag slightly) with
+  `.bin/cbc-qldb` / `.bin/cbc-qldb-row` from `couchbase-cloud`:
+  `cbc-qldb-row --url "$SUPPORTAL_URL" --user "$SUPPORTAL_DB_USER" --password "$SUPPORTAL_DB_PASS" '<SELECT ...>'`.
+  The three variables are exported in my shell; reference them, never print or echo their values. `--url` queries
+  run read-only. Needs the VPN. The `--url` flag lands with AV-150112; until that merges, run it from that branch.
+
+## Couchbase Cloud pull requests
+
+- Drop the "Template Selection" section from the PR template entirely when opening a couchbase-cloud PR. This
+  overrides the couchbase-claude plugin's "keep every section, Template Selection included"; keep all the others.
+
 ## Code style
 
 - Keep code flat: around 3 levels of indentation at most. Extract named helpers rather than nesting closures or
