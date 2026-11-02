@@ -31,6 +31,23 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
   The three variables are exported in my shell; reference them, never print or echo their values. `--url` queries
   run read-only. Needs the VPN. The `--url` flag lands with AV-150112; until that merges, run it from that branch.
 
+## Couchbase Cloud local stack (cbclocal)
+
+- When I say I have cbclocal up, use my default stack (`CBCLOCAL_INSTANCE=default`, `http://localhost:<port>`); don't
+  start your own instance. Restarting a service on it with changed code is fine once I've agreed to it.
+- `JWT`, `V4`, `INTERNAL_SUPPORT_TOKEN`, `TENANT_ID` and `PROJECT_ID` are not exported to your shell. Use these fish
+  equivalents instead, inside `fish -c '...'` or a `cbc-evidence` command (which runs fish):
+  - JWT: the `jwt` fish function, e.g. `http -A bearer -a (jwt) GET http://localhost:8080/v2/...`.
+  - Tenant (organisation) ID: `$localoid`. Project ID: `$localpid`. These are plain fish variables, not exported, so
+    jq's `env.` can't see them; pass them with `jq --arg`.
+  - Internal support routes (`http://localhost:8080/internal/support/...`):
+    `-A bearer -a the-secret-token-for-internal-support`. This is the fixed local-only token, not a secret.
+- AWS profile for cbclocal (cluster deploys, `cbc-https`, ...): `AWS_PROFILE=dbaas-test-0005-temp`.
+- Feature flags: ignore LaunchDarkly locally. Defaults come from `internal/featureflags/v2/service/feature_flags.json`.
+  To flip one, use the internal API: `PUT http://localhost:8080/internal/support/features/flags/<name>` with body
+  `{"value": true}` (support token auth).
+- `$CLAUDE_TMPDIR` can be empty; put evidence logs and `payload.json` files in the session scratchpad instead.
+
 ## Couchbase Cloud pull requests
 
 - Drop the "Template Selection" section from the PR template entirely when opening a couchbase-cloud PR. This
