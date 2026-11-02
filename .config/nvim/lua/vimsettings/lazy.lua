@@ -68,7 +68,7 @@ require("lazy").setup({
                         },
                     },
                     files = { hidden = true, exclude = { "mocks" } },
-                    grep = { exclude = { "mocks" } },
+                    grep = { hidden = true, exclude = { "mocks" } },
                     buffers = {
                         win = { list = { keys = { ["<C-c>"] = "bufdelete" } } },
                     },
