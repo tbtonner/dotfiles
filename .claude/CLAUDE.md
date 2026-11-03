@@ -25,11 +25,12 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 
 ## Couchbase Cloud prod data
 
-- For prod control-plane data, query supportal (an XDCR copy of prod, so it can lag slightly) with
-  `.bin/cbc-qldb` / `.bin/cbc-qldb-row` from `couchbase-cloud`:
-  `cbc-qldb-row --url "$SUPPORTAL_URL" --user "$SUPPORTAL_DB_USER" --password "$SUPPORTAL_DB_PASS" '<SELECT ...>'`.
-  The three variables are exported in my shell; reference them, never print or echo their values. `--url` queries
-  run read-only. Needs the VPN. The `--url` flag lands with AV-150112; until that merges, run it from that branch.
+- For prod control-plane data, query supportal (an XDCR copy of prod, so it can lag slightly) with the `supportal`
+  fish function: `fish -c 'supportal "<SELECT ...>"'`. It wraps `cbc-qldb --url/--user/--password` with the
+  exported `SUPPORTAL_*` variables and returns the full results array; never print or echo their values. For a single
+  row, call `.bin/cbc-qldb-row` with the same three flags. Queries run read-only and need the VPN.
+- A query containing `.env` (e.g. `a.environment`) trips the secret-file hook. Write it to a scratchpad file and pass
+  `(cat <file> | string collect)` instead.
 
 ## Couchbase Cloud local stack (cbclocal)
 
@@ -60,6 +61,10 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 - Comment only what a reader can't see from the code: a workaround, an odd constraint, a non-obvious why. Don't
   narrate what the code plainly does. The exception is functions and methods: give each new one a brief description
   above it.
+- Test files are stricter: no doc comments on test functions or helpers, not even new ones. Comment only something odd
+  that needs explaining.
+- Match the comment style of the surrounding code first. If the neighbouring declarations in a block (consts, vars,
+  fields, functions) carry no doc comments, don't add one to the new entry, even where the rule above would.
 - Wrap comments at 120 columns. Treat 120 as a soft limit for code: go over it when wrapping would hurt readability.
 - Go: use modern `range` loops (`for i := range n`, `for range n`) instead of C-style counter loops, unless you need an
   unusual step, a decrement, or to mutate the counter.
