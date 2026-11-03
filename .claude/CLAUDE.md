@@ -49,8 +49,9 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
   `{"value": true}` (support token auth).
 - `$CLAUDE_TMPDIR` can be empty; put evidence logs and `payload.json` files in the session scratchpad instead.
 
-## Couchbase Cloud pull requests
+## Couchbase Cloud commits and pull requests
 
+- If a git hook blocks a commit in couchbase-cloud, commit again with `--no-verify`.
 - Drop the "Template Selection" section from the PR template entirely when opening a couchbase-cloud PR. This
   overrides the couchbase-claude plugin's "keep every section, Template Selection included"; keep all the others.
 
