@@ -32,6 +32,11 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 - A query containing `.env` (e.g. `a.environment`) trips the secret-file hook. Write it to a scratchpad file and pass
   `(cat <file> | string collect)` instead.
 
+## Couchbase Cloud logs
+
+- When I send a Datadog link, don't open it in Datadog. Read its query, filters and time range from the URL, translate
+  them to DataPrime and search Coralogix instead.
+
 ## Couchbase Cloud local stack (cbclocal)
 
 - When I say I have cbclocal up, use my default stack (`CBCLOCAL_INSTANCE=default`, `http://localhost:<port>`); don't
@@ -54,6 +59,15 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 - If a git hook blocks a commit in couchbase-cloud, commit again with `--no-verify`.
 - Drop the "Template Selection" section from the PR template entirely when opening a couchbase-cloud PR. This
   overrides the couchbase-claude plugin's "keep every section, Template Selection included"; keep all the others.
+- Manage stacked PRs with local `gh stack` tracking, never by creating PRs by hand and linking them (`gh stack link`
+  makes only the GitHub stack object, so `gh stack view` and `sync` can't see it). New stack: `gh stack init`,
+  `gh stack add <branch>` per layer, `gh stack submit`. Stack that exists only on GitHub: `gh stack checkout
+  <stack-number|pr-number>` imports it. Keep it in sync, including after a lower PR gains commits ("Some branches in
+  this stack have diverged"), with `gh stack sync`. It rebases and force-pushes every branch, so confirm first.
+- Reach for `gh stack add` first when starting the next layer of a stack. From the top branch,
+  `gh stack add -Am "AV-1234 Do the thing" AV-1234_brief_snake_summary` creates the branch on top, commits all changes
+  and tracks it in one step; `gh stack submit` then pushes it and opens the PR with the right base. Always pass the
+  branch name: without one it is generated from the commit message and breaks the `AV-1234_...` naming.
 
 ## Code style
 
@@ -67,5 +81,9 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 - Match the comment style of the surrounding code first. If the neighbouring declarations in a block (consts, vars,
   fields, functions) carry no doc comments, don't add one to the new entry, even where the rule above would.
 - Wrap comments at 120 columns. Treat 120 as a soft limit for code: go over it when wrapping would hurt readability.
+- Go: when a function signature has to wrap, put every parameter on its own line with a trailing comma; never pack
+  several per line.
+- Go: give every parameter its own type, even when neighbours share one (`tenantID string, cardID string`, not
+  `tenantID, cardID string`).
 - Go: use modern `range` loops (`for i := range n`, `for range n`) instead of C-style counter loops, unless you need an
   unusual step, a decrement, or to mutate the counter.
