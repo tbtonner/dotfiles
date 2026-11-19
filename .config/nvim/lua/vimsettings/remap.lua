@@ -5,8 +5,8 @@ vim.keymap.set("n", "<F6>", function()
     vim.notify("Spell Check: " .. (vim.o.spell and "On" or "Off"))
 end, { desc = "Toggle spell check" })
 
--- C-hjkl move between nvim splits, then hand over to tmux at the edge. The tmux side lives in
--- ~/.config/tmux/navigate.sh, which falls through to the next window or session at the edge of the tmux window.
+-- C-hjkl move between nvim splits, then hand over to tmux at the edge. The tmux side lives in the @nav_* options in
+-- ~/.config/tmux/tmux.conf, which fall through to the next window or session at the edge of the tmux window.
 --
 -- wincmd from a float picks an arbitrary neighbour, so step from the split a float is anchored to instead (e.g. the
 -- snacks explorer's list is a float inside its sidebar split). Floats anchored to the editor have no position to
@@ -40,7 +40,7 @@ local function navigate(wincmd, tmux_dir)
     if not vim.env.TMUX then
         return
     end
-    vim.system({ vim.fn.expand("~/.config/tmux/navigate.sh"), tmux_dir, vim.env.TMUX_PANE })
+    vim.system({ "tmux", "run", "-t", vim.env.TMUX_PANE, "-C", "#{@nav_" .. tmux_dir .. "}" })
 end
 
 for key, dirs in pairs({ h = { "h", "L" }, j = { "j", "D" }, k = { "k", "U" }, l = { "l", "R" } }) do

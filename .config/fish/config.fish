@@ -15,7 +15,8 @@ end
 test -d /opt/homebrew/bin; and fish_add_path --move /opt/homebrew/bin /opt/homebrew/sbin
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin
-fish_add_path $HOME/work/server/install/bin
+# --path --append: last on PATH, so the server build's own curl/openssl/erl (x86_64 on the Mac) never shadow system ones
+fish_add_path --path --append $HOME/work/server/install/bin
 fish_add_path $HOME/.local/share/nvim/mason/bin/
 # ~/bin must beat mason so bin/gopls (shared-daemon wrapper) shadows the mason gopls
 fish_add_path --move $HOME/bin
