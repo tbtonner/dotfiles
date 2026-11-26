@@ -71,6 +71,13 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 
 ## Code style
 
+- Apply these rules to new or changed logic only. Leave untouched lines as they are, even inside a function you edit
+  or code you move, so the diff shows only the real change.
+- Make the smallest change that does the job. Don't restructure, extract or restyle existing code to fit these rules
+  unless the change needs it.
+- Once I've committed code, treat it as the baseline. A follow-up fix changes only the lines it must, measured
+  against my last commit, not the branch base. Never rework or revert committed code unless I ask.
+
 - Keep code flat: around 3 levels of indentation at most. Extract named helpers rather than nesting closures or
   conditionals. Table-driven tests and HCL are obvious exceptions.
 - Comment only what a reader can't see from the code: a workaround, an odd constraint, a non-obvious why. Don't
@@ -83,7 +90,62 @@ Shared across all my machines (macOS and Arch Linux) via `~/dotfiles`, stowed to
 - Wrap comments at 120 columns. Treat 120 as a soft limit for code: go over it when wrapping would hurt readability.
 - Go: when a function signature has to wrap, put every parameter on its own line with a trailing comma; never pack
   several per line.
+- Go: the same goes for a function call that has to wrap: break after the opening parenthesis, put every argument on
+  its own line with a trailing comma, and close the parenthesis on its own line. Never leave the first argument on the
+  opening line.
+  ```go
+  d.deps.logger.Info(
+      "public security policy does not exist, skipping blocked CIDRs",
+      zap.String("securityPolicyName", securityPolicyName),
+  )
+  ```
 - Go: give every parameter its own type, even when neighbours share one (`tenantID string, cardID string`, not
   `tenantID, cardID string`).
 - Go: use modern `range` loops (`for i := range n`, `for range n`) instead of C-style counter loops, unless you need an
   unusual step, a decrement, or to mutate the counter.
+- Go: by default, wrap returned errors with context (`fmt.Errorf("failed to insert security policy %s: %w", name,
+  err)`), not a bare `return err`, so traces show where an error passed through. This applies at every layer,
+  including errors from helpers that already wrap their own. Don't wrap where it makes no sense, such as returning a
+  dedicated sentinel or typed error that callers compare against, an error already mapped to one, or an error a caller
+  inspects with a type assertion rather than `errors.As` (wrapping hides the type).
+- Go: assign once. Don't set a default and then overwrite it in an `if`. When a value depends on a condition, pull it
+  into a small helper that returns it, one helper per value rather than one returning several, and call it where the
+  value is used (`Action: defaultRuleAction(isPublic), Description: defaultRuleDescription(isPublic)`).
+- No `else`, ever. Pull the branching into a small helper that handles each case with an early `return`, and call it
+  where the result is needed. The same goes for `else if` chains.
+- Go: pass a function only what it uses. If it only checks a value for one case, pass the derived bool, computed at
+  the call (`createSecurityPolicy(name, bsType == backendTypePublic)`), not the whole type string.
+- Go: don't nest a call's result straight into another call's arguments. Name each step instead, so the reader sees
+  what is derived and from what. Group values derived one from the next in a `var` block:
+  ```go
+  var (
+      apply = d.blockedCIDRsApply(restricted, securityPolicy)
+      cidrs = d.blockedCIDRs(apply, entries)
+  )
+  ```
+- Go: when an error needs more than one outcome, handle it in a flat tagless `switch` straight after the call instead
+  of nesting `if`s inside `if err != nil`. Specific cases first, then the general one, then fall through to the happy
+  path:
+  Independent early-return conditions are guard clauses: plain `if`s, not a `switch`.
+  ```go
+  op, err := svc.Delete(ctx, name)
+  switch {
+  case err == nil:
+  case errors.Is(err, ErrNotFound):
+      return nil
+  default:
+      return fmt.Errorf("failed to delete %s: %w", name, err)
+  }
+  ```
+- Separate logical steps in a function body with a blank line. Keep each `if err != nil` check directly under the
+  statement it checks, with no blank line between them. Also leave a blank line after setup assignments before a
+  multi-line statement or literal, and before the final `return` when the function has more than one step:
+  ```go
+  isPublic := bsType == backendTypePublic
+
+  rule := &compute.SecurityPolicyRule{
+      Action: defaultRuleAction(isPublic),
+  }
+
+  return rule
+  ```

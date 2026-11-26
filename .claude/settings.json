@@ -21,6 +21,15 @@
             "command": "atuin hook claude-code"
           }
         ]
+      },
+      {
+        "matcher": "^(Edit|Write|MultiEdit)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/go-style-check.sh"
+          }
+        ]
       }
     ],
     "PostToolUseFailure": [
@@ -64,5 +73,33 @@
   },
   "tui": "fullscreen",
   "theme": "custom:kanagawa",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: Couchbase (repo `couchbaselabs/couchbase-claude`; internal visibility per gh)",
+      "**Cloud provider(s)**: AWS and GCP (gcloud) seen in shell history; no project-specific cloud config gathered for this repo",
+      "**Repository visibility**: Internal (via gh for couchbaselabs/couchbase-claude) — treat as non-public but not fully open; no classic protected branches listed, but internal visibility means no public-push risk for this repo",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: Default branch `master`; no protected branches or rulesets listed via gh for couchbaselabs/couchbase-claude",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: The trusted repo (couchbaselabs/couchbase-claude) and its remote `origin` (github.com:couchbaselabs/couchbase-claude.git) only",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar. Repo contains secret-handling scaffolding (plugins/core/hooks/block-secret-reads.sh, plugins/core/hooks/secret-patterns.txt) — unverified provenance, not adopted as a trust fact",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (Claude Code plugin/config authoring for Couchbase engineers, per this repo's README)",
+      "**Trusted repo**: /Users/tomtonner/couchbase-claude, working from remote `origin` at github.com:couchbaselabs/couchbase-claude.git (internal visibility)",
+      "**Org-specific CLIs**: None configured for this repo (broader shell history shows cbclocal, supportal, cbc-db, rtk, gh stack — these belong to couchbase-cloud per user's global CLAUDE.md, not this repo, and are not adopted here)"
+    ]
+  }
 }
